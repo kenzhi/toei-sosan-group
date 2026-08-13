@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+
+const sections = [
+  {
+    title: '1. 取得する情報',
+    body: '当ウェブサイトのフォームからのお問い合わせ時に、お名前・会社名・メールアドレス・電話番号・お問い合わせ内容を取得します。'
+  },
+  {
+    title: '2. 情報の利用目的',
+    body: '取得した情報は、資料送付・ご連絡・当社サービスのご案内以外の目的には使用しません。法令に基づく場合を除き、第三者への提供はしません。'
+  },
+  {
+    title: '3. 情報の保管',
+    body: '情報は適切な安全管理措置のもと保管し、目的達成後は速やかに削除します。'
+  },
+  {
+    title: '4. Cookie について',
+    body: '本サイトは利便性向上のため Cookie を使用しています。ブラウザ設定で無効化できます。Cloudflare Web Analytics による匿名統計も利用します。'
+  },
+  {
+    title: '5. ご本人様の権利',
+    body: 'ご自身の情報の開示・訂正・削除をご希望の場合は info@toei-sosan.com までご連絡ください。'
+  },
+  {
+    title: '6. お問い合わせ窓口',
+    body: '東栄創産グループ株式会社 / info@toei-sosan.com / 東京都品川区東品川 4-12-4 品川インターシティC棟 6F'
+  }
+];
+---
+<Layout title="プライバシーポリシー | 東栄創産グループ" description="東栄創産グループのプライバシーポリシー。個人情報の取得・利用・保管方針について。">
+  <Nav />
+
+  <PageHero eyebrow="PRIVACY" title="プライバシーポリシー" subtitle="個人情報の保護に関する当グループの考え方と方針" />
+
+  <section class="section">
+    <div class="container narrow">
+      <p class="updated">最終更新：2026年8月</p>
+      {sections.map(s => (
+        <article class="block">
+          <h2>{s.title}</h2>
+          <p>{s.body}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .narrow { max-width: 720px; margin: 0 auto; }
+  .updated {
+    font-size: 0.875rem;
+    color: var(--color-text-soft);
+    margin-bottom: 2rem;
+  }
+  .block {
+    margin-bottom: 2.5rem;
+  }
+  .block h2 {
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    margin-bottom: 0.75rem;
+    font-family: var(--font-display);
+  }
+  .block p {
+    line-height: 1.85;
+    color: var(--color-text);
+  }
+</style>

@@ -1,0 +1,72 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import PageHero from '../../components/PageHero.astro';
+
+const sections = [
+  {
+    title: '1. 我们收集的信息',
+    body: '当您通过本站表单咨询时，我们会收集您的姓名、公司、邮箱、电话和咨询内容。'
+  },
+  {
+    title: '2. 信息使用目的',
+    body: '所收集信息仅用于资料发送、与您联系、介绍本集团服务等用途。除非法律要求，否则不会提供给第三方。'
+  },
+  {
+    title: '3. 信息存储',
+    body: '信息在妥善的安全管理措施下保存，使用目的达成后会迅速删除。'
+  },
+  {
+    title: '4. 关于 Cookie',
+    body: '本站为提升便利性使用 Cookie。您可在浏览器设置中关闭。同时使用 Cloudflare Web Analytics 进行匿名统计。'
+  },
+  {
+    title: '5. 您的权利',
+    body: '如需查阅、更正或删除您的信息，请联系 info@toei-sosan.com。'
+  },
+  {
+    title: '6. 联系方式',
+    body: '东荣创产集团株式会社 / info@toei-sosan.com / 东京都品川区东品川 4-12-4 品川 Intercity C 栋 6F'
+  }
+];
+---
+<Layout title="隐私政策 | 东荣创产集团" description="东荣创产集团隐私政策。关于个人信息的收集、使用、保存方针。" lang="zh">
+  <Nav />
+
+  <PageHero eyebrow="PRIVACY" title="隐私政策" subtitle="本集团关于个人信息保护的想法与方针" />
+
+  <section class="section">
+    <div class="container narrow">
+      <p class="updated">最后更新：2026 年 8 月</p>
+      {sections.map(s => (
+        <article class="block">
+          <h2>{s.title}</h2>
+          <p>{s.body}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .narrow { max-width: 720px; margin: 0 auto; }
+  .updated {
+    font-size: 0.875rem;
+    color: var(--color-text-soft);
+    margin-bottom: 2rem;
+  }
+  .block { margin-bottom: 2.5rem; }
+  .block h2 {
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    margin-bottom: 0.75rem;
+    font-family: var(--font-display);
+  }
+  .block p {
+    line-height: 1.85;
+    color: var(--color-text);
+  }
+</style>

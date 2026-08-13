@@ -1,5 +1,6 @@
 ---
 import { ui, getLangFromPath, type Lang } from '../i18n/ui';
+import LastUpdated from './LastUpdated.astro';
 
 const currentPath = Astro.url.pathname;
 const currentLang: Lang = getLangFromPath(currentPath);
@@ -67,10 +68,13 @@ const addrs = officeAddresses[currentLang];
 
     <!-- Bottom bar -->
     <div class="footer-bottom">
-      <span>© {year} TOEI SOSAN GROUP CO., LTD. ALL RIGHTS RESERVED.</span>
+      <div class="footer-bottom-left">
+        <span>© {year} TOEI SOSAN GROUP CO., LTD. ALL RIGHTS RESERVED.</span>
+        <LastUpdated path={currentPath} />
+      </div>
       <div class="footer-legal">
-        <a href="#">PRIVACY POLICY</a>
-        <a href="#">TERMS</a>
+        <a href={currentLang === 'ja' ? '/privacy/' : `/${currentLang}/privacy/`}>PRIVACY POLICY</a>
+        <a href={currentLang === 'ja' ? '/privacy/#terms' : `/${currentLang}/privacy/#terms`}>TERMS</a>
       </div>
     </div>
   </div>
@@ -158,6 +162,12 @@ const addrs = officeAddresses[currentLang];
     font-family: var(--font-en);
     font-size: 0.625rem;
     letter-spacing: 0.1em;
+  }
+  .footer-bottom-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
     color: rgba(255, 255, 255, 0.3);
   }
   .footer-legal { display: flex; gap: 1.5rem; }

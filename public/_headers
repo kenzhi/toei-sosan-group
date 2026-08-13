@@ -1,0 +1,38 @@
+# Cloudflare Pages _headers file
+# Docs: https://developers.cloudflare.com/pages/configuration/headers/
+
+/*
+  # 强制 HTTPS（生产环境才生效）
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  # 防止 MIME 嗅探
+  X-Content-Type-Options: nosniff
+  # 防点击劫持
+  X-Frame-Options: SAMEORIGIN
+  # 控制 referrer 传递
+  Referrer-Policy: strict-origin-when-cross-origin
+  # 限制危险 API
+  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
+  # XSS 防护（基础策略；如需严格可调）
+  X-XSS-Protection: 1; mode=block
+
+# 静态资源（图片、CSS、JS）：长缓存
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.svg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML：短缓存（让更新更快生效）
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+  # 配合 X-Robots-Tag 防止意外索引
+  X-Robots-Tag: index, follow

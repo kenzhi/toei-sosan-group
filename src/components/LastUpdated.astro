@@ -1,0 +1,70 @@
+---
+// LastUpdated.astro
+// 从 git log 取当前页面最后修改时间，build 时一次性生成
+// 用法：<LastUpdated path={Astro.url.pathname} />
+
+interface Props {
+  path: string;  // 例如 '/about/' 或 '/zh/about/'
+  class?: string;
+}
+const { path, class: className } = Astro.props;
+
+// 用 child_process execSync 拿 git log
+import { execSync } from 'node:child_process';
+import { relative } from 'node:path';
+
+let lastUpdated: string | null = null;
+try {
+  // 把 URL path 转换成可能的 src/pages/.../index.astro 路径
+  // 多语言：/zh/about/ → src/pages/zh/about/index.astro
+  let rel = path.replace(/^\//, '').replace(/\/$/, '');
+  if (rel === '') rel = 'index';
+  // 试 4 种可能：index.astro / 直接 .astro / 三语前缀
+  const candidates = [
+    `src/pages/${rel}/index.astro`,
+    `src/pages/${rel}.astro`,
+    `src/pages/${rel.replace(/^(zh|en)\//, '')}/index.astro`,
+    `src/content/${rel.split('/').slice(0, -1).join('/')}/${rel.split('/').pop()}.md`,
+  ];
+  for (const c of candidates) {
+    try {
+      const out = execSync(
+        `git log -1 --format=%cI -- "${c}" 2>/dev/null`,
+        { encoding: 'utf-8', cwd: process.cwd() }
+      ).trim();
+      if (out) { lastUpdated = out; break; }
+    } catch {}
+  }
+} catch {}
+
+let display = '';
+if (lastUpdated) {
+  const d = new Date(lastUpdated);
+  display = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
+}
+---
+{display && (
+  <p class:list={['last-updated', className]}>
+    <span class="lu-label">Last updated</span>
+    <time datetime={lastUpdated!}>{display}</time>
+  </p>
+)}
+
+<style>
+  .last-updated {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--color-text-soft);
+    margin: 0;
+  }
+  .lu-label {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+  }
+  time {
+    font-variant-numeric: tabular-nums;
+  }
+</style>

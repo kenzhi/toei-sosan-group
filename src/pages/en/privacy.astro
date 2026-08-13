@@ -1,0 +1,72 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import PageHero from '../../components/PageHero.astro';
+
+const sections = [
+  {
+    title: '1. Information We Collect',
+    body: 'When you reach out through our contact form, we collect your name, company, email, phone number, and the content of your inquiry.'
+  },
+  {
+    title: '2. Purpose of Use',
+    body: 'Information is used solely to send materials, contact you, and introduce our services. We do not share with third parties unless required by law.'
+  },
+  {
+    title: '3. Storage',
+    body: 'Information is stored under appropriate security controls and promptly deleted once its purpose is fulfilled.'
+  },
+  {
+    title: '4. About Cookies',
+    body: 'This site uses cookies for usability. You can disable them in browser settings. We also use Cloudflare Web Analytics for anonymous statistics.'
+  },
+  {
+    title: '5. Your Rights',
+    body: 'To access, correct, or delete your information, contact info@toei-sosan.com.'
+  },
+  {
+    title: '6. Contact',
+    body: 'Toei Sosan Group Co., Ltd. / info@toei-sosan.com / 4-12-4 Higashi-Shinagawa, Shinagawa-ku, Tokyo, Shinagawa Intercity C Bldg. 6F'
+  }
+];
+---
+<Layout title="Privacy Policy | Toei Sosan Group" description="Toei Sosan Group's privacy policy. How we collect, use, and store personal information." lang="en">
+  <Nav />
+
+  <PageHero eyebrow="PRIVACY" title="Privacy Policy" subtitle="How we approach and handle personal information protection" />
+
+  <section class="section">
+    <div class="container narrow">
+      <p class="updated">Last updated: August 2026</p>
+      {sections.map(s => (
+        <article class="block">
+          <h2>{s.title}</h2>
+          <p>{s.body}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .narrow { max-width: 720px; margin: 0 auto; }
+  .updated {
+    font-size: 0.875rem;
+    color: var(--color-text-soft);
+    margin-bottom: 2rem;
+  }
+  .block { margin-bottom: 2.5rem; }
+  .block h2 {
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    margin-bottom: 0.75rem;
+    font-family: var(--font-display);
+  }
+  .block p {
+    line-height: 1.85;
+    color: var(--color-text);
+  }
+</style>

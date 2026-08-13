@@ -11,6 +11,12 @@ const faq = [
   { q: '小ロット（試作）も可能ですか？', a: 'はい、試作・小ロットから対応可能です。詳細はお問い合わせください。' },
   { q: '契約から実行までの期間は？', a: '内容により異なりますが、最短 2 週間で着手可能な案件もあります。' }
 ];
+
+// Cloudflare Turnstile（spam 防护）—— 留空则用纯 honeypot
+// 在 Cloudflare Dashboard → Turnstile → Add site 获取 site key + secret key
+//   site key 填 PUBLIC_TURNSTILE_SITE_KEY（前端渲染 widget）
+//   secret key 填 TURNSTILE_SECRET（后端验证；web3forms 会自己验证）
+const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
 ---
 <Layout title="お問い合わせ | 東栄創産グループ" description="OEM製造・跨境電商・国際貿易のお問い合わせはこちらから。24時間以内に返信いたします。">
   <Nav />
@@ -62,6 +68,17 @@ const faq = [
               <input type="checkbox" name="agree" required />
               <span>プライバシーポリシーに同意する</span>
             </label>
+
+            {TURNSTILE_SITE_KEY ? (
+              <div class="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY} data-callback="onTurnstileSuccess"></div>
+            ) : (
+              <noscript>
+                <p style="font-size:0.875rem;color:var(--color-text-soft);">
+                  ※ JavaScript を有効にしてください（スパム対策のため）
+                </p>
+              </noscript>
+            )}
+
             <button type="submit" class="btn btn-primary">送信する</button>
           </form>
         </div>
@@ -108,6 +125,10 @@ const faq = [
   </section>
 
   <Footer />
+
+  {TURNSTILE_SITE_KEY && (
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  )}
 </Layout>
 
 <style>

@@ -10,6 +10,10 @@ const faq = [
   { q: 'Do you accept small-batch or prototype orders?', a: 'Yes. We support prototypes, small batches, and mass production.' },
   { q: 'How long from signing to execution?', a: 'Depends on the project, but the fastest can start within 2 weeks.' }
 ];
+
+// Cloudflare Turnstile — get site key from Cloudflare Dashboard → Turnstile → Add site
+// Set PUBLIC_TURNSTILE_SITE_KEY env var to enable; secret goes in web3forms backend
+const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
 ---
 <Layout title="Contact | Toei Sosan Group" description="Get in touch for OEM manufacturing, cross-border e-commerce, or international trade inquiries." lang="en">
   <Nav />
@@ -64,6 +68,11 @@ const faq = [
               <input type="checkbox" name="agree" required />
               <span>I agree to the privacy policy</span>
             </label>
+
+            {TURNSTILE_SITE_KEY && (
+              <div class="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY}></div>
+            )}
+
             <button type="submit" class="btn btn-primary">Send</button>
           </form>
         </div>
@@ -110,6 +119,10 @@ const faq = [
   </section>
 
   <Footer />
+
+  {TURNSTILE_SITE_KEY && (
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  )}
 </Layout>
 
 <style>

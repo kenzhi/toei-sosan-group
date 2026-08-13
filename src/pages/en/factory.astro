@@ -18,9 +18,9 @@ const processes = [
     title: 'Injection Molding',
     desc: 'ABS, PVC, PP, and soft resin compatible. Precision molds for stable mass production of complex shapes.',
     images: [
-      { src: '/images/factory/注塑 1 - heavy-blur.jpg', alt: 'Injection machine 01' },
-      { src: '/images/factory/注塑 2 - heavy-blur.jpg', alt: 'Injection machine 02' },
-      { src: '/images/factory/注塑 3 - heavy-blur.jpg', alt: 'Injection machine 03' }
+      { src: '/images/factory/注塑 1 - heavy-blur.webp', alt: 'Injection machine 01' },
+      { src: '/images/factory/注塑 2 - heavy-blur.webp', alt: 'Injection machine 02' },
+      { src: '/images/factory/注塑 3 - heavy-blur.webp', alt: 'Injection machine 03' }
     ]
   },
   {
@@ -28,14 +28,14 @@ const processes = [
     title: 'Hand Painting',
     desc: 'Airbrush coating by skilled artisans. Gradients, masking, and detail work — ΔE<1 color accuracy.',
     images: [
-      { src: '/images/factory/上色 1 - heavy-blur.jpg', alt: 'Painting 01' },
-      { src: '/images/factory/上色 2 - heavy-blur.jpg', alt: 'Painting 02' },
-      { src: '/images/factory/上色 3 - heavy-blur.jpg', alt: 'Painting 03' },
-      { src: '/images/factory/上色 4 - heavy-blur.jpg', alt: 'Painting 04' },
-      { src: '/images/factory/上色 5 - heavy-blur.jpg', alt: 'Painting 05' },
-      { src: '/images/factory/上色 6 - heavy-blur.jpg', alt: 'Painting 06' },
-      { src: '/images/factory/上色 7 - heavy-blur.jpg', alt: 'Painting 07' },
-      { src: '/images/factory/上色 8 - heavy-blur.jpg', alt: 'Painting 08' }
+      { src: '/images/factory/上色 1 - heavy-blur.webp', alt: 'Painting 01' },
+      { src: '/images/factory/上色 2 - heavy-blur.webp', alt: 'Painting 02' },
+      { src: '/images/factory/上色 3 - heavy-blur.webp', alt: 'Painting 03' },
+      { src: '/images/factory/上色 4 - heavy-blur.webp', alt: 'Painting 04' },
+      { src: '/images/factory/上色 5 - heavy-blur.webp', alt: 'Painting 05' },
+      { src: '/images/factory/上色 6 - heavy-blur.webp', alt: 'Painting 06' },
+      { src: '/images/factory/上色 7 - heavy-blur.webp', alt: 'Painting 07' },
+      { src: '/images/factory/上色 8 - heavy-blur.webp', alt: 'Painting 08' }
     ]
   },
   {
@@ -43,11 +43,11 @@ const processes = [
     title: 'Assembly & QC',
     desc: 'Multi-part figures assembled with dedicated jigs. Three-stage inspection: visual, dimension, motion.',
     images: [
-      { src: '/images/factory/装配 1 - heavy-blur.jpg', alt: 'Assembly 01' },
-      { src: '/images/factory/装配 2 - heavy-blur.jpg', alt: 'Assembly 02' },
-      { src: '/images/factory/装配 3 - heavy-blur.jpg', alt: 'Assembly 03' },
-      { src: '/images/factory/装配 4 - heavy-blur.jpg', alt: 'Assembly 04' },
-      { src: '/images/factory/装配 5 - heavy-blur.jpg', alt: 'Assembly 05' }
+      { src: '/images/factory/装配 1 - heavy-blur.webp', alt: 'Assembly 01' },
+      { src: '/images/factory/装配 2 - heavy-blur.webp', alt: 'Assembly 02' },
+      { src: '/images/factory/装配 3 - heavy-blur.webp', alt: 'Assembly 03' },
+      { src: '/images/factory/装配 4 - heavy-blur.webp', alt: 'Assembly 04' },
+      { src: '/images/factory/装配 5 - heavy-blur.webp', alt: 'Assembly 05' }
     ]
   },
   {
@@ -55,9 +55,9 @@ const processes = [
     title: 'Packaging',
     desc: 'OPP sleeves, blister cards, gift boxes. FBA intake for Japan-bound orders; FCL for overseas.',
     images: [
-      { src: '/images/factory/包装 1 - heavy-blur.jpg', alt: 'Packaging 01' },
-      { src: '/images/factory/包装 2 - heavy-blur.jpg', alt: 'Packaging 02' },
-      { src: '/images/factory/包装 3 - heavy-blur.jpg', alt: 'Packaging 03' }
+      { src: '/images/factory/包装 1 - heavy-blur.webp', alt: 'Packaging 01' },
+      { src: '/images/factory/包装 2 - heavy-blur.webp', alt: 'Packaging 02' },
+      { src: '/images/factory/包装 3 - heavy-blur.webp', alt: 'Packaging 03' }
     ]
   },
   {
@@ -65,10 +65,10 @@ const processes = [
     title: 'Warehousing & Shipping',
     desc: 'Bonded warehouses in Shenzhen and Dongguan. Climate-controlled; 3-day turnaround to Japan.',
     images: [
-      { src: '/images/factory/仓储 1 - heavy-blur.jpg', alt: 'Warehouse 01' },
-      { src: '/images/factory/仓储 2 - heavy-blur.jpg', alt: 'Warehouse 02' },
-      { src: '/images/factory/仓储 3 - heavy-blur.jpg', alt: 'Warehouse 03' },
-      { src: '/images/factory/仓储 4 - heavy-blur.jpg', alt: 'Warehouse 04' }
+      { src: '/images/factory/仓储 1 - heavy-blur.webp', alt: 'Warehouse 01' },
+      { src: '/images/factory/仓储 2 - heavy-blur.webp', alt: 'Warehouse 02' },
+      { src: '/images/factory/仓储 3 - heavy-blur.webp', alt: 'Warehouse 03' },
+      { src: '/images/factory/仓储 4 - heavy-blur.webp', alt: 'Warehouse 04' }
     ]
   }
 ];
@@ -107,7 +107,15 @@ const processes = [
           <div class:list={["process-gallery", p.images.length >= 6 && "gallery-4"]}>
             {p.images.map(img => (
               <figure class="process-img-wrap">
-                <img src={img.src} alt={img.alt} loading="lazy" />
+                <img
+                  src={img.src}
+                  srcset={`${img.src} 1x, ${img.src.replace('.webp', '-thumb.webp')} 0.5x`}
+                  alt={img.alt}
+                  loading="lazy"
+                  width="1200"
+                  height="1600"
+                  decoding="async"
+                />
               </figure>
             ))}
           </div>

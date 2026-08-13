@@ -10,6 +10,10 @@ const faq = [
   { q: '小批量（试产）也可以吗？', a: '可以。试产、小批量到量产都能承接，详情请咨询。' },
   { q: '从签约到执行要多久？', a: '根据内容不同，最快 2 周内可启动。' }
 ];
+
+// Cloudflare Turnstile —— 在 Cloudflare Dashboard → Turnstile → Add site 获取 site key
+// 填 PUBLIC_TURNSTILE_SITE_KEY（前端 widget）即可启用；secret key 配在 web3forms 后端
+const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
 ---
 <Layout title="联系我们 | 东荣创产集团" description="OEM 制造、跨境电商、国际贸易咨询，24 小时内回复。" lang="zh">
   <Nav />
@@ -64,6 +68,11 @@ const faq = [
               <input type="checkbox" name="agree" required />
               <span>我已阅读并同意隐私政策</span>
             </label>
+
+            {TURNSTILE_SITE_KEY && (
+              <div class="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY}></div>
+            )}
+
             <button type="submit" class="btn btn-primary">发送</button>
           </form>
         </div>
@@ -110,6 +119,10 @@ const faq = [
   </section>
 
   <Footer />
+
+  {TURNSTILE_SITE_KEY && (
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  )}
 </Layout>
 
 <style>

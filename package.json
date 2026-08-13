@@ -7,11 +7,15 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "postbuild": "node scripts/generate-sitemap.mjs && node scripts/generate-og-images.mjs",
+    "optimize-images": "node scripts/optimize-factory-images.mjs",
+    "prebuild": "npm run optimize-images",
     "preview": "astro preview",
     "check": "astro check"
   },
   "dependencies": {
-    "astro": "^4.16.18"
+    "astro": "^4.16.18",
+    "sharp": "^0.35.3"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",

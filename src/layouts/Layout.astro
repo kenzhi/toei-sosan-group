@@ -19,7 +19,18 @@ const CF_BEACON_TOKEN = import.meta.env.PUBLIC_CF_BEACON_TOKEN || '';
 
 const ogLocale: Record<string, string> = { ja: 'ja_JP', zh: 'zh_CN', en: 'en_US' };
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? 'https://toei-sosan.com').toString();
-const ogImageUrl = ogImage || new URL('/og-default.svg', 'https://toei-sosan.com').toString();
+
+// Per-page OG image: 根据当前 path 算 og/xx.png
+// /about/ → /og/about.png
+// /zh/factory/ → /og/zh-factory.png
+// / → /og/index.png
+// Fallback: /og-default.svg
+function ogImageForPath(pathname: string): string {
+  if (pathname === '/' || pathname === '') return '/og/index.png';
+  const slug = pathname.replace(/^\//, '').replace(/\/$/, '').replace(/\//g, '-');
+  return `/og/${slug}.png`;
+}
+const ogImageUrl = ogImage || ogImageForPath(Astro.url.pathname);
 
 function hreflangUrl(targetLang: 'ja' | 'zh' | 'en'): string {
   const stripped = Astro.url.pathname.replace(/^\/(zh|en)/, '') || '/';
