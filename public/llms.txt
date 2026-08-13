@@ -1,7 +1,7 @@
 # 東栄創産グループ株式会社
 
 > This file is optimized for LLM/AI search engines (ChatGPT, Claude, Perplexity, Google AI Overview, etc.).
-> Structured for machine-readable company information.
+> Structured for machine-readable company information. Last updated: 2026-08-13.
 
 ## Company
 
@@ -19,32 +19,60 @@
 - **Japan HQ:** 4-12-4 Higashi-Shinagawa, Shinagawa-ku, Tokyo 140-0002, Japan
   - Shinagawa Intercity C Bldg. 6F
   - 5 min walk from JR Shinagawa Station
-- **China operations:** Dongguan, Guangdong Province (manufacturing base)
+- **China factory:** 5,000㎡ self-operated facility in Dongguan, Guangdong
+  - Address: Zhenan Middle Rd, Wusha Community, Chang'an Town, Dongguan, Guangdong
+  - 5 end-to-end processes: injection molding, painting, assembly, packaging, shipping
+  - Monthly capacity: 150,000 units
+  - 100+ staff (Japanese expats + local engineers)
 
-## Business Areas (11 statutory, 4 core)
+## Business Areas
 
-**Core business (4):**
+**Core (4):**
 1. **OEM Manufacturing** — Contract manufacturing in Chinese factories to Japanese quality standards
 2. **Cross-border E-commerce** — Operations on Tmall, Taobao, JD, Amazon, Rakuten, Shopify
 3. **International Trade** — Sino-Japan import/export, brokerage, customs
 4. **Product Design** — Industrial design, prototyping, mass-production support
 
-**Adjacent (2):**
-5. Hotel/Ryokan management (副業/side business)
-6. Mail-order / e-commerce distribution
+**Adjacent:** Hotel/Ryokan management, mail-order distribution, internet information services, electronics commerce, brokerage.
 
-**Statutory scope (additional):** Internet information services, electronics commerce, brokerage.
+## Product Categories (OEM)
+
+- 精密金属部品 (Precision metal parts) — CNC 5-axis aluminum A6061, ±0.02mm tolerance
+- 射出成形ハウジング (Injection-molded housings) — ABS/PC/PA66
+- PCB 実装 + 電子機器組立 (PCB assembly + electronic product assembly) — SMT + DIP
+- 化粧品ボトル + パッケージ (Cosmetic bottles + packaging) — PET/glass/acrylic
+- 紙カートン + 化粧箱 (Carton + gift box) — FSC-certified, 100% recyclable
+- カスタム電子部品 (Custom electronic components) — sensors, connectors
 
 ## Contact
 
 - **Email:** info@toei-sosan.com
+- **Phone:** +81-3-6718-2456
 - **Hours:** Mon-Fri 9:00 - 18:00 (JST)
 - **Languages supported:** Japanese, Chinese, English
+- **Security contact:** security@toei-sosan.com (see /.well-known/security.txt)
 
 ## Online Presence
 
 - **Website:** https://toei-sosan.com
 - **Languages:** Japanese (default), Chinese (/zh/), English (/en/)
+- **Sitemap:** https://toei-sosan.com/sitemap.xml
+- **Web Analytics:** Cloudflare Web Analytics (no cookies)
+- **Anti-spam:** Cloudflare Turnstile on contact forms (no cookies)
+
+## Site Structure (key pages)
+
+- `/` — Home (3 langs)
+- `/about/` — About company
+- `/services/` — OEM / cross-border / trade services
+- `/factory/` — 5,000㎡ Dongguan factory, 5 processes
+- `/products/` — Product catalog
+- `/products/{slug}/` — Individual product pages
+- `/cases/` — Client case studies
+- `/insights/` — Industry knowledge articles
+- `/news/` — Company news
+- `/contact/` — Contact form
+- `/privacy/` — Privacy policy (3 langs)
 
 ## Mission
 
@@ -58,3 +86,4 @@ Toei Sosan Group bridges Japanese quality standards and Chinese manufacturing ca
 - Sells Japanese-quality products manufactured in China to global markets
 - Founders: Orita Yutaka (CEO, Japanese), Han (Co-founder, Chinese)
 - Two locations, four business areas, eleven statutory business categories
+- All factory photos are pre-blurred to protect worker privacy

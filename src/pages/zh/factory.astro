@@ -12,6 +12,43 @@ const stats = [
   { num: '100+', label: '日方驻在 + 当地工程师' }
 ];
 
+// ManufacturingBusiness JSON-LD
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ManufacturingBusiness',
+  '@id': 'https://toei-sosan.com/zh/factory/#business',
+  name: '东荣创产集团 东莞工厂',
+  alternateName: '東栄創産グループ 東莞工場',
+  description: '中国广东省东莞市 5,000㎡ 自营工厂。注塑成型、涂装、组装、包装、出货 5 道工序一气贯通。',
+  url: 'https://toei-sosan.com/zh/factory/',
+  image: 'https://toei-sosan.com/og/zh-factory.png',
+  telephone: '+81-3-6718-2456',
+  email: 'info@toei-sosan.com',
+  foundingDate: '2014-01-01',
+  areaServed: ['JP', 'CN', 'US', 'EU', 'ASEAN'],
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '长安镇乌沙社区振安中路 东荣创产工业园',
+    addressLocality: '东莞市',
+    addressRegion: '广东省',
+    addressCountry: 'CN'
+  },
+  parentOrganization: {
+    '@type': 'Organization',
+    name: '东荣创产集团股份有限公司',
+    url: 'https://toei-sosan.com/zh/'
+  }
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: 'https://toei-sosan.com/zh/' },
+    { '@type': 'ListItem', position: 2, name: '工厂与制造实力', item: 'https://toei-sosan.com/zh/factory/' }
+  ]
+};
+
 const processes = [
   {
     step: '01',
@@ -74,6 +111,8 @@ const processes = [
 ];
 ---
 <Layout title="工厂实力 | 东荣创产集团" description="中国东莞 5,000㎡ 自有工厂。注塑、喷漆、组装、包装、出货 5 大工序一气呵成。OEM / ODM 请洽东荣创产集团。" lang="zh">
+  <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} is:inline />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} is:inline />
   <Nav />
 
   <PageHero
@@ -108,12 +147,12 @@ const processes = [
             {p.images.map(img => (
               <figure class="process-img-wrap">
                 <img
-                  src={img.src}
-                  srcset={`${img.src} 1x, ${img.src.replace('.webp', '-thumb.webp')} 0.5x`}
+                  src={img.src.replace('.webp', '-thumb.webp')}
+                  srcset={`${img.src} 2x, ${img.src.replace('.webp', '-thumb.webp')} 1x`}
                   alt={img.alt}
                   loading="lazy"
-                  width="1200"
-                  height="1600"
+                  width="600"
+                  height="800"
                   decoding="async"
                 />
               </figure>

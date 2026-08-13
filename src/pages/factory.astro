@@ -12,6 +12,43 @@ const stats = [
   { num: '100+', label: '日本人駐在＋現地エンジニア' }
 ];
 
+// LocalBusiness JSON-LD — 东莞自营工厂，Google Knowledge Graph + Google Maps
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ManufacturingBusiness',
+  '@id': 'https://toei-sosan.com/factory/#business',
+  name: '東栄創産グループ 東莞工場',
+  alternateName: '东荣创产集团 东莞工厂',
+  description: '中国広東省東莞市にある 5,000㎡ の自社工場。射出成形・塗装・組立・包装・出荷まで 5 工程を一気通貫で対応。',
+  url: 'https://toei-sosan.com/factory/',
+  image: 'https://toei-sosan.com/og/zh-factory.png',
+  telephone: '+81-3-6718-2456',
+  email: 'info@toei-sosan.com',
+  foundingDate: '2014-01-01',
+  areaServed: ['JP', 'CN', 'US', 'EU', 'ASEAN'],
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '長安鎮烏沙社区振安中路 東栄創産工業園',
+    addressLocality: '東莞市',
+    addressRegion: '広東省',
+    addressCountry: 'CN'
+  },
+  parentOrganization: {
+    '@type': 'Organization',
+    name: '東栄創産グループ株式会社',
+    url: 'https://toei-sosan.com/'
+  }
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: 'https://toei-sosan.com/' },
+    { '@type': 'ListItem', position: 2, name: '工場・製造実力', item: 'https://toei-sosan.com/factory/' }
+  ]
+};
+
 const processes = [
   {
     step: '01',
@@ -74,6 +111,10 @@ const processes = [
 ];
 ---
 <Layout title="工場・製造実力 | 東栄創産グループ" description="中国・東莞 5,000㎡ の自社工場。射出成形から塗装・組立・包装・出荷まで 5 工程を一気通貫。OEM / ODM のご相談は東栄創産グループまで。">
+  <!-- 構造化データ: ManufacturingBusiness + BreadcrumbList -->
+  <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} is:inline />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} is:inline />
+
   <Nav />
 
   <PageHero
@@ -108,12 +149,12 @@ const processes = [
             {p.images.map(img => (
               <figure class="process-img-wrap">
                 <img
-                  src={img.src}
-                  srcset={`${img.src} 1x, ${img.src.replace('.webp', '-thumb.webp')} 0.5x`}
+                  src={img.src.replace('.webp', '-thumb.webp')}
+                  srcset={`${img.src} 2x, ${img.src.replace('.webp', '-thumb.webp')} 1x`}
                   alt={img.alt}
                   loading="lazy"
-                  width="1200"
-                  height="1600"
+                  width="600"
+                  height="800"
                   decoding="async"
                 />
               </figure>

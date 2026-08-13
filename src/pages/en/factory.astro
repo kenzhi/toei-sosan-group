@@ -12,6 +12,43 @@ const stats = [
   { num: '100+', label: 'JP staff + local engineers' }
 ];
 
+// ManufacturingBusiness JSON-LD
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ManufacturingBusiness',
+  '@id': 'https://toei-sosan.com/en/factory/#business',
+  name: 'Toei Sosan Group — Dongguan Plant',
+  alternateName: '東栄創産グループ 東莞工場',
+  description: '5,000㎡ self-operated factory in Dongguan, Guangdong, China. Five end-to-end processes: injection molding, painting, assembly, packaging, and shipping.',
+  url: 'https://toei-sosan.com/en/factory/',
+  image: 'https://toei-sosan.com/og/en-factory.png',
+  telephone: '+81-3-6718-2456',
+  email: 'info@toei-sosan.com',
+  foundingDate: '2014-01-01',
+  areaServed: ['JP', 'CN', 'US', 'EU', 'ASEAN'],
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Zhenan Middle Rd, Wusha Community, Chang\'an Town',
+    addressLocality: 'Dongguan',
+    addressRegion: 'Guangdong',
+    addressCountry: 'CN'
+  },
+  parentOrganization: {
+    '@type': 'Organization',
+    name: 'Toei Sosan Group Co., Ltd.',
+    url: 'https://toei-sosan.com/en/'
+  }
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://toei-sosan.com/en/' },
+    { '@type': 'ListItem', position: 2, name: 'Factory & Manufacturing', item: 'https://toei-sosan.com/en/factory/' }
+  ]
+};
+
 const processes = [
   {
     step: '01',
@@ -74,6 +111,8 @@ const processes = [
 ];
 ---
 <Layout title="Factory | Toei Sosan Group" description="5,000㎡ in-house facility in Dongguan, China. Five stages — injection, painting, assembly, packaging, shipping — under one roof. OEM/ODM by Toei Sosan Group." lang="en">
+  <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} is:inline />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} is:inline />
   <Nav />
 
   <PageHero
@@ -108,12 +147,12 @@ const processes = [
             {p.images.map(img => (
               <figure class="process-img-wrap">
                 <img
-                  src={img.src}
-                  srcset={`${img.src} 1x, ${img.src.replace('.webp', '-thumb.webp')} 0.5x`}
+                  src={img.src.replace('.webp', '-thumb.webp')}
+                  srcset={`${img.src} 2x, ${img.src.replace('.webp', '-thumb.webp')} 1x`}
                   alt={img.alt}
                   loading="lazy"
-                  width="1200"
-                  height="1600"
+                  width="600"
+                  height="800"
                   decoding="async"
                 />
               </figure>

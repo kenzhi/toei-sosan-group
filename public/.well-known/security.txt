@@ -1,0 +1,13 @@
+# security.txt — RFC 9116
+# 安全研究人员发现问题时的联系方式
+
+Contact: mailto:security@toei-sosan.com
+Contact: https://toei-sosan.com/contact/
+Expires: 2027-12-31T23:59:59.000Z
+Preferred-Languages: ja, en, zh
+Canonical: https://toei-sosan.com/.well-known/security.txt
+
+# 我们承诺：
+# - 收到报告后 7 个工作日内首次回复
+# - 确认漏洞后 90 天内修复
+# - 协调披露

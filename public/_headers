@@ -31,8 +31,34 @@
 /*.js
   Cache-Control: public, max-age=31536000, immutable
 
+/*.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+
+/manifest.webmanifest
+  Content-Type: application/manifest+json
+  Cache-Control: public, max-age=86400, must-revalidate
+
+# security.txt (RFC 9116) — 安全研究人员联系入口
+/.well-known/security.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=86400, must-revalidate
+
 # HTML：短缓存（让更新更快生效）
 /*.html
   Cache-Control: public, max-age=0, must-revalidate
   # 配合 X-Robots-Tag 防止意外索引
   X-Robots-Tag: index, follow
+
+# 404 页面：极短缓存 + 明确 noindex
+/404
+  Cache-Control: public, max-age=0, must-revalidate
+  X-Robots-Tag: noindex, nofollow
+/zh/404
+  Cache-Control: public, max-age=0, must-revalidate
+  X-Robots-Tag: noindex, nofollow
+/en/404
+  Cache-Control: public, max-age=0, must-revalidate
+  X-Robots-Tag: noindex, nofollow

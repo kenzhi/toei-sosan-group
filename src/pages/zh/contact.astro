@@ -14,6 +14,8 @@ const faq = [
 // Cloudflare Turnstile —— 在 Cloudflare Dashboard → Turnstile → Add site 获取 site key
 // 填 PUBLIC_TURNSTILE_SITE_KEY（前端 widget）即可启用；secret key 配在 web3forms 后端
 const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
+
+const isSubmitted = Astro.url.searchParams.get('submitted') === '1';
 ---
 <Layout title="联系我们 | 东荣创产集团" description="OEM 制造、跨境电商、国际贸易咨询，24 小时内回复。" lang="zh">
   <Nav />
@@ -25,7 +27,15 @@ const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
       <div class="contact-grid">
         <div class="form-wrap">
           <h2>填写表单</h2>
-          <form class="form" action="https://api.web3forms.com/submit" method="POST">
+          {isSubmitted ? (
+            <div class="success-card" role="status" aria-live="polite">
+              <div class="success-icon" aria-hidden="true">✓</div>
+              <h3 class="success-title">咨询已收到</h3>
+              <p class="success-desc">感谢您的咨询！我们会在 <strong>24 小时内</strong> 回复。<br />如未收到，请检查垃圾邮件文件夹。</p>
+              <a href="/zh/" class="btn btn-primary">返回首页</a>
+            </div>
+          ) : (
+          <form class="form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
             <input type="hidden" name="access_key" value="e9b29e3d-a8ad-45e6-9f75-44a84ee2c156" />
             <input type="hidden" name="subject" value="东荣创产集团 — 新的咨询" />
             <input type="hidden" name="from_name" value="Toei Sosan Group Website" />
@@ -73,8 +83,9 @@ const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
               <div class="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY}></div>
             )}
 
-            <button type="submit" class="btn btn-primary">发送</button>
+            <button type="submit" class="btn btn-primary" id="contact-submit">发送</button>
           </form>
+          )}
         </div>
 
         <aside class="info-wrap">
@@ -123,9 +134,67 @@ const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
   {TURNSTILE_SITE_KEY && (
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   )}
+
+  <script>
+    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    const submitBtn = document.getElementById('contact-submit') as HTMLButtonElement | null;
+    if (form && submitBtn) {
+      form.addEventListener('submit', () => {
+        submitBtn.classList.add('is-loading');
+        submitBtn.disabled = true;
+      });
+    }
+  </script>
 </Layout>
 
 <style>
+  .success-card {
+    background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-white) 100%);
+    border: 1.5px solid var(--color-accent);
+    border-radius: 4px;
+    padding: 3rem 2rem;
+    text-align: center;
+    animation: successIn 0.5s var(--ease) both;
+  }
+  .success-icon {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 64px;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 4px 16px rgba(226, 156, 82, 0.3);
+  }
+  .success-title {
+    font-size: 1.375rem;
+    color: var(--color-primary);
+    margin: 0 0 1rem;
+    font-weight: 600;
+  }
+  .success-desc {
+    color: var(--color-text-soft);
+    line-height: 1.8;
+    margin: 0 0 2rem;
+  }
+  .success-desc strong { color: var(--color-accent); }
+  @keyframes successIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .form button[type="submit"].is-loading {
+    opacity: 0.7; pointer-events: none; position: relative; color: transparent;
+  }
+  .form button[type="submit"].is-loading::after {
+    content: ''; position: absolute; top: 50%; left: 50%;
+    width: 18px; height: 18px; margin: -9px 0 0 -9px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: white; border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
   .contact-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem; }
   .form-wrap h2, .info-wrap h2 { font-size: 1.25rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border); }
   .form { display: flex; flex-direction: column; gap: 1.5rem; }

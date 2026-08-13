@@ -6,6 +6,10 @@ import { getLangFromPath, type Lang } from '../i18n/ui';
 
 const lang: Lang = getLangFromPath(Astro.url.pathname);
 
+// 告诉 Cloudflare Pages：这是真正的 404
+Astro.response.status = 404;
+Astro.response.headers.set('X-Robots-Tag', 'noindex, nofollow');
+
 const t = {
   ja: {
     eyebrow: '404 ERROR',

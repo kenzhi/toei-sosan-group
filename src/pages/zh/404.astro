@@ -2,6 +2,9 @@
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+
+Astro.response.status = 404;
+Astro.response.headers.set('X-Robots-Tag', 'noindex, nofollow');
 ---
 <Layout title="404 - 页面未找到" description="您查找的页面可能已被移动或删除。" lang="zh">
   <Nav />
