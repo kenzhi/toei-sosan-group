@@ -1,0 +1,530 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from './Nav.astro';
+import Footer from './Footer.astro';
+import type { CollectionEntry } from 'astro:content';
+import { cleanSlug } from '../i18n/ui';
+
+interface Props {
+  entry: CollectionEntry<'products'>;
+  backLabel: string;
+  backHref: string;
+  ctaTitle: string;
+  ctaButton: string;
+  ctaHref: string;
+  relatedCaseEntry?: CollectionEntry<'cases'>;
+  relatedProducts?: CollectionEntry<'products'>[];
+  lang: 'ja' | 'zh' | 'en';
+}
+
+const {
+  entry, backLabel, backHref, ctaTitle, ctaButton, ctaHref,
+  relatedCaseEntry, relatedProducts = [], lang
+} = Astro.props;
+
+const { Content } = await entry.render();
+const data = entry.data as any;
+const dateStr = data.date.toISOString().split('T')[0];
+
+const cover = data.cover || 'https://images.unsplash.com/photo-1565043589221-1a6fd9ae74c4?w=1600&h=600&fit=crop&auto=format&q=80';
+const gallery = data.gallery && data.gallery.length > 0 ? data.gallery : [cover];
+const specs = data.specs || {};
+const ogImage = cover.startsWith('http') ? cover : `https://toei-sosan.com${cover}`;
+
+const pageTitle = `${data.title} | 製品 | 東栄創産グループ`;
+
+const t = {
+  ja: { relatedCase: '関連ケース', relatedProducts: '関連製品', gallery: 'ギャラリー', specs: '製品仕様' },
+  zh: { relatedCase: '相关案例', relatedProducts: '相关产品', gallery: '产品图集', specs: '产品规格' },
+  en: { relatedCase: 'Related Case Study', relatedProducts: 'Related Products', gallery: 'Gallery', specs: 'Specifications' },
+}[lang];
+
+// Product schema
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: data.title,
+  description: data.excerpt,
+  image: gallery.map((g: string) => g.startsWith('http') ? g : `https://toei-sosan.com${g}`),
+  brand: { '@type': 'Brand', name: '東栄創産グループ' },
+  manufacturer: { '@type': 'Organization', name: '東栄創産グループ株式会社' },
+  category: data.category,
+};
+---
+<Layout title={pageTitle} description={data.excerpt} lang={lang} ogImage={ogImage}>
+  <Nav />
+
+  <article class="product">
+    <!-- Cover -->
+    <div class="product-cover" style={`background-image: url(${cover})`}>
+      <div class="product-cover-overlay"></div>
+      <div class="container product-cover-content">
+        <div class="product-meta-top">
+          {data.category && <span class="product-tag">{data.category}</span>}
+          {data.industry && <span class="product-tag">{data.industry}</span>}
+        </div>
+        <h1 class="product-title">{data.title}</h1>
+      </div>
+    </div>
+
+    <div class="container product-grid">
+      <!-- 左侧主内容 -->
+      <main class="product-main">
+        <a href={backHref} class="back-link">← {backLabel}</a>
+
+        <p class="product-excerpt">{data.excerpt}</p>
+
+        <!-- Gallery -->
+        {gallery.length > 1 && (
+          <section class="product-section">
+            <h2 class="section-title">{t.gallery}</h2>
+            <div class="gallery-grid">
+              {gallery.map((img: string, i: number) => (
+                <a href={img} target="_blank" rel="noopener" class="gallery-item">
+                  <img src={img} alt={`${data.title} - ${i + 1}`} loading="lazy" decoding="async" />
+                </a>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <!-- Body -->
+        <div class="product-body">
+          <Content />
+        </div>
+
+        <div class="product-cta">
+          <p>{ctaTitle}</p>
+          <a href={ctaHref} class="btn-cta">{ctaButton}</a>
+        </div>
+      </main>
+
+      <!-- 右侧 sidebar：specs + meta -->
+      <aside class="product-sidebar">
+        <div class="specs-box">
+          <h3 class="specs-title">{t.specs}</h3>
+          <dl class="specs-list">
+            {Object.entries(specs).map(([k, v]) => (
+              <div class="specs-item">
+                <dt>{k}</dt>
+                <dd>{v}</dd>
+              </div>
+            ))}
+          </dl>
+          {data.client && (
+            <div class="specs-meta">
+              <div class="specs-meta-item">
+                <span class="specs-meta-label">Client</span>
+                <span class="specs-meta-value">{data.client}</span>
+              </div>
+            </div>
+          )}
+        </div>
+      </aside>
+    </div>
+
+    <!-- Related Case -->
+    {relatedCaseEntry && (
+      <section class="related-case-section">
+        <div class="container">
+          <div class="sec-eyebrow"><span class="eyebrow-line"></span><span>{t.relatedCase}</span></div>
+          <a href={`${lang === 'ja' ? '' : '/' + lang}/cases/${cleanSlug(relatedCaseEntry.slug)}/`} class="related-case-card">
+            <div class="related-case-cover" style={`background-image: url(${(relatedCaseEntry.data as any).cover || 'https://images.unsplash.com/photo-1565043666747-69f6646db940?w=800&h=400&fit=crop&auto=format&q=80'})`}></div>
+            <div class="related-case-content">
+              <span class="related-case-tag">{(relatedCaseEntry.data as any).industry || 'CASE'}</span>
+              <h3>{(relatedCaseEntry.data as any).title}</h3>
+              <p>{(relatedCaseEntry.data as any).excerpt}</p>
+              <span class="related-case-link">{t.relatedCase} →</span>
+            </div>
+          </a>
+        </div>
+      </section>
+    )}
+
+    <!-- Related Products -->
+    {relatedProducts.length > 0 && (
+      <section class="related-products-section">
+        <div class="container">
+          <div class="sec-eyebrow"><span class="eyebrow-line"></span><span>{t.relatedProducts}</span></div>
+          <div class="related-products-grid">
+            {relatedProducts.map(p => (
+              <a href={`${lang === 'ja' ? '' : '/' + lang}/products/${cleanSlug(p.slug)}/`} class="related-product-card">
+                <div class="related-product-cover" style={`background-image: url(${(p.data as any).cover})`}>
+                  <span class="related-product-tag">{(p.data as any).category}</span>
+                </div>
+                <div class="related-product-content">
+                  <h4>{(p.data as any).title}</h4>
+                  <p>{(p.data as any).excerpt}</p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+  </article>
+
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(productSchema)}></script>
+</Layout>
+
+<style>
+  .product-cover {
+    position: relative;
+    height: clamp(280px, 40vw, 480px);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+  }
+  .product-cover-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(0deg, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.2) 60%, transparent 100%);
+  }
+  .product-cover-content {
+    position: relative;
+    z-index: 2;
+    padding-bottom: 3rem;
+    color: white;
+  }
+  .product-meta-top { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+  .product-tag {
+    font-family: var(--font-en);
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--color-accent);
+    border-radius: 2px;
+    background: rgba(15, 23, 42, 0.3);
+    backdrop-filter: blur(4px);
+  }
+  .product-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    font-weight: 600;
+    color: white;
+    line-height: 1.2;
+    margin: 0;
+    max-width: 800px;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 3rem;
+    padding-top: 3rem;
+    padding-bottom: 5rem;
+  }
+  .product-main { max-width: 760px; position: relative; }
+  .back-link {
+    display: inline-block;
+    color: var(--color-text-soft);
+    font-size: 0.8125rem;
+    margin-bottom: 1.5rem;
+    text-decoration: none;
+  }
+  .back-link:hover { color: var(--color-accent); }
+  .product-excerpt {
+    font-family: var(--font-sc);
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--color-text-soft);
+    margin: 0 0 2.5rem;
+    padding-left: 1rem;
+    border-left: 3px solid var(--color-accent);
+  }
+
+  .product-section { margin-bottom: 3rem; }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin: 0 0 1.5rem;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+  .gallery-item {
+    display: block;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: var(--radius);
+  }
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s var(--ease);
+  }
+  .gallery-item:hover img { transform: scale(1.05); }
+
+  .product-body { margin-bottom: 3rem; }
+  .product-body :global(h2) {
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  .product-body :global(h3) {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+  .product-body :global(p) {
+    font-family: var(--font-sc);
+    font-size: 0.9375rem;
+    line-height: 1.95;
+    margin-bottom: 1.25rem;
+    color: var(--color-text);
+  }
+  .product-body :global(ul) { margin: 1rem 0 1.5rem 1.5rem; }
+  .product-body :global(li) { font-family: var(--font-sc); line-height: 1.85; margin-bottom: 0.5rem; }
+  .product-body :global(strong) { color: var(--color-primary); font-weight: 600; }
+  .product-body :global(hr) { margin: 2.5rem 0; border: none; border-top: 1px solid var(--color-border); }
+
+  .product-cta {
+    background: var(--color-primary);
+    color: white;
+    padding: 2.5rem;
+    text-align: center;
+  }
+  .product-cta p { color: white; margin-bottom: 1.5rem; font-size: 1.0625rem; }
+  .btn-cta {
+    display: inline-block;
+    padding: 0.7rem 1.5rem;
+    background: var(--color-accent);
+    color: white;
+    font-family: var(--font-en);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.3s var(--ease);
+  }
+  .btn-cta:hover { background: white; color: var(--color-primary); transform: translateY(-1px); }
+
+  /* Sidebar */
+  .product-sidebar { position: relative; }
+  .specs-box {
+    position: sticky;
+    top: 100px;
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+  }
+  .specs-title {
+    font-family: var(--font-en);
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    opacity: 0.6;
+    margin: 0 0 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .specs-list { margin: 0; padding: 0; }
+  .specs-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0.625rem 0;
+    border-bottom: 1px solid var(--color-border-soft);
+    gap: 1rem;
+  }
+  .specs-item:last-child { border-bottom: none; }
+  .specs-item dt {
+    font-family: var(--font-sc);
+    font-size: 0.75rem;
+    color: var(--color-text-mute);
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+  .specs-item dd {
+    font-family: var(--font-sc);
+    font-size: 0.8125rem;
+    color: var(--color-primary);
+    font-weight: 500;
+    text-align: right;
+    margin: 0;
+  }
+  .specs-meta { margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--color-border); }
+  .specs-meta-item { display: flex; flex-direction: column; gap: 0.25rem; }
+  .specs-meta-label {
+    font-family: var(--font-en);
+    font-size: 0.625rem;
+    letter-spacing: 0.2em;
+    color: var(--color-text-mute);
+    text-transform: uppercase;
+  }
+  .specs-meta-value { font-family: var(--font-sc); font-size: 0.8125rem; color: var(--color-primary); }
+
+  /* Related Case */
+  .related-case-section {
+    background: var(--color-bg);
+    padding: 4rem 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .related-case-card {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 0;
+    background: white;
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--color-primary);
+    transition: all 0.3s var(--ease);
+  }
+  .related-case-card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+  }
+  .related-case-cover {
+    aspect-ratio: 4/3;
+    background-size: cover;
+    background-position: center;
+  }
+  .related-case-content { padding: 2.5rem; }
+  .related-case-tag {
+    font-family: var(--font-en);
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--color-accent);
+    text-transform: uppercase;
+  }
+  .related-case-content h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0.75rem 0;
+    line-height: 1.3;
+  }
+  .related-case-content p {
+    font-family: var(--font-sc);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--color-text-soft);
+    margin: 0 0 1rem;
+  }
+  .related-case-link {
+    font-family: var(--font-en);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    letter-spacing: 0.05em;
+  }
+
+  /* Related Products */
+  .related-products-section {
+    background: white;
+    padding: 4rem 0 6rem;
+    border-top: 1px solid var(--color-border);
+  }
+  .related-products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .related-product-card {
+    display: block;
+    background: white;
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--color-primary);
+    transition: all 0.3s var(--ease);
+  }
+  .related-product-card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  }
+  .related-product-cover {
+    position: relative;
+    aspect-ratio: 4/3;
+    background-size: cover;
+    background-position: center;
+  }
+  .related-product-tag {
+    position: absolute;
+    top: 0.75rem; left: 0.75rem;
+    font-family: var(--font-en);
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--color-accent);
+    background: rgba(255, 255, 255, 0.95);
+    padding: 0.25rem 0.6rem;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+  .related-product-content { padding: 1.5rem; }
+  .related-product-content h4 {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+    line-height: 1.35;
+  }
+  .related-product-content p {
+    font-family: var(--font-sc);
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--color-text-soft);
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .sec-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .sec-eyebrow .eyebrow-line { width: 32px; height: 2px; background: var(--color-accent); border-radius: 999px; }
+  .sec-eyebrow span:last-child {
+    font-family: var(--font-en);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    color: var(--color-primary);
+    opacity: 0.6;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 1023px) {
+    .product-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .related-case-card { grid-template-columns: 1fr; }
+    .related-products-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .product-cover { height: 240px; }
+  }
+</style>

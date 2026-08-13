@@ -1,0 +1,5 @@
+<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <rect width="32" height="32" fill="#1B3A5C"/>
+  <text x="16" y="23" font-family="'Noto Serif JP', 'Hiragino Mincho ProN', serif" font-size="20" font-weight="700" fill="white" text-anchor="middle">東</text>
+  <circle cx="26" cy="6" r="2.5" fill="#E29C52"/>
+</svg>

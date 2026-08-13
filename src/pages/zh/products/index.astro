@@ -1,0 +1,90 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+import PageHero from '../../../components/PageHero.astro';
+import { getCollection } from 'astro:content';
+import { cleanSlug } from '../../../i18n/ui';
+
+const products = (await getCollection('products', p => p.data.lang === 'zh' && !p.data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const byCategory = new Map<string, typeof products>();
+products.forEach(p => {
+  const cat = (p.data as any).category || '其他';
+  if (!byCategory.has(cat)) byCategory.set(cat, []);
+  byCategory.get(cat)!.push(p);
+});
+const categories = Array.from(byCategory.keys());
+---
+<Layout title="产品 | 东荣创产集团" description="东荣创产集团自有工厂制作的产品线，涵盖金属加工、树脂成形、电子组装、包装等。" lang="zh">
+  <Nav />
+  <PageHero eyebrow="PRODUCTS" title="产品" subtitle="自有工厂制作的产品线。金属加工、树脂成形、电子组装、包装一应俱全。" />
+
+  <section class="products-list section">
+    <div class="container">
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">全部</button>
+        {categories.map(c => <button class="filter-btn" data-filter={c}>{c}</button>)}
+      </div>
+
+      <div class="products-grid">
+        {products.map(p => (
+          <a href={`/zh/products/${cleanSlug(p.slug)}/`} class="product-card" data-category={(p.data as any).category || '其他'}>
+            <div class="product-card-cover" style={`background-image: url(${(p.data as any).cover})`}>
+              <span class="product-card-cat">{(p.data as any).category}</span>
+              <div class="product-card-overlay"></div>
+            </div>
+            <div class="product-card-content">
+              <h3>{(p.data as any).title}</h3>
+              <p>{(p.data as any).excerpt}</p>
+              <span class="product-card-link">查看详情 →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('.product-card');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      cards.forEach(card => {
+        if (filter === 'all' || card.dataset.category === filter) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .filter-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--color-border); }
+  .filter-btn { padding: 0.5rem 1rem; font-family: var(--font-en); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.05em; color: var(--color-primary); background: white; border: 1px solid var(--color-border); border-radius: 2px; cursor: pointer; transition: all 0.2s var(--ease); }
+  .filter-btn:hover { border-color: var(--color-primary); }
+  .filter-btn.active { background: var(--color-primary); color: white; border-color: var(--color-primary); }
+
+  .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .product-card { display: block; background: white; border: 1px solid var(--color-border-soft); border-radius: var(--radius-lg); overflow: hidden; text-decoration: none; color: var(--color-primary); transition: all 0.3s var(--ease); }
+  .product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(15, 23, 42, 0.1); border-color: var(--color-accent); }
+  .product-card-cover { position: relative; aspect-ratio: 4/3; background-size: cover; background-position: center; background-color: var(--color-bg-soft); }
+  .product-card-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, rgba(15, 23, 42, 0.3) 100%); }
+  .product-card-cat { position: absolute; top: 1rem; left: 1rem; font-family: var(--font-en); font-size: 0.625rem; font-weight: 600; letter-spacing: 0.2em; color: var(--color-accent); text-transform: uppercase; background: rgba(255, 255, 255, 0.95); padding: 0.3rem 0.7rem; border-radius: 2px; }
+  .product-card-content { padding: 1.5rem 1.75rem 1.75rem; }
+  .product-card-content h3 { font-family: var(--font-display); font-size: 1.125rem; font-weight: 600; line-height: 1.35; margin: 0 0 0.5rem; }
+  .product-card-content p { font-family: var(--font-sc); font-size: 0.8125rem; line-height: 1.6; color: var(--color-text-soft); margin: 0 0 1rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .product-card-link { font-family: var(--font-en); font-size: 0.75rem; font-weight: 600; color: var(--color-accent); letter-spacing: 0.05em; }
+
+  @media (max-width: 1023px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .products-grid { grid-template-columns: 1fr; } }
+</style>

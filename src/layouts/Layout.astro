@@ -1,0 +1,192 @@
+---
+import '../styles/global.css';
+interface Props {
+  title: string;
+  description?: string;
+  lang?: 'ja' | 'zh' | 'en';
+  ogImage?: string;
+}
+const {
+  title,
+  description = '東栄創産グループ - 中国の工場から、世界へ。OEM製造・跨境電商・国際貿易を一社で。',
+  lang = 'ja',
+  ogImage
+} = Astro.props;
+
+// CF Web Analytics token（从 Cloudflare Dashboard → Analytics → Web Analytics 获取）
+// 留空则不注入 beacon；填上后 1-2 分钟内 CF 后台开始有数据
+const CF_BEACON_TOKEN = import.meta.env.PUBLIC_CF_BEACON_TOKEN || '';
+
+const ogLocale: Record<string, string> = { ja: 'ja_JP', zh: 'zh_CN', en: 'en_US' };
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? 'https://toei-sosan.com').toString();
+const ogImageUrl = ogImage || new URL('/og-default.svg', 'https://toei-sosan.com').toString();
+
+function hreflangUrl(targetLang: 'ja' | 'zh' | 'en'): string {
+  const stripped = Astro.url.pathname.replace(/^\/(zh|en)/, '') || '/';
+  if (targetLang === 'ja') {
+    return new URL(stripped, 'https://toei-sosan.com').toString();
+  }
+  let path = stripped.endsWith('/') ? stripped : stripped + '/';
+  return new URL(`/${targetLang}${path}`, 'https://toei-sosan.com').toString();
+}
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: '東栄創産グループ株式会社',
+  alternateName: ['Toei Sosan Group', '东荣创产集团'],
+  url: 'https://toei-sosan.com',
+  logo: 'https://toei-sosan.com/logo.svg',
+  foundingDate: '2025-11-04',
+  description: 'Chinese factories × global markets. OEM manufacturing, cross-border e-commerce, and international trade, all under one roof.',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '品川インターシティC棟 6F',
+    addressLocality: '品川区',
+    addressRegion: '東京都',
+    postalCode: '140-0002',
+    addressCountry: 'JP'
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'customer service',
+    email: 'info@toei-sosan.com',
+    availableLanguage: ['Japanese', 'Chinese', 'English']
+  },
+  sameAs: [],
+  knowsAbout: ['OEM manufacturing', 'Cross-border e-commerce', 'International trade', 'Sino-Japan business', 'China manufacturing']
+};
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+
+    <!-- SEO -->
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+
+    <!-- GEO 优化：hreflang 告诉搜索引擎各语言版本 -->
+    <link rel="alternate" hreflang="ja" href={hreflangUrl('ja')} />
+    <link rel="alternate" hreflang="zh" href={hreflangUrl('zh')} />
+    <link rel="alternate" hreflang="en" href={hreflangUrl('en')} />
+    <link rel="alternate" hreflang="x-default" href="https://toei-sosan.com/" />
+
+    <!-- Open Graph / 社交分享 -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content={ogLocale[lang] || 'ja_JP'} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:site_name" content="東栄創産グループ" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <meta name="theme-color" content="#1B3A5C" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;500;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <title>{title}</title>
+
+    <!-- JSON-LD 结构化数据（GEO 优化） -->
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)}></script>
+
+    <!-- Cloudflare Web Analytics（可选，PUBLIC_CF_BEACON_TOKEN env var 配置） -->
+    {CF_BEACON_TOKEN && (
+      <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: CF_BEACON_TOKEN })}></script>
+    )}
+  </head>
+  <body>
+    <slot />
+
+    <!-- 全局滚动渐入动画：给 [data-reveal] 或 .section 元素加 fade-in -->
+    <script>
+      const initReveal = () => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const targets = document.querySelectorAll<HTMLElement>('[data-reveal], main > .section, main > section.section');
+        if (!targets.length) return;
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((e, i) => {
+            if (e.isIntersecting) {
+              const el = e.target as HTMLElement;
+              const delay = parseInt(el.dataset.revealDelay || '0', 10);
+              setTimeout(() => el.classList.add('is-revealed'), delay);
+              observer.unobserve(e.target);
+            }
+          });
+        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+        targets.forEach(el => {
+          el.classList.add('reveal');
+          observer.observe(el);
+        });
+      };
+
+      // Count-up 数字动画：给 [data-countup] 元素加 0→target 滚动
+      const initCountUp = () => {
+        const targets = document.querySelectorAll<HTMLElement>('[data-countup]');
+        if (!targets.length) return;
+        const animate = (el: HTMLElement) => {
+          if (el.dataset.countupDone === '1') return;
+          el.dataset.countupDone = '1';
+          const target = parseFloat(el.dataset.countup || '0');
+          const duration = parseInt(el.dataset.countupDuration || '1500', 10);
+          const decimals = parseInt(el.dataset.countupDecimals || '0', 10);
+          const suffix = el.dataset.countupSuffix || '';
+          const prefix = el.dataset.countupPrefix || '';
+          const start = performance.now();
+          const tick = (now: number) => {
+            const t = Math.min(1, (now - start) / duration);
+            const eased = 1 - Math.pow(1 - t, 3); // easeOutCubic
+            const value = target * eased;
+            el.textContent = prefix + value.toFixed(decimals) + suffix;
+            if (t < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        };
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              animate(e.target as HTMLElement);
+              observer.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.5 });
+        targets.forEach(el => observer.observe(el));
+      };
+
+      // 等待 DOM 完成
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => { initReveal(); initCountUp(); });
+      } else {
+        initReveal();
+        initCountUp();
+      }
+    </script>
+
+    <style is:global>
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: opacity, transform;
+      }
+      .reveal.is-revealed {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+      }
+    </style>
+  </body>
+</html>

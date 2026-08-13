@@ -1,0 +1,5 @@
+# Cloudflare Pages redirects
+# 404 handling — serve language-specific 404 page based on path prefix
+/zh/*   /zh/404/   404
+/en/*   /en/404/   404
+/*      /404/      404

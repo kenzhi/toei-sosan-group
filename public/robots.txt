@@ -1,0 +1,62 @@
+# robots.txt — 允许所有爬虫（包括 AI 引擎）
+
+# === 默认：所有爬虫 ===
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# === 主流搜索引擎（显式允许）===
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# === AI 搜索引擎爬虫（GEO 优化：明确允许）===
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+# === Sitemap ===
+Sitemap: https://toei-sosan.com/sitemap.xml

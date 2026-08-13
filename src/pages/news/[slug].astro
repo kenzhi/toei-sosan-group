@@ -1,0 +1,29 @@
+---
+import ArticleLayout from '../../components/ArticleLayout.astro';
+import { getCollection } from 'astro:content';
+import { cleanSlug } from '../../i18n/ui';
+
+export async function getStaticPaths() {
+  const news = await getCollection('news', c => c.data.lang === 'ja');
+  return Promise.all(news.map(async (entry) => {
+    const related = (await getCollection('news', c =>
+      c.data.lang === 'ja' && c.slug !== entry.slug
+    )).slice(0, 3);
+    return { params: { slug: cleanSlug(entry.slug) }, props: { entry, related } };
+  }));
+}
+
+const { entry, related } = Astro.props;
+---
+<ArticleLayout
+  entry={entry}
+  collection="news"
+  backLabel="ニュース一覧"
+  backHref="/news/"
+  ctaTitle="最新情報をチェックしませんか？"
+  ctaButton="お問い合わせ"
+  ctaHref="/contact/"
+  relatedTitle="ニュース"
+  related={related}
+  lang="ja"
+/>

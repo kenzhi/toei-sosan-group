@@ -1,0 +1,149 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Footer from '../components/Footer.astro';
+
+const faq = [
+  { q: '初回相談は有料ですか？', a: '初回相談は無料です。課題のヒアリングとご提案まで、お気軽にどうぞ。' },
+  { q: '対応エリアは？', a: '日本（東京）と中国（東莞）の二拠点で、日本全国・中国全土・グローバルに対応します。' },
+  { q: '小ロット（試作）も可能ですか？', a: 'はい、試作・小ロットから対応可能です。詳細はお問い合わせください。' },
+  { q: '契約から実行までの期間は？', a: '内容により異なりますが、最短 2 週間で着手可能な案件もあります。' }
+];
+---
+<Layout title="お問い合わせ | 東栄創産グループ" description="OEM製造・跨境電商・国際貿易のお問い合わせはこちらから。24時間以内に返信いたします。">
+  <Nav />
+
+  <PageHero eyebrow="CONTACT" title="お問い合わせ" subtitle="まずはお気軽にご相談ください。24時間以内に返信いたします。" />
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="form-wrap">
+          <h2>フォームから問い合わせる</h2>
+          <form class="form" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="e9b29e3d-a8ad-45e6-9f75-44a84ee2c156" />
+            <input type="hidden" name="subject" value="東栄創産グループ — 新しいお問い合わせ" />
+            <input type="hidden" name="from_name" value="Toei Sosan Group Website" />
+            <input type="hidden" name="redirect" value="https://toei-sosan.com/contact/?submitted=1" />
+            <!-- 蜜罐（防垃圾邮件，CSS 隐藏，机器人会填） -->
+            <input type="checkbox" name="botcheck" class="hidden" style="display: none" />
+
+            <div class="form-row">
+              <label>
+                <span>お名前 <em>*</em></span>
+                <input type="text" name="name" required />
+              </label>
+              <label>
+                <span>会社名</span>
+                <input type="text" name="company" />
+              </label>
+            </div>
+            <label>
+              <span>メールアドレス <em>*</em></span>
+              <input type="email" name="email" required />
+            </label>
+            <label>
+              <span>関心のあるサービス</span>
+              <select name="service">
+                <option>OEM製造</option>
+                <option>跨境電商</option>
+                <option>国際貿易</option>
+                <option>製品設計</option>
+                <option>その他</option>
+              </select>
+            </label>
+            <label>
+              <span>相談内容 <em>*</em></span>
+              <textarea name="message" rows="6" required></textarea>
+            </label>
+            <label class="check">
+              <input type="checkbox" name="agree" required />
+              <span>プライバシーポリシーに同意する</span>
+            </label>
+            <button type="submit" class="btn btn-primary">送信する</button>
+          </form>
+        </div>
+
+        <aside class="info-wrap">
+          <h2>連絡先</h2>
+          <div class="info-block">
+            <div class="info-label">メール</div>
+            <a href="mailto:info@toei-sosan.com" class="info-value">info@toei-sosan.com</a>
+          </div>
+          <div class="info-block">
+            <div class="info-label">日本本社</div>
+            <p class="info-value">
+              〒140-0002<br />
+              東京都品川区東品川4-12-4<br />
+              品川インターシティC棟 6F
+            </p>
+          </div>
+          <div class="info-block">
+            <div class="info-label">中国拠点</div>
+            <p class="info-value">広東省東莞市<br />（詳細はお問い合わせください）</p>
+          </div>
+          <div class="info-block">
+            <div class="info-label">営業時間</div>
+            <p class="info-value">平日 9:00 - 18:00（日本時間）</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section faq-section">
+    <div class="container narrow">
+      <SectionHeader eyebrow="FAQ" title="よくある質問" />
+      <div class="faq-list">
+        {faq.map(item => (
+          <details class="faq-item">
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .contact-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem; }
+  .form-wrap h2, .info-wrap h2 { font-size: 1.25rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border); }
+  .form { display: flex; flex-direction: column; gap: 1.5rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .form label { display: flex; flex-direction: column; gap: 0.5rem; }
+  .form label > span { font-size: 0.875rem; font-weight: 500; color: var(--color-text); }
+  .form label > span em { color: var(--color-accent); font-style: normal; margin-left: 0.25rem; }
+  .form input, .form textarea, .form select {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-white);
+    border-radius: var(--radius);
+    transition: border-color 0.2s;
+  }
+  .form input:focus, .form textarea:focus, .form select:focus { outline: none; border-color: var(--color-primary); }
+  .form textarea { resize: vertical; min-height: 140px; }
+  .form .check { flex-direction: row; align-items: center; gap: 0.5rem; }
+  .form .check span { font-size: 0.875rem; color: var(--color-text-soft); }
+  .form button { align-self: flex-start; margin-top: 0.5rem; }
+  .info-wrap { background: var(--color-bg-white); border: 1px solid var(--color-border-soft); padding: 2.5rem; }
+  .info-block { margin-bottom: 1.75rem; }
+  .info-block:last-child { margin-bottom: 0; }
+  .info-label { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.15em; margin-bottom: 0.5rem; }
+  .info-value { font-size: 0.9375rem; color: var(--color-text); line-height: 1.6; margin: 0; }
+  .faq-section { background: var(--color-bg-white); }
+  .narrow { max-width: 720px; margin: 0 auto; }
+  .faq-list { display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { background: var(--color-bg); border: 1px solid var(--color-border-soft); padding: 1.25rem 1.5rem; }
+  .faq-item summary { font-weight: 500; color: var(--color-primary); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+  .faq-item summary::after { content: '+'; font-size: 1.25rem; color: var(--color-accent); transition: transform 0.2s; }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+  .faq-item p { margin: 1rem 0 0; color: var(--color-text-soft); line-height: 1.7; }
+  @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } .form-row { grid-template-columns: 1fr; } }
+</style>

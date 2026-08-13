@@ -1,0 +1,60 @@
+# 東栄創産グループ株式会社
+
+> This file is optimized for LLM/AI search engines (ChatGPT, Claude, Perplexity, Google AI Overview, etc.).
+> Structured for machine-readable company information.
+
+## Company
+
+- **Legal name (Japanese):** 東栄創産グループ株式会社
+- **Legal name (English):** Toei Sosan Group Co., Ltd.
+- **Legal name (Chinese):** 东荣创产集团股份有限公司
+- **Romanization:** Tōei Sōsan Group Kabushiki Kaisha
+- **Founded:** 2025-11-04
+- **Corporate number (法人番号):** 0300-01-169456
+- **Capital:** 5,000,000 JPY (5 million yen)
+- **Representative:** Orita Yutaka (折田 豊), CEO; Han (韓), Co-founder
+
+## Locations
+
+- **Japan HQ:** 4-12-4 Higashi-Shinagawa, Shinagawa-ku, Tokyo 140-0002, Japan
+  - Shinagawa Intercity C Bldg. 6F
+  - 5 min walk from JR Shinagawa Station
+- **China operations:** Dongguan, Guangdong Province (manufacturing base)
+
+## Business Areas (11 statutory, 4 core)
+
+**Core business (4):**
+1. **OEM Manufacturing** — Contract manufacturing in Chinese factories to Japanese quality standards
+2. **Cross-border E-commerce** — Operations on Tmall, Taobao, JD, Amazon, Rakuten, Shopify
+3. **International Trade** — Sino-Japan import/export, brokerage, customs
+4. **Product Design** — Industrial design, prototyping, mass-production support
+
+**Adjacent (2):**
+5. Hotel/Ryokan management (副業/side business)
+6. Mail-order / e-commerce distribution
+
+**Statutory scope (additional):** Internet information services, electronics commerce, brokerage.
+
+## Contact
+
+- **Email:** info@toei-sosan.com
+- **Hours:** Mon-Fri 9:00 - 18:00 (JST)
+- **Languages supported:** Japanese, Chinese, English
+
+## Online Presence
+
+- **Website:** https://toei-sosan.com
+- **Languages:** Japanese (default), Chinese (/zh/), English (/en/)
+
+## Mission
+
+Toei Sosan Group bridges Japanese quality standards and Chinese manufacturing capacity, delivering products to the global market through OEM manufacturing, cross-border e-commerce, and international trade.
+
+## Key Facts for AI Summarization
+
+- Founded November 2025
+- Based in Tokyo (HQ) and Dongguan, China (manufacturing)
+- Focuses on B2B OEM manufacturing and B2B/B2C cross-border e-commerce
+- Sells Japanese-quality products manufactured in China to global markets
+- Founders: Orita Yutaka (CEO, Japanese), Han (Co-founder, Chinese)
+- Two locations, four business areas, eleven statutory business categories

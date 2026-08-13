@@ -1,0 +1,43 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Nav from '../../../components/Nav.astro';
+import PageHero from '../../../components/PageHero.astro';
+import Footer from '../../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+import { cleanSlug } from '../../../i18n/ui';
+
+const insights = (await getCollection('insights', i => i.data.lang === 'en' && !i.data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<Layout title="Insights | Toei Sosan Group" description="China factory QC, cross-border e-commerce trends, and more.">
+  <Nav />
+  <PageHero eyebrow="INSIGHTS" title="Insights" subtitle="China factory QC, cross-border e-commerce trends, and more." />
+  <section class="section">
+    <div class="container">
+      <div class="article-list">
+        {insights.map(i => (
+          <a href={`/en/insights/${cleanSlug(i.slug)}/`} class="article-card">
+            <div class="article-meta">
+              <time>{i.data.date.toISOString().split('T')[0]}</time>
+              {i.data.category && <span class="tag">{i.data.category}</span>}
+            </div>
+            <h2>{i.data.title}</h2>
+            <p>{i.data.excerpt}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <Footer />
+</Layout>
+
+<style>
+  .article-list { display: grid; gap: 1.5rem; }
+  .article-card { display: block; padding: 2.5rem; background: var(--color-bg-white); border: 1px solid var(--color-border-soft); transition: all 0.3s; text-decoration: none; }
+  .article-card:hover { border-color: var(--color-accent); transform: translateY(-3px); }
+  .article-meta { display: flex; gap: 0.75rem; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; }
+  .article-meta time { font-size: 0.875rem; color: var(--color-text-mute); }
+  .tag { font-size: 0.75rem; color: var(--color-accent); padding: 0.125rem 0.625rem; border: 1px solid var(--color-accent); border-radius: 2px; }
+  .article-card h2 { font-size: 1.375rem; margin-bottom: 0.75rem; }
+  .article-card p { color: var(--color-text-soft); margin: 0; font-size: 0.9375rem; line-height: 1.7; }
+</style>

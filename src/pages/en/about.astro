@@ -1,0 +1,116 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import Footer from '../../components/Footer.astro';
+
+const team = [
+  { role: 'CEO', name: 'Yutaka Orita', bio: '20+ years in the Japanese market.' },
+  { role: 'Co-founder', name: 'Han Longyi', bio: 'Bridge between Chinese manufacturing and the Japanese market.' },
+  { role: 'China Factory Head', name: '(Hiring)', bio: 'Dongguan factory operations.' },
+  { role: 'Sales Manager', name: '(Hiring)', bio: 'Client relations across China and Japan.' }
+];
+
+const stats = [
+  { num: '2025', label: 'Founded' },
+  { num: '2', label: 'Countries' },
+  { num: '11', label: 'Business Areas' },
+  { num: '100%', label: 'Real Business' }
+];
+---
+<Layout title="About | Toei Sosan Group" description="Toei Sosan Group story. From Tokyo and Dongguan, building cross-border real business." lang="en">
+  <Nav />
+
+  <PageHero eyebrow="ABOUT US" title="Our Story" subtitle="Tokyo · Shinagawa × China · Dongguan. Two locations, one mission." />
+
+  <section class="section">
+    <div class="container narrow">
+      <h2>Why we started this</h2>
+      <p>
+        November 2025, Tokyo · Shinagawa and Dongguan, Guangdong.<br />
+        Toei Sosan Group started from <strong>two locations</strong> at the same time.
+      </p>
+      <p>
+        One question kept us thinking —<br />
+        <em>"Can China's powerful manufacturing capacity, paired with Japanese quality standards, reach global consumers?"</em>
+      </p>
+      <p>
+        Japanese companies want Chinese manufacturing, so they set up factories in China.<br />
+        Chinese factories can't meet Japanese quality demands, and back-and-forth wastes time.<br />
+        In the end, time and cost drain away in the "middle ground."
+      </p>
+      <p>
+        We chose to <strong>sit between these two worlds</strong>.<br />
+        Use Chinese factories, follow Japanese quality, deliver to the global market.<br />
+        All 11 business areas exist for that <strong>real business</strong> purpose.
+      </p>
+    </div>
+  </section>
+
+  <section class="section stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        {stats.map(s => (
+          <div class="stat">
+            <div class="stat-num">{s.num}</div>
+            <div class="stat-label">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeader eyebrow="TEAM" title="Team" subtitle="Two founders personally involved in every project." />
+      <div class="team-grid">
+        {team.map(m => (
+          <div class="team-card">
+            <div class="team-avatar">{m.name.charAt(0)}</div>
+            <div class="team-role">{m.role}</div>
+            <div class="team-name">{m.name}</div>
+            <p class="team-bio">{m.bio}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner cta-banner-primary">
+        <div class="cta-tag">Contact Us</div>
+        <h3>Let's deliver your product to global consumers, together</h3>
+        <a href="/en/contact/" class="btn cta-btn">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .narrow { max-width: 720px; margin: 0 auto; }
+  .narrow h2 { text-align: center; margin-bottom: 2.5rem; }
+  .narrow p { font-size: 1.0625rem; line-height: 2; margin-bottom: 1.5rem; }
+  .narrow em { color: var(--color-accent); font-style: normal; font-weight: 500; }
+  .narrow strong { color: var(--color-primary); font-weight: 500; }
+  .stats-section { background: var(--color-bg-white); }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center; }
+  .stat-num { font-family: var(--font-serif); font-size: clamp(2.5rem, 4vw, 3.5rem); color: var(--color-primary); font-weight: 500; margin-bottom: 0.5rem; }
+  .stat-label { font-size: 0.875rem; color: var(--color-text-soft); letter-spacing: 0.1em; }
+  .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+  .team-card { background: var(--color-bg-white); border: 1px solid var(--color-border-soft); padding: 2rem 1.5rem; text-align: center; transition: all 0.3s; }
+  .team-card:hover { border-color: var(--color-accent); }
+  .team-avatar { width: 72px; height: 72px; border-radius: 50%; background: var(--color-primary); color: white; font-family: var(--font-serif); font-size: 1.75rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; }
+  .team-role { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+  .team-name { font-family: var(--font-serif); font-size: 1.125rem; color: var(--color-primary); font-weight: 500; margin-bottom: 0.75rem; }
+  .team-bio { font-size: 0.875rem; color: var(--color-text-soft); line-height: 1.6; margin: 0; }
+  .cta-banner { padding: 3.5rem 2.5rem; text-align: center; }
+  .cta-banner h3 { color: white; margin-bottom: 2rem; }
+  .cta-tag { font-size: 0.75rem; color: var(--color-accent-soft); letter-spacing: 0.2em; margin-bottom: 1rem; }
+  .cta-btn { background: white; color: var(--color-primary); border-color: white; }
+  .cta-btn:hover { background: var(--color-accent); color: white; border-color: var(--color-accent); }
+  @media (max-width: 768px) { .stats-grid, .team-grid { grid-template-columns: repeat(2, 1fr); } }
+</style>

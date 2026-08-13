@@ -1,0 +1,303 @@
+---
+import { ui, getLangFromPath, type Lang } from '../i18n/ui';
+
+const currentPath = Astro.url.pathname;
+const currentLang: Lang = getLangFromPath(currentPath);
+const t = ui[currentLang];
+
+function langPath(targetLang: Lang, p: string = currentPath): string {
+  if (targetLang === 'ja') {
+    if (p === '/zh' || p === '/en') return '/';
+    return p.replace(/^\/(zh|en)/, '') || '/';
+  }
+  let stripped = p.replace(/^\/(zh|en)/, '') || '/';
+  if (!stripped.endsWith('/')) stripped += '/';
+  return `/${targetLang}${stripped}`;
+}
+
+const langs: { code: Lang; label: string; short: string; native: string; path: string }[] = [
+  { code: 'ja', label: '日本語',  short: 'JP', native: '日本語',  path: langPath('ja') },
+  { code: 'zh', label: '中文',    short: '中', native: '中文',    path: langPath('zh') },
+  { code: 'en', label: 'English', short: 'EN', native: 'English', path: langPath('en') },
+];
+const currentLangInfo = langs.find(l => l.code === currentLang)!;
+---
+<header class="nav">
+  <div class="accent-line"></div>
+
+  <div class="container nav-inner">
+    <!-- 左：Logo -->
+    <a href={langPath('ja')} class="brand" aria-label="東栄創産グループ ホーム">
+      <img src="/logo.svg" alt="東栄創産グループ TOEI SOSAN GROUP" class="brand-logo" width="180" height="60" />
+    </a>
+
+    <!-- 中：4 个导航链接（lg 以上） -->
+    <nav class="links" aria-label="主要导航">
+      <a href={langPath(currentLang, '/')}>{t.nav.home}</a>
+      <a href={langPath(currentLang, '/about/')}>{t.nav.about}</a>
+      <a href={langPath(currentLang, '/services/')}>{t.nav.services}</a>
+      <a href={langPath(currentLang, '/contact/')}>{t.nav.contact}</a>
+    </nav>
+
+    <!-- 右：actions（横排 lang + CTA + hamburger） -->
+    <div class="actions">
+      <!-- 语言切换：横排 JP / 中 / EN（当前语言下方橙色短线） -->
+      <div class="lang-switch" role="group" aria-label="言語切替">
+        {langs.map((l, i) => (
+          <>
+            <a href={l.path} class:list={['lang-link', { active: l.code === currentLang }]} aria-current={l.code === currentLang ? 'true' : undefined}>
+              {l.short}
+            </a>
+            {i < langs.length - 1 && <span class="lang-sep" aria-hidden="true">/</span>}
+          </>
+        ))}
+      </div>
+
+      <a href={langPath(currentLang, '/contact/')} class="cta">{t.nav.cta}</a>
+
+      <button id="navToggle" class="hamburger" aria-label="メニューを開く" aria-expanded="false">
+        <span></span>
+        <span class="middle"></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 移动端菜单（4 个 nav links，lang 已在外面下拉） -->
+  <nav id="mobileNav" class="mobile-nav" aria-label="モバイル导航">
+    {[['/', t.nav.home], [`/${currentLang === 'ja' ? '' : currentLang + '/'}about/`, t.nav.about], [`/${currentLang === 'ja' ? '' : currentLang + '/'}services/`, t.nav.services], [`/${currentLang === 'ja' ? '' : currentLang + '/'}contact/`, t.nav.contact]].map(([href, label]) => (
+      <a href={href}>{label}</a>
+    ))}
+  </nav>
+</header>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  if (toggle && mobileNav) {
+    toggle.addEventListener('click', () => {
+      const isOpen = toggle.classList.toggle('active');
+      mobileNav.classList.toggle('open', isOpen);
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+    mobileNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        toggle.classList.remove('active');
+        mobileNav.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+</script>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: saturate(180%) blur(10px);
+    -webkit-backdrop-filter: saturate(180%) blur(10px);
+    border-bottom: 1px solid var(--color-border-soft);
+  }
+
+  .accent-line {
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-accent) 50%, var(--color-primary) 100%);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .brand { display: flex; align-items: center; text-decoration: none; }
+  .brand-logo { display: block; height: 60px; width: auto; }
+
+  .links {
+    display: flex;
+    justify-content: center;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .links a {
+    position: relative;
+    font-family: var(--font-en);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--color-primary);
+    opacity: 0.7;
+    padding: 0.5rem 0;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: opacity 0.3s var(--ease);
+  }
+  .links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--color-accent);
+    transition: width 0.3s var(--ease);
+  }
+  .links a:hover { opacity: 1; }
+  .links a:hover::after { width: 100%; }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /* ─── 语言切换：横排 JP / 中 / EN（当前语言下方橙色短线） ─── */
+  .lang-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-en);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+  .lang-link {
+    position: relative;
+    display: inline-block;
+    padding: 0.25rem 0.15rem 0.35rem;
+    color: var(--color-primary);
+    opacity: 0.4;
+    text-decoration: none;
+    transition: opacity 0.2s var(--ease);
+  }
+  .lang-link::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--color-accent);
+    transition: width 0.3s var(--ease);
+  }
+  .lang-link:hover { opacity: 0.85; }
+  .lang-link:hover::after { width: 60%; }
+  .lang-link.active {
+    opacity: 1;
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+  .lang-link.active::after { width: 60%; }
+  .lang-sep {
+    color: var(--color-primary);
+    opacity: 0.25;
+    user-select: none;
+    line-height: 1;
+  }
+
+  /* CTA */
+  .cta {
+    display: inline-block;
+    padding: 0.55rem 1.1rem;
+    font-family: var(--font-en);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    border: 1.5px solid var(--color-primary);
+    border-radius: 2px;
+    text-decoration: none;
+    transition: all 0.3s var(--ease);
+  }
+  .cta:hover {
+    background: var(--color-primary);
+    color: white;
+    transform: translateY(-1px);
+  }
+
+  /* 汉堡（移动端可见，桌面 hidden） */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: 2px;
+    cursor: pointer;
+    gap: 5px;
+    flex-shrink: 0;
+  }
+  .hamburger span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--color-primary);
+    transition: all 0.3s var(--ease);
+  }
+  .hamburger span.middle { width: 13px; align-self: flex-start; margin-left: 6px; }
+  .hamburger.active { border-color: var(--color-primary); background: var(--color-primary); }
+  .hamburger.active span { background: white; }
+  .hamburger.active span:first-child { transform: translateY(7px) rotate(45deg); }
+  .hamburger.active span.middle { opacity: 0; }
+  .hamburger.active span:last-child { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    padding: 1rem 1.5rem 1.5rem;
+    background: white;
+    border-top: 1px solid var(--color-border-soft);
+  }
+  .mobile-nav > a {
+    display: block;
+    padding: 0.95rem 0;
+    font-family: var(--font-en);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-border-soft);
+  }
+  .mobile-nav.open { display: flex; }
+
+  /* ─── 响应式 ─── */
+  @media (max-width: 1023px) {
+    .links { display: none; }
+    .hamburger { display: flex; }
+    .brand-logo { height: 44px; }
+    .cta { padding: 0.5rem 0.9rem; font-size: 0.65rem; letter-spacing: 0.15em; }
+    .actions { gap: 0.6rem; }
+  }
+  @media (max-width: 640px) {
+    /* 移动端：两端各 30px 留白 */
+    .nav-inner {
+      padding-left: 30px;
+      padding-right: 30px;
+      padding-top: 0.6rem;
+      padding-bottom: 0.6rem;
+      gap: 0.5rem;
+    }
+    .cta { display: none; }
+    .brand-logo { height: 32px; }
+    .actions { gap: 0.5rem; }
+    .lang-switch { font-size: 0.75rem; gap: 0.35rem; }
+    .hamburger { width: 32px; height: 32px; border: none; }
+  }
+  @media (max-width: 380px) {
+    /* 极窄屏（iPhone SE 等）：padding 缩到 20px */
+    .nav-inner {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .brand-logo { height: 28px; }
+  }
+</style>

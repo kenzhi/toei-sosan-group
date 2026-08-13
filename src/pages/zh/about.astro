@@ -1,0 +1,116 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import Footer from '../../components/Footer.astro';
+
+const team = [
+  { role: '代表取缔役 CEO', name: '折田 豊', bio: '深耕日本市场 20 年以上。' },
+  { role: '联合创始人', name: '韓 龍一', bio: '中国制造业与日本市场的桥梁。' },
+  { role: '中国工厂长', name: '（招聘中）', bio: '负责东莞工厂运营。' },
+  { role: '销售经理', name: '（招聘中）', bio: '中日双方客户对接。' }
+];
+
+const stats = [
+  { num: '2025', label: '年成立' },
+  { num: '2', label: '国据点' },
+  { num: '11', label: '业务领域' },
+  { num: '100%', label: '实业' }
+];
+---
+<Layout title="关于我们 | 东荣创产集团" description="东荣创产集团的故事。日本东京与中国东莞双据点，构建跨境实业。" lang="zh">
+  <Nav />
+
+  <PageHero eyebrow="关于我们" title="我们的故事" subtitle="东京·品川 × 中国·东莞。两个据点，一份事业。" />
+
+  <section class="section">
+    <div class="container narrow">
+      <h2>为什么，我们要做这件事</h2>
+      <p>
+        2025 年 11 月，东京·品川与中国广东·东莞。<br />
+        东荣创产集团，从<strong>两个据点</strong>同时起步。
+      </p>
+      <p>
+        有一个问题，一直困扰着我们 —<br />
+        <em>「中国强大的制造力，能不能用日本品质标准，送到全球消费者手里？」</em>
+      </p>
+      <p>
+        日本企业想要中国制造力，于是去中国办厂；<br />
+        中国工厂达不到日本企业的品质要求，反复试错；<br />
+        最后，时间和成本都耗在了"中间地带"。
+      </p>
+      <p>
+        我们选择，<strong>站在这个"中间"</strong>。<br />
+        用中国工厂，按日本品质，送到全球市场。<br />
+        11 个业务领域，都是为此而存在的<strong>真实实业</strong>。
+      </p>
+    </div>
+  </section>
+
+  <section class="section stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        {stats.map(s => (
+          <div class="stat">
+            <div class="stat-num">{s.num}</div>
+            <div class="stat-label">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeader eyebrow="TEAM" title="团队" subtitle="两位创始人，亲自参与每一个项目。" />
+      <div class="team-grid">
+        {team.map(m => (
+          <div class="team-card">
+            <div class="team-avatar">{m.name.charAt(0)}</div>
+            <div class="team-role">{m.role}</div>
+            <div class="team-name">{m.name}</div>
+            <p class="team-bio">{m.bio}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner cta-banner-primary">
+        <div class="cta-tag">联系我们</div>
+        <h3>一起，把产品送到全球消费者手里</h3>
+        <a href="/zh/contact" class="btn cta-btn">联系我们</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .narrow { max-width: 720px; margin: 0 auto; }
+  .narrow h2 { text-align: center; margin-bottom: 2.5rem; }
+  .narrow p { font-size: 1.0625rem; line-height: 2; margin-bottom: 1.5rem; }
+  .narrow em { color: var(--color-accent); font-style: normal; font-weight: 500; }
+  .narrow strong { color: var(--color-primary); font-weight: 500; }
+  .stats-section { background: var(--color-bg-white); }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center; }
+  .stat-num { font-family: var(--font-serif); font-size: clamp(2.5rem, 4vw, 3.5rem); color: var(--color-primary); font-weight: 500; margin-bottom: 0.5rem; }
+  .stat-label { font-size: 0.875rem; color: var(--color-text-soft); letter-spacing: 0.1em; }
+  .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+  .team-card { background: var(--color-bg-white); border: 1px solid var(--color-border-soft); padding: 2rem 1.5rem; text-align: center; transition: all 0.3s; }
+  .team-card:hover { border-color: var(--color-accent); }
+  .team-avatar { width: 72px; height: 72px; border-radius: 50%; background: var(--color-primary); color: white; font-family: var(--font-serif); font-size: 1.75rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; }
+  .team-role { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+  .team-name { font-family: var(--font-serif); font-size: 1.125rem; color: var(--color-primary); font-weight: 500; margin-bottom: 0.75rem; }
+  .team-bio { font-size: 0.875rem; color: var(--color-text-soft); line-height: 1.6; margin: 0; }
+  .cta-banner { padding: 3.5rem 2.5rem; text-align: center; }
+  .cta-banner h3 { color: white; margin-bottom: 2rem; }
+  .cta-tag { font-size: 0.75rem; color: var(--color-accent-soft); letter-spacing: 0.2em; margin-bottom: 1rem; }
+  .cta-btn { background: white; color: var(--color-primary); border-color: white; }
+  .cta-btn:hover { background: var(--color-accent); color: white; border-color: var(--color-accent); }
+  @media (max-width: 768px) { .stats-grid, .team-grid { grid-template-columns: repeat(2, 1fr); } }
+</style>

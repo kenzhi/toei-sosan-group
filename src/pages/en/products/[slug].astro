@@ -1,0 +1,32 @@
+---
+import ProductLayout from '../../../components/ProductLayout.astro';
+import { getCollection } from 'astro:content';
+import { cleanSlug } from '../../../i18n/ui';
+
+export async function getStaticPaths() {
+  const products = await getCollection('products', p => p.data.lang === 'en');
+  const cases = await getCollection('cases', c => c.data.lang === 'en');
+  return Promise.all(products.map(async (entry) => {
+    const relatedCaseEntry = (entry.data as any).relatedCase
+      ? cases.find(c => c.slug.startsWith((entry.data as any).relatedCase + '.'))
+      : undefined;
+    const relatedProducts = (await getCollection('products', p =>
+      p.data.lang === 'en' && p.slug !== entry.slug
+    )).slice(0, 3);
+    return { params: { slug: cleanSlug(entry.slug) }, props: { entry, relatedCaseEntry, relatedProducts } };
+  }));
+}
+
+const { entry, relatedCaseEntry, relatedProducts } = Astro.props;
+---
+<ProductLayout
+  entry={entry}
+  backLabel="Back to Products"
+  backHref="/en/products/"
+  ctaTitle="Request a quote for this product"
+  ctaButton="Contact Us"
+  ctaHref="/en/contact/"
+  relatedCaseEntry={relatedCaseEntry}
+  relatedProducts={relatedProducts}
+  lang="en"
+/>

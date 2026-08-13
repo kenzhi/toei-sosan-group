@@ -1,0 +1,145 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import Footer from '../../components/Footer.astro';
+
+const services = [
+  {
+    num: '01',
+    title: 'OEM Manufacturing',
+    summary: 'Chinese factory × Japanese quality standards',
+    detail: 'In our own and partner factories in Dongguan, Guangdong, we deliver OEM manufacturing to Japanese quality standards. From consumer electronics to household goods and miscellaneous categories — flexible from small batches to mass production.',
+    bullets: ['Owned & partner factories', 'Quality control (QC)', 'Small-batch flexibility', 'Logistics & customs'],
+    img: '/images/factory/上色 1 - heavy-blur.jpg',
+    gallery: [
+      '/images/factory/注塑 1 - heavy-blur.jpg',
+      '/images/factory/装配 1 - heavy-blur.jpg',
+      '/images/factory/包装 1 - heavy-blur.jpg'
+    ]
+  },
+  {
+    num: '02',
+    title: 'Cross-border E-commerce',
+    summary: 'Made in China → Global consumers',
+    detail: 'Tmall Global, Taobao, JD, Amazon, Rakuten, Shopify. We build revenue-driving operations for your brand on Chinese and global e-commerce platforms.',
+    bullets: ['Cross-border store setup', 'Page design & translation', 'Store operations', 'Ad management']
+  },
+  {
+    num: '03',
+    title: 'International Trade',
+    summary: 'Sino-Japan two-way trade',
+    detail: 'Japan to China, China to Japan. From raw materials to finished goods, our team knows the customs, regulations, and logistics to make your trade frictionless.',
+    bullets: ['Sino-Japan brokerage', 'Customs clearance', 'Supplier introduction', 'Contract support']
+  },
+  {
+    num: '04',
+    title: 'Product Design',
+    summary: 'Concept to mass production',
+    detail: 'Japanese designers × Chinese manufacturing engineers. We support the full chain from planning, design, prototyping to mass production.',
+    bullets: ['Planning & concept', 'Industrial design', 'Prototyping / 3D printing', 'Mass-production support']
+  }
+];
+
+const process = [
+  { step: '01', title: 'Discovery', desc: 'We deeply understand your needs and challenges' },
+  { step: '02', title: 'Proposal', desc: 'We design the right service combination' },
+  { step: '03', title: 'Execution', desc: 'Both China and Japan teams drive the project' },
+  { step: '04', title: 'Iteration', desc: 'Data-driven continuous optimization' }
+];
+---
+<Layout title="Services | Toei Sosan Group" description="OEM Manufacturing, Cross-border E-commerce, International Trade, Product Design." lang="en">
+  <Nav />
+
+  <PageHero eyebrow="SERVICES" title="Four Business Areas" subtitle="Built on Chinese manufacturing capacity, four businesses delivering to the global market." />
+
+  <section class="section">
+    <div class="container">
+      <div class="services-list">
+        {services.map(s => (
+          <article class={`service-item ${s.img ? 'has-image' : ''}`}>
+            {s.img && (
+              <div class="service-img-main">
+                <img src={s.img} alt={s.title} loading="lazy" />
+              </div>
+            )}
+            <div class="service-header">
+              <div class="service-num">{s.num}</div>
+              <h2>{s.title}</h2>
+            </div>
+            <p class="service-summary">{s.summary}</p>
+            <p class="service-detail">{s.detail}</p>
+            <ul class="service-bullets">
+              {s.bullets.map(b => <li>· {b}</li>)}
+            </ul>
+            {s.gallery && s.gallery.length > 0 && (
+              <div class="service-gallery">
+                {s.gallery.map(src => (
+                  <div class="service-gallery-item">
+                    <img src={src} alt="" loading="lazy" />
+                  </div>
+                ))}
+              </div>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section process-section">
+    <div class="container">
+      <SectionHeader eyebrow="PROCESS" title="How We Work" />
+      <div class="process-grid">
+        {process.map(p => (
+          <div class="process-step">
+            <div class="process-num">{p.step}</div>
+            <h3>{p.title}</h3>
+            <p>{p.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner">
+        <h3>Not sure which services to combine?<br />Tell us about your project.</h3>
+        <a href="/en/contact/" class="btn btn-primary">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .services-list { display: grid; gap: 1.5rem; }
+  .service-item { background: var(--color-bg-white); border: 1px solid var(--color-border-soft); padding: 2.5rem; transition: all 0.3s; }
+  .service-item:hover { border-color: var(--color-accent); }
+  .service-item.has-image { padding-top: 0; overflow: hidden; }
+  .service-img-main { margin: 0 -2.5rem 1.5rem; aspect-ratio: 16 / 9; overflow: hidden; background: var(--color-bg); }
+  .service-img-main img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+  .service-item:hover .service-img-main img { transform: scale(1.03); }
+  .service-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-top: 1.5rem; }
+  .service-gallery-item { aspect-ratio: 1; overflow: hidden; background: var(--color-bg); }
+  .service-gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+  .service-gallery-item:hover img { transform: scale(1.05); }
+  .service-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 1.25rem; }
+  .service-num { font-family: var(--font-serif); font-size: 1.125rem; color: var(--color-accent); letter-spacing: 0.1em; }
+  .service-header h2 { margin: 0; font-size: 1.5rem; }
+  .service-summary { color: var(--color-primary); font-weight: 500; font-size: 1rem; margin-bottom: 1rem; }
+  .service-detail { color: var(--color-text-soft); line-height: 1.8; margin-bottom: 1.25rem; }
+  .service-bullets { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; color: var(--color-text); font-size: 0.9375rem; }
+  .process-section { background: var(--color-bg-white); }
+  .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; text-align: center; }
+  .process-step { padding: 2rem 1rem; border: 1px solid var(--color-border-soft); }
+  .process-num { font-family: var(--font-serif); font-size: 2rem; color: var(--color-accent); margin-bottom: 1rem; }
+  .process-step h3 { font-size: 1.25rem; margin-bottom: 0.75rem; }
+  .process-step p { color: var(--color-text-soft); font-size: 0.875rem; margin: 0; }
+  .cta-banner { background: var(--color-primary); color: white; padding: 3.5rem 2.5rem; text-align: center; }
+  .cta-banner h3 { color: white; margin-bottom: 2rem; }
+  @media (max-width: 768px) { .service-bullets { grid-template-columns: 1fr; } .process-grid { grid-template-columns: repeat(2, 1fr); } }
+</style>

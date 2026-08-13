@@ -1,0 +1,145 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Footer from '../components/Footer.astro';
+
+const services = [
+  {
+    num: '01',
+    title: 'OEM製造',
+    summary: '中国工場 × 日本の品質基準',
+    detail: '広東省東莞の自社・提携工場で、日本品質基準の OEM 製造を提供します。家電・日用品・雑貨など幅広いカテゴリで、小ロットから量産まで対応。',
+    bullets: ['自社・提携工場', '品質管理（QC）', '小ロット対応', '物流・通関手配'],
+    img: '/images/factory/上色 1 - heavy-blur.jpg',
+    gallery: [
+      '/images/factory/注塑 1 - heavy-blur.jpg',
+      '/images/factory/装配 1 - heavy-blur.jpg',
+      '/images/factory/包装 1 - heavy-blur.jpg'
+    ]
+  },
+  {
+    num: '02',
+    title: '跨境電商',
+    summary: '中国製造を、世界消費者へ',
+    detail: '天猫国際、淘宝、京東、Amazon、楽天、Shopify。日中両市場のECプラットフォームで、貴社ブランドの売上を構築します。',
+    bullets: ['EC出店戦略', 'ページ制作・翻訳', '運営代行', '広告運用']
+  },
+  {
+    num: '03',
+    title: '国際貿易',
+    summary: '日中双方向の商流',
+    detail: '日本から中国へ、中国から日本へ。原材料から完成品まで、商習慣・規制・物流を熟知したスタッフが取引をワンストップで支援します。',
+    bullets: ['日中貿易仲介', '通関手続き', 'サプライヤー紹介', '契約書支援']
+  },
+  {
+    num: '04',
+    title: '製品設計',
+    summary: 'コンセプトから量産まで',
+    detail: '日本のデザイナーと中国の製造技術者のコラボレーション。企画・デザイン・試作・量産まで、一気通貫でサポートします。',
+    bullets: ['企画・コンセプト', '工業デザイン', '試作・3D プリント', '量産化支援']
+  }
+];
+
+const process = [
+  { step: '01', title: 'ヒアリング', desc: 'ご要望と課題を詳細にお聞きします' },
+  { step: '02', title: 'ご提案', desc: '最適なサービス組み合わせを設計' },
+  { step: '03', title: '実行', desc: '中国・日本両拠点でプロジェクト推進' },
+  { step: '04', title: '改善', desc: 'データに基づき継続的に最適化' }
+];
+---
+<Layout title="サービス | 東栄創産グループ" description="OEM製造・跨境電商・国際貿易・製品設計。東栄創産グループの 4 つの事業領域。">
+  <Nav />
+
+  <PageHero eyebrow="SERVICES" title="4つの事業領域" subtitle="中国工場を基点に、4 つの事業でグローバル市場に伴走します。" />
+
+  <section class="section">
+    <div class="container">
+      <div class="services-list">
+        {services.map(s => (
+          <article class={`service-item ${s.img ? 'has-image' : ''}`}>
+            {s.img && (
+              <div class="service-img-main">
+                <img src={s.img} alt={s.title} loading="lazy" />
+              </div>
+            )}
+            <div class="service-header">
+              <div class="service-num">{s.num}</div>
+              <h2>{s.title}</h2>
+            </div>
+            <p class="service-summary">{s.summary}</p>
+            <p class="service-detail">{s.detail}</p>
+            <ul class="service-bullets">
+              {s.bullets.map(b => <li>・{b}</li>)}
+            </ul>
+            {s.gallery && s.gallery.length > 0 && (
+              <div class="service-gallery">
+                {s.gallery.map(src => (
+                  <div class="service-gallery-item">
+                    <img src={src} alt="" loading="lazy" />
+                  </div>
+                ))}
+              </div>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section process-section">
+    <div class="container">
+      <SectionHeader eyebrow="PROCESS" title="進め方" />
+      <div class="process-grid">
+        {process.map(p => (
+          <div class="process-step">
+            <div class="process-num">{p.step}</div>
+            <h3>{p.title}</h3>
+            <p>{p.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner">
+        <h3>どのサービスを組み合わせればいいか、<br />迷ったらご相談ください</h3>
+        <a href="/contact" class="btn btn-primary">お問い合わせ</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .services-list { display: grid; gap: 1.5rem; }
+  .service-item { background: var(--color-bg-white); border: 1px solid var(--color-border-soft); padding: 2.5rem; transition: all 0.3s; }
+  .service-item:hover { border-color: var(--color-accent); }
+  .service-item.has-image { padding-top: 0; overflow: hidden; }
+  .service-img-main { margin: 0 -2.5rem 1.5rem; aspect-ratio: 16 / 9; overflow: hidden; background: var(--color-bg); }
+  .service-img-main img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+  .service-item:hover .service-img-main img { transform: scale(1.03); }
+  .service-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-top: 1.5rem; }
+  .service-gallery-item { aspect-ratio: 1; overflow: hidden; background: var(--color-bg); }
+  .service-gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+  .service-gallery-item:hover img { transform: scale(1.05); }
+  .service-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 1.25rem; }
+  .service-num { font-family: var(--font-serif); font-size: 1.125rem; color: var(--color-accent); letter-spacing: 0.1em; }
+  .service-header h2 { margin: 0; font-size: 1.5rem; }
+  .service-summary { color: var(--color-primary); font-weight: 500; font-size: 1rem; margin-bottom: 1rem; }
+  .service-detail { color: var(--color-text-soft); line-height: 1.8; margin-bottom: 1.25rem; }
+  .service-bullets { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; color: var(--color-text); font-size: 0.9375rem; }
+  .process-section { background: var(--color-bg-white); }
+  .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; text-align: center; }
+  .process-step { padding: 2rem 1rem; border: 1px solid var(--color-border-soft); }
+  .process-num { font-family: var(--font-serif); font-size: 2rem; color: var(--color-accent); margin-bottom: 1rem; }
+  .process-step h3 { font-size: 1.25rem; margin-bottom: 0.75rem; }
+  .process-step p { color: var(--color-text-soft); font-size: 0.875rem; margin: 0; }
+  .cta-banner { background: var(--color-primary); color: white; padding: 3.5rem 2.5rem; text-align: center; }
+  .cta-banner h3 { color: white; margin-bottom: 2rem; }
+  @media (max-width: 768px) { .service-bullets { grid-template-columns: 1fr; } .process-grid { grid-template-columns: repeat(2, 1fr); } }
+</style>

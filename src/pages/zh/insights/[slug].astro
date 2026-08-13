@@ -1,0 +1,29 @@
+---
+import ArticleLayout from '../../../components/ArticleLayout.astro';
+import { getCollection } from 'astro:content';
+import { cleanSlug } from '../../../i18n/ui';
+
+export async function getStaticPaths() {
+  const insights = await getCollection('insights', c => c.data.lang === 'zh');
+  return Promise.all(insights.map(async (entry) => {
+    const related = (await getCollection('insights', c =>
+      c.data.lang === 'zh' && c.slug !== entry.slug
+    )).slice(0, 3);
+    return { params: { slug: cleanSlug(entry.slug) }, props: { entry, related } };
+  }));
+}
+
+const { entry, related } = Astro.props;
+---
+<ArticleLayout
+  entry={entry}
+  collection="insights"
+  backLabel="行业洞察列表"
+  backHref="/zh/insights/"
+  ctaTitle="想听更深入的见解？"
+  ctaButton="联系我们"
+  ctaHref="/zh/contact/"
+  relatedTitle="行业洞察"
+  related={related}
+  lang="zh"
+/>

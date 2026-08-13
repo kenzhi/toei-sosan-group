@@ -1,0 +1,29 @@
+---
+import ArticleLayout from '../../components/ArticleLayout.astro';
+import { getCollection } from 'astro:content';
+import { cleanSlug } from '../../i18n/ui';
+
+export async function getStaticPaths() {
+  const insights = await getCollection('insights', c => c.data.lang === 'ja');
+  return Promise.all(insights.map(async (entry) => {
+    const related = (await getCollection('insights', c =>
+      c.data.lang === 'ja' && c.slug !== entry.slug
+    )).slice(0, 3);
+    return { params: { slug: cleanSlug(entry.slug) }, props: { entry, related } };
+  }));
+}
+
+const { entry, related } = Astro.props;
+---
+<ArticleLayout
+  entry={entry}
+  collection="insights"
+  backLabel="業界知見一覧"
+  backHref="/insights/"
+  ctaTitle="もっと深い話を聞きたい方へ"
+  ctaButton="お問い合わせ"
+  ctaHref="/contact/"
+  relatedTitle="業界知見"
+  related={related}
+  lang="ja"
+/>

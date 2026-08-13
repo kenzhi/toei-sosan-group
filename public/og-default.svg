@@ -1,0 +1,9 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#1B3A5C"/>
+  <rect x="0" y="585" width="1200" height="45" fill="#D97706"/>
+  <text x="80" y="180" font-family="'Noto Serif JP', serif" font-size="48" font-weight="700" fill="#FFFFFF" letter-spacing="3">東栄創産グループ</text>
+  <text x="80" y="225" font-family="'Noto Sans', sans-serif" font-size="14" font-weight="500" letter-spacing="6" fill="#D97706">TOEI SOSAN GROUP · JAPAN × CHINA × GLOBAL</text>
+  <text x="80" y="340" font-family="'Noto Serif JP', serif" font-size="56" font-weight="500" fill="#FFFFFF">中国から、世界へ。</text>
+  <text x="80" y="410" font-family="'Noto Sans', sans-serif" font-size="22" fill="#F5F2EC" opacity="0.85">OEM 製造 · 跨境電商 · 国際貿易 · 製品設計</text>
+  <text x="80" y="540" font-family="'Noto Sans', sans-serif" font-size="16" fill="#F5F2EC" opacity="0.7">info@toei-sosan.com  ·  toei-sosan.com</text>
+</svg>
