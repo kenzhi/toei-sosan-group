@@ -27,14 +27,12 @@ const isSubmitted = Astro.url.searchParams.get('submitted') === '1';
       <div class="contact-grid">
         <div class="form-wrap">
           <h2>填写表单</h2>
-          {isSubmitted ? (
-            <div class="success-card" role="status" aria-live="polite">
-              <div class="success-icon" aria-hidden="true">✓</div>
-              <h3 class="success-title">咨询已收到</h3>
-              <p class="success-desc">感谢您的咨询！我们会在 <strong>24 小时内</strong> 回复。<br />如未收到，请检查垃圾邮件文件夹。</p>
-              <a href="/zh/" class="btn btn-primary">返回首页</a>
-            </div>
-          ) : (
+          <div class="success-card" id="contact-success" role="status" aria-live="polite">
+            <div class="success-icon" aria-hidden="true">✓</div>
+            <h3 class="success-title">咨询已收到</h3>
+            <p class="success-desc">感谢您的咨询！我们会在 <strong>24 小时内</strong> 回复。<br />如未收到，请检查垃圾邮件文件夹。</p>
+            <a href="/zh/" class="btn btn-primary">返回首页</a>
+          </div>
           <form class="form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
             <input type="hidden" name="access_key" value="e9b29e3d-a8ad-45e6-9f75-44a84ee2c156" />
             <input type="hidden" name="subject" value="东荣创产集团 — 新的咨询" />
@@ -85,7 +83,6 @@ const isSubmitted = Astro.url.searchParams.get('submitted') === '1';
 
             <button type="submit" class="btn btn-primary" id="contact-submit">发送</button>
           </form>
-          )}
         </div>
 
         <aside class="info-wrap">
@@ -136,6 +133,18 @@ const isSubmitted = Astro.url.searchParams.get('submitted') === '1';
   )}
 
   <script>
+    // 1) Static build 不会渲染 success card — 在客户端检测 ?submitted=1
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('submitted') === '1') {
+      const form = document.getElementById('contact-form');
+      const successCard = document.getElementById('contact-success');
+      if (form) form.style.display = 'none';
+      if (successCard) {
+        successCard.style.display = 'block';
+        successCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+    // 2) 提交时按钮 loading + disable
     const form = document.getElementById('contact-form') as HTMLFormElement | null;
     const submitBtn = document.getElementById('contact-submit') as HTMLButtonElement | null;
     if (form && submitBtn) {
@@ -149,6 +158,7 @@ const isSubmitted = Astro.url.searchParams.get('submitted') === '1';
 
 <style>
   .success-card {
+    display: none;
     background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-white) 100%);
     border: 1.5px solid var(--color-accent);
     border-radius: 4px;
