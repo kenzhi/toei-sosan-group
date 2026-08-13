@@ -31,12 +31,11 @@ const currentLangInfo = langs.find(l => l.code === currentLang)!;
       <img src="/logo.svg" alt="東栄創産グループ TOEI SOSAN GROUP" class="brand-logo" width="180" height="60" />
     </a>
 
-    <!-- 中：4 个导航链接（lg 以上） -->
+    <!-- 中：3 个导航链接（lg 以上） -->
     <nav class="links" aria-label="主要导航">
       <a href={langPath(currentLang, '/')}>{t.nav.home}</a>
       <a href={langPath(currentLang, '/about/')}>{t.nav.about}</a>
       <a href={langPath(currentLang, '/services/')}>{t.nav.services}</a>
-      <a href={langPath(currentLang, '/contact/')}>{t.nav.contact}</a>
     </nav>
 
     <!-- 右：actions（横排 lang + CTA + hamburger） -->
@@ -63,7 +62,7 @@ const currentLangInfo = langs.find(l => l.code === currentLang)!;
     </div>
   </div>
 
-  <!-- 移动端菜单（4 个 nav links，lang 已在外面下拉） -->
+  <!-- 移动端菜单（3 个 nav links + contact，lang 已在外面下拉） -->
   <nav id="mobileNav" class="mobile-nav" aria-label="モバイル导航">
     {[
       ['/', t.nav.home],
