@@ -1,0 +1,114 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import PageHero from '../../components/PageHero.astro';
+
+const services = [
+  { num: '01', title: 'Ocean & Air Freight', desc: 'Optimized routes between Tokyo, Dongguan, and Shenzhen ports. FCL / LCL / Express — pick the cheapest or fastest based on volume and timeline.' },
+  { num: '02', title: 'Bonded Warehouse & Inventory', desc: 'Direct links to Dongguan / Shenzhen bonded warehouses. Climate-controlled storage with same-day customs clearance on dispatch orders.' },
+  { num: '03', title: 'Customs & Triangular Trade', desc: 'Licensed customs brokers in both Japan and China. HS code classification, certificates of origin, and complex routing handled in-house.' },
+  { num: '04', title: 'Last-Mile Delivery', desc: 'Partners with Sagawa, Yamato, SF Express, DHL, and EMS. Japan FBA, China domestic cross-border, and ASEAN international shipping.' }
+];
+
+const partners = [
+  { name: 'Sagawa Express', region: 'Japan' },
+  { name: 'Yamato Transport', region: 'Japan' },
+  { name: 'SF Express', region: 'China' },
+  { name: 'EMS / DHL', region: 'Global' }
+];
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://toei-sosan.com/en/logistics/#service',
+  name: 'International Logistics & Supply Chain',
+  description: 'Optimized Tokyo ⇄ Dongguan ⇄ Shenzhen logistics. FCL/LCL/Express, bonded warehousing, customs clearance, and last-mile delivery — all in one stop.',
+  provider: { '@type': 'Organization', name: 'Toei Sosan Group Co., Ltd.', url: 'https://toei-sosan.com/en/' },
+  areaServed: ['JP', 'CN', 'ASEAN', 'US', 'EU'],
+  serviceType: 'International Freight Forwarding'
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://toei-sosan.com/en/' },
+    { '@type': 'ListItem', position: 2, name: 'Logistics & Supply Chain', item: 'https://toei-sosan.com/en/logistics/' }
+  ]
+};
+---
+<Layout title="Logistics & Supply Chain | Toei Sosan Group" description="Optimized Tokyo ⇄ Dongguan ⇄ Shenzhen logistics. FCL/LCL/Express, bonded warehousing, customs clearance, and last-mile delivery — all in one stop." lang="en">
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} is:inline />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} is:inline />
+
+  <Nav />
+
+  <PageHero
+    eyebrow="LOGISTICS"
+    title="Logistics & Supply Chain"
+    subtitle="Tokyo ⇄ Dongguan ⇄ Shenzhen. Three integrated channels for optimal cost and timeline."
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="services-grid">
+        {services.map(s => (
+          <div class="service-card">
+            <div class="service-num">{s.num}</div>
+            <h3 class="service-title">{s.title}</h3>
+            <p class="service-desc">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section partners-section">
+    <div class="container">
+      <div class="sec-eyebrow"><span class="eyebrow-line"></span><span>PARTNERS</span></div>
+      <h2 class="sec-title">Key Logistics Partners</h2>
+      <div class="partners-grid">
+        {partners.map(p => (
+          <div class="partner-card">
+            <div class="partner-name">{p.name}</div>
+            <div class="partner-region">{p.region}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner">
+        <h3>Get a free quote on<br />your next shipment.</h3>
+        <a href="/en/contact/" class="btn btn-primary">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+  .service-card { background: var(--color-bg-white); border: 1px solid var(--color-border-soft); border-top: 3px solid var(--color-accent); padding: 2rem; }
+  .service-num { font-family: var(--font-display); font-size: 2rem; color: var(--color-accent); font-weight: 600; line-height: 1; margin-bottom: 0.75rem; }
+  .service-title { font-size: 1.25rem; color: var(--color-primary); margin: 0 0 0.75rem; font-weight: 600; }
+  .service-desc { color: var(--color-text-soft); line-height: 1.8; font-size: 0.9375rem; margin: 0; }
+  .partners-section { background: var(--color-bg); }
+  .sec-eyebrow { display: flex; align-items: center; gap: 0.75rem; color: var(--color-accent); font-family: var(--font-en); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.35em; margin-bottom: 1rem; }
+  .eyebrow-line { width: 32px; height: 1px; background: var(--color-accent); }
+  .sec-title { font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.5rem); color: var(--color-primary); margin: 0 0 2.5rem; font-weight: 600; }
+  .partners-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+  .partner-card { background: var(--color-bg-white); border: 1px solid var(--color-border-soft); padding: 2rem 1.5rem; text-align: center; }
+  .partner-name { font-size: 1.125rem; color: var(--color-primary); font-weight: 600; margin-bottom: 0.5rem; }
+  .partner-region { font-family: var(--font-en); font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.2em; }
+  .cta-banner { background: var(--color-primary); color: white; padding: 3.5rem 2.5rem; text-align: center; }
+  .cta-banner h3 { color: white; margin-bottom: 2rem; line-height: 1.5; }
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .partners-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>

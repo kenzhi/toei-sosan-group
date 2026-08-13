@@ -1,0 +1,116 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import PageHero from '../../components/PageHero.astro';
+
+const services = [
+  { num: '01', title: '中国市场进入战略', desc: '市场调研、进入形态（独资 / 合资 / 代理）选择、选址与合作伙伴介绍。' },
+  { num: '02', title: '公司设立·许可', desc: 'WFOE（外商独资企业）/ 代表处 / 合资公司设立。营业执照、进出口权等许可申请。' },
+  { num: '03', title: '法务·合同·合规', desc: '中日两国律师协作。购销合同、许可合同、NDA、劳动法合规。' },
+  { num: '04', title: '税务·会计·转让定价', desc: '中日双重税收协调、增值税退税、转让定价应对。中国准则 / J-GAAP / IFRS 三轴优化。' }
+];
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://toei-sosan.com/zh/consulting/#service',
+  name: '海外拓展·商业咨询',
+  alternateName: 'Market Entry & Business Consulting',
+  description: '中国市场进入战略、公司设立许可、法务合同、税务会计。中日两国专家团队一站支持。',
+  provider: { '@type': 'Organization', name: '东荣创产集团股份有限公司', url: 'https://toei-sosan.com/zh/' },
+  areaServed: ['JP', 'CN'],
+  serviceType: 'Business Consulting'
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: 'https://toei-sosan.com/zh/' },
+    { '@type': 'ListItem', position: 2, name: '海外拓展·商业咨询', item: 'https://toei-sosan.com/zh/consulting/' }
+  ]
+};
+---
+<Layout title="海外拓展·商业咨询 | 东荣创产集团" description="中国市场进入、公司设立、许可、法务合同、税务会计。中日两国专家团队一站支持。" lang="zh">
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} is:inline />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} is:inline />
+
+  <Nav />
+
+  <PageHero
+    eyebrow="CONSULTING"
+    title="海外拓展·商业咨询"
+    subtitle="从中国市场进入到公司设立、法务税务。中日两国专家团队一站支持。"
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-eyebrow"><span class="eyebrow-line"></span><span>SERVICES</span></div>
+      <h2 class="sec-title">服务内容</h2>
+      <div class="services-grid">
+        {services.map(s => (
+          <div class="service-card">
+            <div class="service-num">{s.num}</div>
+            <h3 class="service-title">{s.title}</h3>
+            <p class="service-desc">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section faq-section">
+    <div class="container narrow">
+      <div class="sec-eyebrow"><span class="eyebrow-line"></span><span>FAQ</span></div>
+      <h2 class="sec-title">常见问题</h2>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>初次咨询真的免费吗？</summary>
+          <p>是的。首次 60 分钟内免费提供需求了解与初步方案。正式开始具体调查或文件准备后才收费。</p>
+        </details>
+        <details class="faq-item">
+          <summary>能签 NDA 吗？</summary>
+          <p>可以。首次咨询前即可签 NDA。在保护贵司技术与客户信息的基础上坦诚沟通。</p>
+        </details>
+        <details class="faq-item">
+          <summary>能介绍中国的合作伙伴吗？</summary>
+          <p>可以。会计师事务所、律师事务所、物流公司、销售代理等可靠的本地合作伙伴都可引荐。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner">
+        <h3>海外拓展，<br />从免费初次咨询开始。</h3>
+        <a href="/zh/contact/" class="btn btn-primary">联系我们</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .sec-eyebrow { display: flex; align-items: center; gap: 0.75rem; color: var(--color-accent); font-family: var(--font-en); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.35em; margin-bottom: 1rem; }
+  .eyebrow-line { width: 32px; height: 1px; background: var(--color-accent); }
+  .sec-title { font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.5rem); color: var(--color-primary); margin: 0 0 2.5rem; font-weight: 600; }
+  .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+  .service-card { background: var(--color-bg-white); border: 1px solid var(--color-border-soft); border-top: 3px solid var(--color-accent); padding: 2rem; }
+  .service-num { font-family: var(--font-display); font-size: 2rem; color: var(--color-accent); font-weight: 600; line-height: 1; margin-bottom: 0.75rem; }
+  .service-title { font-size: 1.25rem; color: var(--color-primary); margin: 0 0 0.75rem; font-weight: 600; }
+  .service-desc { color: var(--color-text-soft); line-height: 1.8; font-size: 0.9375rem; margin: 0; }
+  .faq-section { background: var(--color-bg); }
+  .narrow { max-width: 800px; }
+  .faq-list { display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { background: var(--color-bg-white); border: 1px solid var(--color-border-soft); padding: 1.25rem 1.5rem; }
+  .faq-item summary { font-weight: 500; color: var(--color-primary); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+  .faq-item summary::after { content: '+'; font-size: 1.25rem; color: var(--color-accent); transition: transform 0.2s; }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+  .faq-item p { margin: 1rem 0 0; color: var(--color-text-soft); line-height: 1.7; }
+  .cta-banner { background: var(--color-primary); color: white; padding: 3.5rem 2.5rem; text-align: center; }
+  .cta-banner h3 { color: white; margin-bottom: 2rem; line-height: 1.5; }
+  @media (max-width: 1024px) { .services-grid { grid-template-columns: 1fr; } }
+</style>

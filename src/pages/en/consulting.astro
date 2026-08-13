@@ -1,0 +1,115 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import PageHero from '../../components/PageHero.astro';
+
+const services = [
+  { num: '01', title: 'China Market Entry', desc: 'From market research to entry mode selection (WFOE / JV / agency) and partner introductions.' },
+  { num: '02', title: 'Company Setup & Licensing', desc: 'WFOE / Rep Office / JV formation. Business licenses, import/export rights, and regulatory permits handled end-to-end.' },
+  { num: '03', title: 'Legal, Contracts & Compliance', desc: 'Lawyers in both Japan and China. Sales contracts, licensing, NDAs, and labor compliance.' },
+  { num: '04', title: 'Tax, Accounting & Transfer Pricing', desc: 'Japan-China double taxation relief, VAT refund, transfer pricing. Optimized across PRC GAAP / J-GAAP / IFRS.' }
+];
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://toei-sosan.com/en/consulting/#service',
+  name: 'Market Entry & Business Consulting',
+  description: 'China market entry strategy, company formation, regulatory licensing, legal contracts, and tax accounting — supported by Japan-China expert teams.',
+  provider: { '@type': 'Organization', name: 'Toei Sosan Group Co., Ltd.', url: 'https://toei-sosan.com/en/' },
+  areaServed: ['JP', 'CN'],
+  serviceType: 'Business Consulting'
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://toei-sosan.com/en/' },
+    { '@type': 'ListItem', position: 2, name: 'Market Entry & Consulting', item: 'https://toei-sosan.com/en/consulting/' }
+  ]
+};
+---
+<Layout title="Market Entry & Consulting | Toei Sosan Group" description="China market entry, company formation, regulatory licensing, legal contracts, and tax accounting — supported by Japan-China expert teams." lang="en">
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} is:inline />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} is:inline />
+
+  <Nav />
+
+  <PageHero
+    eyebrow="CONSULTING"
+    title="Market Entry & Business Consulting"
+    subtitle="From China market entry to company formation, legal and tax — Japan-China expert teams in one place."
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-eyebrow"><span class="eyebrow-line"></span><span>SERVICES</span></div>
+      <h2 class="sec-title">What We Do</h2>
+      <div class="services-grid">
+        {services.map(s => (
+          <div class="service-card">
+            <div class="service-num">{s.num}</div>
+            <h3 class="service-title">{s.title}</h3>
+            <p class="service-desc">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section faq-section">
+    <div class="container narrow">
+      <div class="sec-eyebrow"><span class="eyebrow-line"></span><span>FAQ</span></div>
+      <h2 class="sec-title">Frequently Asked</h2>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Is the initial consultation really free?</summary>
+          <p>Yes. The first 60 minutes are free for discovery and a high-level proposal. Paid engagement only starts when concrete research or document work begins.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can we sign an NDA first?</summary>
+          <p>Yes. We can sign an NDA even before the first call, so we can speak openly while protecting your technical and customer information.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can you introduce local Chinese partners?</summary>
+          <p>Yes. We work with trusted accounting firms, law firms, logistics providers, and sales agents on the ground.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner">
+        <h3>Market entry,<br />start with a free consultation.</h3>
+        <a href="/en/contact/" class="btn btn-primary">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .sec-eyebrow { display: flex; align-items: center; gap: 0.75rem; color: var(--color-accent); font-family: var(--font-en); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.35em; margin-bottom: 1rem; }
+  .eyebrow-line { width: 32px; height: 1px; background: var(--color-accent); }
+  .sec-title { font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.5rem); color: var(--color-primary); margin: 0 0 2.5rem; font-weight: 600; }
+  .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+  .service-card { background: var(--color-bg-white); border: 1px solid var(--color-border-soft); border-top: 3px solid var(--color-accent); padding: 2rem; }
+  .service-num { font-family: var(--font-display); font-size: 2rem; color: var(--color-accent); font-weight: 600; line-height: 1; margin-bottom: 0.75rem; }
+  .service-title { font-size: 1.25rem; color: var(--color-primary); margin: 0 0 0.75rem; font-weight: 600; }
+  .service-desc { color: var(--color-text-soft); line-height: 1.8; font-size: 0.9375rem; margin: 0; }
+  .faq-section { background: var(--color-bg); }
+  .narrow { max-width: 800px; }
+  .faq-list { display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { background: var(--color-bg-white); border: 1px solid var(--color-border-soft); padding: 1.25rem 1.5rem; }
+  .faq-item summary { font-weight: 500; color: var(--color-primary); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+  .faq-item summary::after { content: '+'; font-size: 1.25rem; color: var(--color-accent); transition: transform 0.2s; }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+  .faq-item p { margin: 1rem 0 0; color: var(--color-text-soft); line-height: 1.7; }
+  .cta-banner { background: var(--color-primary); color: white; padding: 3.5rem 2.5rem; text-align: center; }
+  .cta-banner h3 { color: white; margin-bottom: 2rem; line-height: 1.5; }
+  @media (max-width: 1024px) { .services-grid { grid-template-columns: 1fr; } }
+</style>

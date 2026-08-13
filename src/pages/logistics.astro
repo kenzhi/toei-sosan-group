@@ -1,0 +1,197 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+
+const services = [
+  { num: '01', title: '国際海上・航空輸送', desc: '東京⇄東莞⇄深セン港の定期便を最適化。FCL / LCL / エクスプレスの 3 モードで、量と納期に応じて最安・最速を提案。' },
+  { num: '02', title: '保税倉庫・在庫管理', desc: '東莞・深センの保税倉庫を直結。温湿度管理で長期保管でも品質を保持し、出荷指示から即日通関まで対応。' },
+  { num: '03', title: '通関・三国間貿易', desc: '日中両国の通関士が常駐。NACCS / 中国電子通関の双方を熟知し、HS コード分類から原産地証明書まで一貫サポート。' },
+  { num: '04', title: 'ラストマイル配送', desc: '佐川急便 / SF エクスプレス / DHL と提携。日本全国 FBA 納品、中国国内越境 EC、ASEAN 国際配送まで。' }
+];
+
+const partners = [
+  { name: '佐川急便', region: '日本' },
+  { name: 'ヤマト運輸', region: '日本' },
+  { name: 'SF エクスプレス', region: '中国' },
+  { name: 'EMS / DHL', region: '国際' }
+];
+
+// JSON-LD: Service + BreadcrumbList
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://toei-sosan.com/logistics/#service',
+  name: '国際物流・サプライチェーン',
+  alternateName: 'International Logistics & Supply Chain',
+  description: '東京⇄東莞⇄深センの物流ルート最適化。FCL/LCL/エクスプレス、保税倉庫、通関・三国間貿易、ラストマイル配送まで一貫対応。',
+  provider: {
+    '@type': 'Organization',
+    name: '東栄創産グループ株式会社',
+    url: 'https://toei-sosan.com/'
+  },
+  areaServed: ['JP', 'CN', 'ASEAN', 'US', 'EU'],
+  serviceType: 'International Freight Forwarding'
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: 'https://toei-sosan.com/' },
+    { '@type': 'ListItem', position: 2, name: '国際物流 & サプライチェーン', item: 'https://toei-sosan.com/logistics/' }
+  ]
+};
+---
+<Layout title="国際物流 & サプライチェーン | 東栄創産グループ" description="東京⇄東莞⇄深センの物流ルート最適化。FCL/LCL/エクスプレス、保税倉庫、通関、ラストマイル配送まで一貫対応。">
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} is:inline />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} is:inline />
+
+  <Nav />
+
+  <PageHero
+    eyebrow="LOGISTICS"
+    title="国際物流 & サプライチェーン"
+    subtitle="東京⇄東莞⇄深セン。3 つの物流チャネルを統合し、最適なコストと納期を提案。"
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="services-grid">
+        {services.map(s => (
+          <div class="service-card">
+            <div class="service-num">{s.num}</div>
+            <h3 class="service-title">{s.title}</h3>
+            <p class="service-desc">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section partners-section">
+    <div class="container">
+      <div class="sec-eyebrow"><span class="eyebrow-line"></span><span>PARTNERS</span></div>
+      <h2 class="sec-title">主要物流パートナー</h2>
+      <div class="partners-grid">
+        {partners.map(p => (
+          <div class="partner-card">
+            <div class="partner-name">{p.name}</div>
+            <div class="partner-region">{p.region}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner">
+        <h3>物流コスト・納期、<br />無料相談から承ります。</h3>
+        <a href="/contact/" class="btn btn-primary">お問い合わせ</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  .service-card {
+    background: var(--color-bg-white);
+    border: 1px solid var(--color-border-soft);
+    border-top: 3px solid var(--color-accent);
+    padding: 2rem;
+    transition: all 0.3s var(--ease);
+  }
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(27, 58, 92, 0.08);
+  }
+  .service-num {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--color-accent);
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 0.75rem;
+  }
+  .service-title {
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    margin: 0 0 0.75rem;
+    font-weight: 600;
+  }
+  .service-desc {
+    color: var(--color-text-soft);
+    line-height: 1.8;
+    font-size: 0.9375rem;
+    margin: 0;
+  }
+
+  .partners-section { background: var(--color-bg); }
+  .sec-eyebrow {
+    display: flex; align-items: center; gap: 0.75rem;
+    color: var(--color-accent);
+    font-family: var(--font-en);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    margin-bottom: 1rem;
+  }
+  .eyebrow-line {
+    width: 32px; height: 1px;
+    background: var(--color-accent);
+  }
+  .sec-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    color: var(--color-primary);
+    margin: 0 0 2.5rem;
+    font-weight: 600;
+  }
+  .partners-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+  .partner-card {
+    background: var(--color-bg-white);
+    border: 1px solid var(--color-border-soft);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: border-color 0.3s;
+  }
+  .partner-card:hover { border-color: var(--color-accent); }
+  .partner-name {
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .partner-region {
+    font-family: var(--font-en);
+    font-size: 0.75rem;
+    color: var(--color-accent);
+    letter-spacing: 0.2em;
+  }
+
+  .cta-banner {
+    background: var(--color-primary);
+    color: white;
+    padding: 3.5rem 2.5rem;
+    text-align: center;
+  }
+  .cta-banner h3 { color: white; margin-bottom: 2rem; line-height: 1.5; }
+
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .partners-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>

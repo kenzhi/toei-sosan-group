@@ -1,0 +1,189 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+
+const services = [
+  { num: '01', title: '中国市場参入戦略', desc: '市場調査から参入形態（独資 / 合弁 / 代理店）の選定、立地・パートナー紹介まで。' },
+  { num: '02', title: '法人設立・許認可', desc: 'WFOE（外商独資企業） / 代表処 / 合弁会社の設立サポート。営業許可証、輸出入権など許認可申請も。' },
+  { num: '03', title: '法務・契約・コンプライアンス', desc: '日中両国の弁護士と連携。売買契約、ライセンス契約、NDA、労務コンプライアンスまで。' },
+  { num: '04', title: '税務・会計・移転価格', desc: '日中二重課税調整、增值税 (VAT) 還付、移転価格税制対応。中国会計基準 / J-GAAP / IFRS の 3 軸で最適化。' }
+];
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://toei-sosan.com/consulting/#service',
+  name: '海外進出 & ビジネスコンサルティング',
+  alternateName: 'Market Entry & Business Consulting',
+  description: '中国市場参入戦略、法人設立・許認可、法務・契約、税務・会計まで。日中両国の専門家チームが支援。',
+  provider: { '@type': 'Organization', name: '東栄創産グループ株式会社', url: 'https://toei-sosan.com/' },
+  areaServed: ['JP', 'CN'],
+  serviceType: 'Business Consulting'
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: 'https://toei-sosan.com/' },
+    { '@type': 'ListItem', position: 2, name: '海外進出 & ビジネスコンサルティング', item: 'https://toei-sosan.com/consulting/' }
+  ]
+};
+---
+<Layout title="海外進出 & ビジネスコンサルティング | 東栄創産グループ" description="中国市場参入、法人設立、許認可、法務・契約、税務・会計。日中両国の専門家チームがワンストップ支援。">
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} is:inline />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} is:inline />
+
+  <Nav />
+
+  <PageHero
+    eyebrow="CONSULTING"
+    title="海外進出 & ビジネスコンサルティング"
+    subtitle="中国市場参入から法人設立、法務・税務まで。日中両国の専門家チームがワンストップで支援。"
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-eyebrow"><span class="eyebrow-line"></span><span>SERVICES</span></div>
+      <h2 class="sec-title">提供サービス</h2>
+      <div class="services-grid">
+        {services.map(s => (
+          <div class="service-card">
+            <div class="service-num">{s.num}</div>
+            <h3 class="service-title">{s.title}</h3>
+            <p class="service-desc">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section faq-section">
+    <div class="container narrow">
+      <div class="sec-eyebrow"><span class="eyebrow-line"></span><span>FAQ</span></div>
+      <h2 class="sec-title">よくある質問</h2>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>初回相談は本当に無料ですか？</summary>
+          <p>はい。初回 60 分まで無料でヒアリング・概算提案までご提供します。有料になるのは具体的な調査・書類作成などに入ってから。</p>
+        </details>
+        <details class="faq-item">
+          <summary>NDA は結べますか？</summary>
+          <p>はい、初回相談前でも NDA 締結可能です。貴社の技術・顧客情報を保護した上で本音でお話しできます。</p>
+        </details>
+        <details class="faq-item">
+          <summary>中国側のパートナーも紹介してもらえますか？</summary>
+          <p>はい。会計事務所・法律事務所・物流会社・営業代理店など、信頼できる現地パートナーを紹介できます。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner">
+        <h3>海外進出、<br />初回相談（無料）から承ります。</h3>
+        <a href="/contact/" class="btn btn-primary">お問い合わせ</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .sec-eyebrow {
+    display: flex; align-items: center; gap: 0.75rem;
+    color: var(--color-accent);
+    font-family: var(--font-en);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    margin-bottom: 1rem;
+  }
+  .eyebrow-line { width: 32px; height: 1px; background: var(--color-accent); }
+  .sec-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    color: var(--color-primary);
+    margin: 0 0 2.5rem;
+    font-weight: 600;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  .service-card {
+    background: var(--color-bg-white);
+    border: 1px solid var(--color-border-soft);
+    border-top: 3px solid var(--color-accent);
+    padding: 2rem;
+    transition: all 0.3s var(--ease);
+  }
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(27, 58, 92, 0.08);
+  }
+  .service-num {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--color-accent);
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 0.75rem;
+  }
+  .service-title {
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    margin: 0 0 0.75rem;
+    font-weight: 600;
+  }
+  .service-desc {
+    color: var(--color-text-soft);
+    line-height: 1.8;
+    font-size: 0.9375rem;
+    margin: 0;
+  }
+
+  .faq-section { background: var(--color-bg); }
+  .narrow { max-width: 800px; }
+  .faq-list { display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item {
+    background: var(--color-bg-white);
+    border: 1px solid var(--color-border-soft);
+    padding: 1.25rem 1.5rem;
+  }
+  .faq-item summary {
+    font-weight: 500;
+    color: var(--color-primary);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .faq-item summary::after {
+    content: '+';
+    font-size: 1.25rem;
+    color: var(--color-accent);
+    transition: transform 0.2s;
+  }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+  .faq-item p { margin: 1rem 0 0; color: var(--color-text-soft); line-height: 1.7; }
+
+  .cta-banner {
+    background: var(--color-primary);
+    color: white;
+    padding: 3.5rem 2.5rem;
+    text-align: center;
+  }
+  .cta-banner h3 { color: white; margin-bottom: 2rem; line-height: 1.5; }
+
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: 1fr; }
+  }
+</style>

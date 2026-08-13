@@ -66,6 +66,9 @@
 - `/about/` — About company
 - `/services/` — OEM / cross-border / trade services
 - `/factory/` — 5,000㎡ Dongguan factory, 5 processes
+- `/logistics/` — International logistics & supply chain (Tokyo ⇄ Dongguan)
+- `/ecommerce/` — Cross-border e-commerce (15+ platforms)
+- `/consulting/` — China market entry, legal, tax, accounting
 - `/products/` — Product catalog
 - `/products/{slug}/` — Individual product pages
 - `/cases/` — Client case studies

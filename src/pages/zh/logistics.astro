@@ -1,0 +1,115 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import PageHero from '../../components/PageHero.astro';
+
+const services = [
+  { num: '01', title: '国际海运·空运', desc: '优化东京⇄东莞⇄深圳港的定期班次。FCL / LCL / 快递三模式，根据体量与时效推荐最便宜或最快方案。' },
+  { num: '02', title: '保税仓·库存管理', desc: '直连东莞·深圳保税仓。温湿度管理让长期存放也能保持品质，下单后当天报关出库。' },
+  { num: '03', title: '报关·转口贸易', desc: '中日两国报关员常驻。NACCS / 中国电子口岸双系统，HS 编码分类到原产地证明一条龙。' },
+  { num: '04', title: '最后一公里配送', desc: '与佐川急便 / SF 快递 / DHL 合作。日本全国 FBA 配送、中国国内跨境 EC、ASEAN 国际派送。' }
+];
+
+const partners = [
+  { name: '佐川急便', region: '日本' },
+  { name: '大和运输', region: '日本' },
+  { name: '顺丰速运', region: '中国' },
+  { name: 'EMS / DHL', region: '国际' }
+];
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://toei-sosan.com/zh/logistics/#service',
+  name: '国际物流·供应链',
+  alternateName: 'International Logistics & Supply Chain',
+  description: '东京⇄东莞⇄深圳的物流路径优化。FCL/LCL/快递、保税仓、报关转口、最后一公里配送一站搞定。',
+  provider: { '@type': 'Organization', name: '东荣创产集团股份有限公司', url: 'https://toei-sosan.com/zh/' },
+  areaServed: ['JP', 'CN', 'ASEAN', 'US', 'EU'],
+  serviceType: 'International Freight Forwarding'
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: 'https://toei-sosan.com/zh/' },
+    { '@type': 'ListItem', position: 2, name: '国际物流·供应链', item: 'https://toei-sosan.com/zh/logistics/' }
+  ]
+};
+---
+<Layout title="国际物流·供应链 | 东荣创产集团" description="东京⇄东莞⇄深圳的物流路径优化。FCL/LCL/快递、保税仓、报关、最后一公里配送一站搞定。" lang="zh">
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} is:inline />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} is:inline />
+
+  <Nav />
+
+  <PageHero
+    eyebrow="LOGISTICS"
+    title="国际物流·供应链"
+    subtitle="东京⇄东莞⇄深圳。3 大物流通道整合，推荐最优成本与时效。"
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="services-grid">
+        {services.map(s => (
+          <div class="service-card">
+            <div class="service-num">{s.num}</div>
+            <h3 class="service-title">{s.title}</h3>
+            <p class="service-desc">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section partners-section">
+    <div class="container">
+      <div class="sec-eyebrow"><span class="eyebrow-line"></span><span>PARTNERS</span></div>
+      <h2 class="sec-title">主要物流合作伙伴</h2>
+      <div class="partners-grid">
+        {partners.map(p => (
+          <div class="partner-card">
+            <div class="partner-name">{p.name}</div>
+            <div class="partner-region">{p.region}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner">
+        <h3>物流成本与时效，<br />免费咨询开始。</h3>
+        <a href="/zh/contact/" class="btn btn-primary">联系我们</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+  .service-card { background: var(--color-bg-white); border: 1px solid var(--color-border-soft); border-top: 3px solid var(--color-accent); padding: 2rem; }
+  .service-num { font-family: var(--font-display); font-size: 2rem; color: var(--color-accent); font-weight: 600; line-height: 1; margin-bottom: 0.75rem; }
+  .service-title { font-size: 1.25rem; color: var(--color-primary); margin: 0 0 0.75rem; font-weight: 600; }
+  .service-desc { color: var(--color-text-soft); line-height: 1.8; font-size: 0.9375rem; margin: 0; }
+  .partners-section { background: var(--color-bg); }
+  .sec-eyebrow { display: flex; align-items: center; gap: 0.75rem; color: var(--color-accent); font-family: var(--font-en); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.35em; margin-bottom: 1rem; }
+  .eyebrow-line { width: 32px; height: 1px; background: var(--color-accent); }
+  .sec-title { font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.5rem); color: var(--color-primary); margin: 0 0 2.5rem; font-weight: 600; }
+  .partners-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+  .partner-card { background: var(--color-bg-white); border: 1px solid var(--color-border-soft); padding: 2rem 1.5rem; text-align: center; }
+  .partner-name { font-size: 1.125rem; color: var(--color-primary); font-weight: 600; margin-bottom: 0.5rem; }
+  .partner-region { font-family: var(--font-en); font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.2em; }
+  .cta-banner { background: var(--color-primary); color: white; padding: 3.5rem 2.5rem; text-align: center; }
+  .cta-banner h3 { color: white; margin-bottom: 2rem; line-height: 1.5; }
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .partners-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
