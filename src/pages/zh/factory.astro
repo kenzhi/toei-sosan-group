@@ -1,0 +1,221 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+
+const stats = [
+  { num: '5,000㎡', label: '东莞自有工厂' },
+  { num: '12年', label: '制造经验' },
+  { num: '15万', label: '月产能（个）' },
+  { num: '100+', label: '日方驻在 + 当地工程师' }
+];
+
+const processes = [
+  {
+    step: '01',
+    title: '注塑成型',
+    desc: '支持 ABS / PVC / PP / 软质树脂。精密模具让复杂造型稳定量产。',
+    images: [
+      { src: '/images/factory/注塑 1 - heavy-blur.jpg', alt: '注塑机 01' },
+      { src: '/images/factory/注塑 2 - heavy-blur.jpg', alt: '注塑机 02' },
+      { src: '/images/factory/注塑 3 - heavy-blur.jpg', alt: '注塑机 03' }
+    ]
+  },
+  {
+    step: '02',
+    title: '喷漆上色',
+    desc: '技师一台台手工喷涂。色彩渐变也由人工细致把控，还原度 ΔE<1。',
+    images: [
+      { src: '/images/factory/上色 1 - heavy-blur.jpg', alt: '上色工序 01' },
+      { src: '/images/factory/上色 2 - heavy-blur.jpg', alt: '上色工序 02' },
+      { src: '/images/factory/上色 3 - heavy-blur.jpg', alt: '上色工序 03' },
+      { src: '/images/factory/上色 4 - heavy-blur.jpg', alt: '上色工序 04' },
+      { src: '/images/factory/上色 5 - heavy-blur.jpg', alt: '上色工序 05' },
+      { src: '/images/factory/上色 6 - heavy-blur.jpg', alt: '上色工序 06' },
+      { src: '/images/factory/上色 7 - heavy-blur.jpg', alt: '上色工序 07' },
+      { src: '/images/factory/上色 8 - heavy-blur.jpg', alt: '上色工序 08' }
+    ]
+  },
+  {
+    step: '03',
+    title: '组装・质检',
+    desc: '多部件角色手办也用专用治具和作业指导书保品质。组装后逐个目视 + 尺寸 + 动作三道检测。',
+    images: [
+      { src: '/images/factory/装配 1 - heavy-blur.jpg', alt: '装配工序 01' },
+      { src: '/images/factory/装配 2 - heavy-blur.jpg', alt: '装配工序 02' },
+      { src: '/images/factory/装配 3 - heavy-blur.jpg', alt: '装配工序 03' },
+      { src: '/images/factory/装配 4 - heavy-blur.jpg', alt: '装配工序 04' },
+      { src: '/images/factory/装配 5 - heavy-blur.jpg', alt: '装配工序 05' }
+    ]
+  },
+  {
+    step: '04',
+    title: '包装',
+    desc: 'OPP 单包、吸塑卡、彩盒全部支持。对日 FBA 入库，对外整柜发货。',
+    images: [
+      { src: '/images/factory/包装 1 - heavy-blur.jpg', alt: '包装工序 01' },
+      { src: '/images/factory/包装 2 - heavy-blur.jpg', alt: '包装工序 02' },
+      { src: '/images/factory/包装 3 - heavy-blur.jpg', alt: '包装工序 03' }
+    ]
+  },
+  {
+    step: '05',
+    title: '仓储・出货',
+    desc: '紧邻深圳、东莞保税仓。温湿度受控，对日出货最快 3 个工作日。',
+    images: [
+      { src: '/images/factory/仓储 1 - heavy-blur.jpg', alt: '仓库 01' },
+      { src: '/images/factory/仓储 2 - heavy-blur.jpg', alt: '仓库 02' },
+      { src: '/images/factory/仓储 3 - heavy-blur.jpg', alt: '仓库 03' },
+      { src: '/images/factory/仓储 4 - heavy-blur.jpg', alt: '仓库 04' }
+    ]
+  }
+];
+---
+<Layout title="工厂实力 | 东荣创产集团" description="中国东莞 5,000㎡ 自有工厂。注塑、喷漆、组装、包装、出货 5 大工序一气呵成。OEM / ODM 请洽东荣创产集团。" lang="zh">
+  <Nav />
+
+  <PageHero
+    eyebrow="工厂实力"
+    title="5,000㎡ 自有工厂"
+    subtitle="中国·东莞。从设计到出货，5 大工序一站搞定。"
+  />
+
+  <section class="section stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        {stats.map(s => (
+          <div class="stat">
+            <div class="stat-num">{s.num}</div>
+            <div class="stat-label">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {processes.map((p, i) => (
+    <section class:list={['section', 'process-section', i % 2 === 1 && 'bg-soft']}>
+      <div class="container">
+        <div class="process-row">
+          <div class="process-meta">
+            <div class="process-step-num">{p.step}</div>
+            <h2 class="process-title">{p.title}</h2>
+            <p class="process-desc">{p.desc}</p>
+          </div>
+          <div class:list={["process-gallery", p.images.length >= 6 && "gallery-4"]}>
+            {p.images.map(img => (
+              <figure class="process-img-wrap">
+                <img src={img.src} alt={img.alt} loading="lazy" />
+              </figure>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner">
+        <h3>OEM / ODM 项目，<br />从企划阶段就让我们参与</h3>
+        <a href="/zh/contact" class="btn btn-primary">联系我们</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .stats-section { background: var(--color-bg-white); }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    color: var(--color-primary);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  .stat-label {
+    font-size: 0.875rem;
+    color: var(--color-text-soft);
+    letter-spacing: 0.05em;
+  }
+
+  .process-section.bg-soft { background: var(--color-bg); }
+  .process-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .process-meta { position: sticky; top: 6rem; }
+  .process-step-num {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    color: var(--color-accent);
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+  .process-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  .process-desc {
+    color: var(--color-text-soft);
+    line-height: 1.85;
+    font-size: 1rem;
+  }
+
+  .process-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .process-gallery.gallery-4 { grid-template-columns: repeat(4, 1fr); }
+  .process-gallery.gallery-4 .process-img-wrap { aspect-ratio: 1; }
+  .process-img-wrap {
+    margin: 0;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    background: var(--color-border-soft);
+  }
+  .process-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .process-img-wrap:hover img { transform: scale(1.05); }
+
+  .cta-banner {
+    background: var(--color-primary);
+    color: white;
+    padding: 3.5rem 2.5rem;
+    text-align: center;
+  }
+  .cta-banner h3 { color: white; margin-bottom: 2rem; line-height: 1.5; }
+
+  @media (max-width: 1024px) {
+    .process-row { grid-template-columns: 1fr; gap: 1.5rem; }
+    .process-meta { position: static; }
+    .process-gallery, .process-gallery.gallery-4 { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .process-gallery, .process-gallery.gallery-4 { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>

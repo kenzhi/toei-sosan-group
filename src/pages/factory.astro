@@ -1,0 +1,229 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+
+const stats = [
+  { num: '5,000㎡', label: '東莞自社工場' },
+  { num: '12年', label: '製造実績' },
+  { num: '15万', label: '月間生産能力（個）' },
+  { num: '100+', label: '日本人駐在＋現地エンジニア' }
+];
+
+const processes = [
+  {
+    step: '01',
+    title: '射出成形',
+    desc: 'ABS / PVC / PP / 軟質樹脂などに対応。精密金型で複雑な造型も安定量産。',
+    images: [
+      { src: '/images/factory/注塑 1 - heavy-blur.jpg', alt: '射出成形機' },
+      { src: '/images/factory/注塑 2 - heavy-blur.jpg', alt: '射出成形機 02' },
+      { src: '/images/factory/注塑 3 - heavy-blur.jpg', alt: '射出成形機 03' }
+    ]
+  },
+  {
+    step: '02',
+    title: '塗装・上色',
+    desc: '職人が一台ずつ手作業のエアブラシ塗装。色彩のグラデーションも繊細に再現。',
+    images: [
+      { src: '/images/factory/上色 1 - heavy-blur.jpg', alt: '塗装工程 01' },
+      { src: '/images/factory/上色 2 - heavy-blur.jpg', alt: '塗装工程 02' },
+      { src: '/images/factory/上色 3 - heavy-blur.jpg', alt: '塗装工程 03' },
+      { src: '/images/factory/上色 4 - heavy-blur.jpg', alt: '塗装工程 04' },
+      { src: '/images/factory/上色 5 - heavy-blur.jpg', alt: '塗装工程 05' },
+      { src: '/images/factory/上色 6 - heavy-blur.jpg', alt: '塗装工程 06' },
+      { src: '/images/factory/上色 7 - heavy-blur.jpg', alt: '塗装工程 07' },
+      { src: '/images/factory/上色 8 - heavy-blur.jpg', alt: '塗装工程 08' }
+    ]
+  },
+  {
+    step: '03',
+    title: '組立・検査',
+    desc: '多部品のキャラクターフィギュアも、専用治具と作業標準書で一貫品質を担保。',
+    images: [
+      { src: '/images/factory/装配 1 - heavy-blur.jpg', alt: '組立工程 01' },
+      { src: '/images/factory/装配 2 - heavy-blur.jpg', alt: '組立工程 02' },
+      { src: '/images/factory/装配 3 - heavy-blur.jpg', alt: '組立工程 03' },
+      { src: '/images/factory/装配 4 - heavy-blur.jpg', alt: '組立工程 04' },
+      { src: '/images/factory/装配 5 - heavy-blur.jpg', alt: '組立工程 05' }
+    ]
+  },
+  {
+    step: '04',
+    title: '包装',
+    desc: 'OPP 個包装・ブリスター・化粧箱まで対応。日本向け FBA 納品も。',
+    images: [
+      { src: '/images/factory/包装 1 - heavy-blur.jpg', alt: '包装工程 01' },
+      { src: '/images/factory/包装 2 - heavy-blur.jpg', alt: '包装工程 02' },
+      { src: '/images/factory/包装 3 - heavy-blur.jpg', alt: '包装工程 03' }
+    ]
+  },
+  {
+    step: '05',
+    title: '保管・出荷',
+    desc: '深セン・東莞の保税倉庫直結。温湿度管理で長期保管でも品質を保持。',
+    images: [
+      { src: '/images/factory/仓储 1 - heavy-blur.jpg', alt: '倉庫 01' },
+      { src: '/images/factory/仓储 2 - heavy-blur.jpg', alt: '倉庫 02' },
+      { src: '/images/factory/仓储 3 - heavy-blur.jpg', alt: '倉庫 03' },
+      { src: '/images/factory/仓储 4 - heavy-blur.jpg', alt: '倉庫 04' }
+    ]
+  }
+];
+---
+<Layout title="工場・製造実力 | 東栄創産グループ" description="中国・東莞 5,000㎡ の自社工場。射出成形から塗装・組立・包装・出荷まで 5 工程を一気通貫。OEM / ODM のご相談は東栄創産グループまで。">
+  <Nav />
+
+  <PageHero
+    eyebrow="FACTORY"
+    title="工場・製造実力"
+    subtitle="中国・東莞 5,000㎡ の自社工場。5 工程で、企画から出荷まで一気通貫。"
+  />
+
+  <section class="section stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        {stats.map(s => (
+          <div class="stat">
+            <div class="stat-num">{s.num}</div>
+            <div class="stat-label">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {processes.map((p, i) => (
+    <section class:list={['section', 'process-section', i % 2 === 1 && 'bg-soft']}>
+      <div class="container">
+        <div class="process-row">
+          <div class="process-meta">
+            <div class="process-step-num">{p.step}</div>
+            <h2 class="process-title">{p.title}</h2>
+            <p class="process-desc">{p.desc}</p>
+          </div>
+          <div class="process-gallery">
+            {p.images.map(img => (
+              <figure class="process-img-wrap">
+                <img src={img.src} alt={img.alt} loading="lazy" />
+              </figure>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner">
+        <h3>OEM / ODM のご依頼、<br />企画段階からご相談ください</h3>
+        <a href="/contact" class="btn btn-primary">お問い合わせ</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .stats-section { background: var(--color-bg-white); }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    color: var(--color-primary);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  .stat-label {
+    font-size: 0.875rem;
+    color: var(--color-text-soft);
+    letter-spacing: 0.05em;
+  }
+
+  .process-section.bg-soft { background: var(--color-bg); }
+  .process-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .process-meta {
+    position: sticky;
+    top: 6rem;
+  }
+  .process-step-num {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    color: var(--color-accent);
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+  .process-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  .process-desc {
+    color: var(--color-text-soft);
+    line-height: 1.85;
+    font-size: 1rem;
+  }
+
+  .process-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .process-section.bg-soft .process-gallery {
+    /* When many images (like 8 上色), make it 3 columns on wide */
+  }
+  .process-img-wrap {
+    margin: 0;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    background: var(--color-border-soft);
+  }
+  .process-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .process-img-wrap:hover img { transform: scale(1.05); }
+
+  /* For the painting step (8 images), use 4-column grid */
+  .process-gallery.gallery-4 { grid-template-columns: repeat(4, 1fr); }
+  .process-gallery.gallery-4 .process-img-wrap { aspect-ratio: 1; }
+
+  .cta-banner {
+    background: var(--color-primary);
+    color: white;
+    padding: 3.5rem 2.5rem;
+    text-align: center;
+  }
+  .cta-banner h3 { color: white; margin-bottom: 2rem; line-height: 1.5; }
+
+  @media (max-width: 1024px) {
+    .process-row { grid-template-columns: 1fr; gap: 1.5rem; }
+    .process-meta { position: static; }
+    .process-gallery { grid-template-columns: repeat(2, 1fr) !important; }
+  }
+  @media (max-width: 640px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .process-gallery, .process-gallery.gallery-4 { grid-template-columns: repeat(2, 1fr) !important; }
+  }
+</style>

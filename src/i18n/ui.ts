@@ -3,7 +3,7 @@ export type Lang = 'ja' | 'zh' | 'en';
 
 export const ui = {
   ja: {
-    nav: { home: 'ホーム', about: '私たちについて', services: 'サービス', contact: 'お問い合わせ', cta: 'お問い合わせ' },
+    nav: { home: 'ホーム', about: '私たちについて', services: 'サービス', factory: '工場・製造', contact: 'お問い合わせ', cta: 'お問い合わせ' },
     langSwitch: { next: '中文', path: '/zh/' },
     footer: {
       servicesTitle: 'サービス',
@@ -20,7 +20,7 @@ export const ui = {
     },
   },
   zh: {
-    nav: { home: '首页', about: '关于我们', services: '服务', contact: '联系我们', cta: '联系我们' },
+    nav: { home: '首页', about: '关于我们', services: '服务', factory: '工厂实力', contact: '联系我们', cta: '联系我们' },
     langSwitch: { next: 'English', path: '/en/' },
     footer: {
       servicesTitle: '服务',
@@ -37,7 +37,7 @@ export const ui = {
     },
   },
   en: {
-    nav: { home: 'Home', about: 'About', services: 'Services', contact: 'Contact', cta: 'Contact Us' },
+    nav: { home: 'Home', about: 'About', services: 'Services', factory: 'Factory', contact: 'Contact', cta: 'Contact Us' },
     langSwitch: { next: '日本語', path: '/' },
     footer: {
       servicesTitle: 'Services',

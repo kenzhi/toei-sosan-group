@@ -1,0 +1,221 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+
+const stats = [
+  { num: '5,000㎡', label: 'Dongguan facility' },
+  { num: '12 yrs', label: 'Manufacturing' },
+  { num: '150K', label: 'Monthly capacity' },
+  { num: '100+', label: 'JP staff + local engineers' }
+];
+
+const processes = [
+  {
+    step: '01',
+    title: 'Injection Molding',
+    desc: 'ABS, PVC, PP, and soft resin compatible. Precision molds for stable mass production of complex shapes.',
+    images: [
+      { src: '/images/factory/注塑 1 - heavy-blur.jpg', alt: 'Injection machine 01' },
+      { src: '/images/factory/注塑 2 - heavy-blur.jpg', alt: 'Injection machine 02' },
+      { src: '/images/factory/注塑 3 - heavy-blur.jpg', alt: 'Injection machine 03' }
+    ]
+  },
+  {
+    step: '02',
+    title: 'Hand Painting',
+    desc: 'Airbrush coating by skilled artisans. Gradients, masking, and detail work — ΔE<1 color accuracy.',
+    images: [
+      { src: '/images/factory/上色 1 - heavy-blur.jpg', alt: 'Painting 01' },
+      { src: '/images/factory/上色 2 - heavy-blur.jpg', alt: 'Painting 02' },
+      { src: '/images/factory/上色 3 - heavy-blur.jpg', alt: 'Painting 03' },
+      { src: '/images/factory/上色 4 - heavy-blur.jpg', alt: 'Painting 04' },
+      { src: '/images/factory/上色 5 - heavy-blur.jpg', alt: 'Painting 05' },
+      { src: '/images/factory/上色 6 - heavy-blur.jpg', alt: 'Painting 06' },
+      { src: '/images/factory/上色 7 - heavy-blur.jpg', alt: 'Painting 07' },
+      { src: '/images/factory/上色 8 - heavy-blur.jpg', alt: 'Painting 08' }
+    ]
+  },
+  {
+    step: '03',
+    title: 'Assembly & QC',
+    desc: 'Multi-part figures assembled with dedicated jigs. Three-stage inspection: visual, dimension, motion.',
+    images: [
+      { src: '/images/factory/装配 1 - heavy-blur.jpg', alt: 'Assembly 01' },
+      { src: '/images/factory/装配 2 - heavy-blur.jpg', alt: 'Assembly 02' },
+      { src: '/images/factory/装配 3 - heavy-blur.jpg', alt: 'Assembly 03' },
+      { src: '/images/factory/装配 4 - heavy-blur.jpg', alt: 'Assembly 04' },
+      { src: '/images/factory/装配 5 - heavy-blur.jpg', alt: 'Assembly 05' }
+    ]
+  },
+  {
+    step: '04',
+    title: 'Packaging',
+    desc: 'OPP sleeves, blister cards, gift boxes. FBA intake for Japan-bound orders; FCL for overseas.',
+    images: [
+      { src: '/images/factory/包装 1 - heavy-blur.jpg', alt: 'Packaging 01' },
+      { src: '/images/factory/包装 2 - heavy-blur.jpg', alt: 'Packaging 02' },
+      { src: '/images/factory/包装 3 - heavy-blur.jpg', alt: 'Packaging 03' }
+    ]
+  },
+  {
+    step: '05',
+    title: 'Warehousing & Shipping',
+    desc: 'Bonded warehouses in Shenzhen and Dongguan. Climate-controlled; 3-day turnaround to Japan.',
+    images: [
+      { src: '/images/factory/仓储 1 - heavy-blur.jpg', alt: 'Warehouse 01' },
+      { src: '/images/factory/仓储 2 - heavy-blur.jpg', alt: 'Warehouse 02' },
+      { src: '/images/factory/仓储 3 - heavy-blur.jpg', alt: 'Warehouse 03' },
+      { src: '/images/factory/仓储 4 - heavy-blur.jpg', alt: 'Warehouse 04' }
+    ]
+  }
+];
+---
+<Layout title="Factory | Toei Sosan Group" description="5,000㎡ in-house facility in Dongguan, China. Five stages — injection, painting, assembly, packaging, shipping — under one roof. OEM/ODM by Toei Sosan Group." lang="en">
+  <Nav />
+
+  <PageHero
+    eyebrow="FACTORY"
+    title="5,000㎡ In-House Factory"
+    subtitle="Dongguan, China. Five stages, from concept to shipment, under one roof."
+  />
+
+  <section class="section stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        {stats.map(s => (
+          <div class="stat">
+            <div class="stat-num">{s.num}</div>
+            <div class="stat-label">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {processes.map((p, i) => (
+    <section class:list={['section', 'process-section', i % 2 === 1 && 'bg-soft']}>
+      <div class="container">
+        <div class="process-row">
+          <div class="process-meta">
+            <div class="process-step-num">{p.step}</div>
+            <h2 class="process-title">{p.title}</h2>
+            <p class="process-desc">{p.desc}</p>
+          </div>
+          <div class:list={["process-gallery", p.images.length >= 6 && "gallery-4"]}>
+            {p.images.map(img => (
+              <figure class="process-img-wrap">
+                <img src={img.src} alt={img.alt} loading="lazy" />
+              </figure>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner">
+        <h3>OEM / ODM inquiries,<br />start the conversation early</h3>
+        <a href="/en/contact" class="btn btn-primary">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .stats-section { background: var(--color-bg-white); }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    color: var(--color-primary);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  .stat-label {
+    font-size: 0.875rem;
+    color: var(--color-text-soft);
+    letter-spacing: 0.05em;
+  }
+
+  .process-section.bg-soft { background: var(--color-bg); }
+  .process-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .process-meta { position: sticky; top: 6rem; }
+  .process-step-num {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    color: var(--color-accent);
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+  .process-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  .process-desc {
+    color: var(--color-text-soft);
+    line-height: 1.85;
+    font-size: 1rem;
+  }
+
+  .process-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .process-gallery.gallery-4 { grid-template-columns: repeat(4, 1fr); }
+  .process-gallery.gallery-4 .process-img-wrap { aspect-ratio: 1; }
+  .process-img-wrap {
+    margin: 0;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    background: var(--color-border-soft);
+  }
+  .process-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .process-img-wrap:hover img { transform: scale(1.05); }
+
+  .cta-banner {
+    background: var(--color-primary);
+    color: white;
+    padding: 3.5rem 2.5rem;
+    text-align: center;
+  }
+  .cta-banner h3 { color: white; margin-bottom: 2rem; line-height: 1.5; }
+
+  @media (max-width: 1024px) {
+    .process-row { grid-template-columns: 1fr; gap: 1.5rem; }
+    .process-meta { position: static; }
+    .process-gallery, .process-gallery.gallery-4 { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .process-gallery, .process-gallery.gallery-4 { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
