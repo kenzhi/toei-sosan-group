@@ -1,0 +1,128 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import PageHero from '../../components/PageHero.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+import { cleanSlug } from '../../i18n/ui';
+
+const cases = (await getCollection('cases', c => c.data.lang === 'zh' && !c.data.draft))
+  .map(e => ({ ...e, kind: 'case' as const, kindLabel: '案例', href: `/zh/cases/${cleanSlug(e.slug)}/` }));
+const insights = (await getCollection('insights', c => c.data.lang === 'zh' && !c.data.draft))
+  .map(e => ({ ...e, kind: 'insight' as const, kindLabel: '行业洞察', href: `/zh/insights/${cleanSlug(e.slug)}/` }));
+const news = (await getCollection('news', c => c.data.lang === 'zh' && !c.data.draft))
+  .map(e => ({ ...e, kind: 'news' as const, kindLabel: '新闻', href: `/zh/news/${cleanSlug(e.slug)}/` }));
+
+const articles = [...cases, ...insights, ...news]
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const covers: Record<string, string> = {
+  case: 'https://images.unsplash.com/photo-1565043666747-69f6646db940?w=800&h=500&fit=crop&auto=format&q=80',
+  insight: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=500&fit=crop&auto=format&q=80',
+  news: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&h=500&fit=crop&auto=format&q=80',
+};
+
+const blogSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  '@id': 'https://toei-sosan.com/zh/blog/#blog',
+  name: '东荣创产集团 博客',
+  description: '行业洞察·案例研究·最新新闻汇总。',
+  url: 'https://toei-sosan.com/zh/blog/',
+  publisher: { '@type': 'Organization', name: '东荣创产集团股份有限公司', url: 'https://toei-sosan.com/zh/' }
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首页', item: 'https://toei-sosan.com/zh/' },
+    { '@type': 'ListItem', position: 2, name: '博客', item: 'https://toei-sosan.com/zh/blog/' }
+  ]
+};
+---
+<Layout title="博客 | 东荣创产集团" description="行业洞察·案例研究·最新新闻。东荣创产集团的动态与见解。" lang="zh">
+  <script type="application/ld+json" set:html={JSON.stringify(blogSchema)} is:inline />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} is:inline />
+
+  <Nav />
+
+  <PageHero
+    eyebrow="BLOG"
+    title="博客"
+    subtitle="行业洞察、案例研究与最新新闻，一站汇集。"
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="filter-bar" role="tablist" aria-label="文章分类筛选">
+        <button class="filter-btn is-active" data-filter="all" role="tab" aria-selected="true">全部 <span class="count">({articles.length})</span></button>
+        <button class="filter-btn" data-filter="case" role="tab" aria-selected="false">案例 <span class="count">({cases.length})</span></button>
+        <button class="filter-btn" data-filter="insight" role="tab" aria-selected="false">行业洞察 <span class="count">({insights.length})</span></button>
+        <button class="filter-btn" data-filter="news" role="tab" aria-selected="false">新闻 <span class="count">({news.length})</span></button>
+      </div>
+
+      <div class="article-list" id="article-list">
+        {articles.map(a => (
+          <a href={a.href} class="article-card" data-kind={a.kind}>
+            <div class="article-cover" style={`background-image: url(${a.data.cover || covers[a.kind]})`}>
+              <span class={`article-kind kind-${a.kind}`}>{a.kindLabel}</span>
+            </div>
+            <div class="article-body">
+              <div class="article-meta">
+                <time datetime={a.data.date.toISOString().split('T')[0]}>{a.data.date.toISOString().split('T')[0]}</time>
+                {a.data.category && <span class="tag">{a.data.category}</span>}
+              </div>
+              <h2 class="article-title">{a.data.title}</h2>
+              <p class="article-excerpt">{a.data.excerpt}</p>
+              <span class="read-more">阅读全文 →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <script>
+    const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+    const cards = document.querySelectorAll<HTMLElement>('.article-card');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => { b.classList.remove('is-active'); b.setAttribute('aria-selected', 'false'); });
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-selected', 'true');
+        const filter = btn.dataset.filter || 'all';
+        cards.forEach(card => {
+          card.style.display = (filter === 'all' || card.dataset.kind === filter) ? '' : 'none';
+        });
+      });
+    });
+  </script>
+</Layout>
+
+<style>
+  .filter-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 3rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--color-border-soft); }
+  .filter-btn { padding: 0.6rem 1.25rem; background: transparent; border: 1px solid var(--color-border); border-radius: 2px; font-family: var(--font-en); font-size: 0.8125rem; font-weight: 500; color: var(--color-primary); cursor: pointer; transition: all 0.2s var(--ease); }
+  .filter-btn:hover { border-color: var(--color-accent); color: var(--color-accent); }
+  .filter-btn.is-active { background: var(--color-primary); color: white; border-color: var(--color-primary); }
+  .filter-btn .count { opacity: 0.6; font-weight: 400; margin-left: 0.25rem; }
+  .article-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+  .article-card { display: grid; grid-template-rows: 200px 1fr; background: var(--color-bg-white); border: 1px solid var(--color-border-soft); text-decoration: none; color: inherit; transition: all 0.3s var(--ease); overflow: hidden; }
+  .article-card:hover { transform: translateY(-4px); border-color: var(--color-accent); box-shadow: 0 12px 32px rgba(27, 58, 92, 0.08); }
+  .article-cover { position: relative; background-size: cover; background-position: center; }
+  .article-cover::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.4) 100%); }
+  .article-kind { position: absolute; top: 1rem; left: 1rem; padding: 0.3rem 0.75rem; font-family: var(--font-en); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: white; z-index: 1; }
+  .kind-case { background: var(--color-primary); }
+  .kind-insight { background: var(--color-accent); }
+  .kind-news { background: #2C7A7B; }
+  .article-body { padding: 1.75rem; }
+  .article-meta { display: flex; gap: 0.75rem; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; }
+  .article-meta time { font-family: var(--font-en); font-size: 0.8125rem; color: var(--color-text-mute); }
+  .tag { font-size: 0.7rem; color: var(--color-accent); padding: 0.15rem 0.625rem; border: 1px solid var(--color-accent); border-radius: 2px; }
+  .article-title { font-family: var(--font-display); font-size: 1.25rem; color: var(--color-primary); margin: 0 0 0.75rem; line-height: 1.4; font-weight: 600; }
+  .article-excerpt { color: var(--color-text-soft); font-size: 0.9375rem; line-height: 1.7; margin: 0 0 1rem; }
+  .read-more { font-family: var(--font-en); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; color: var(--color-accent); text-transform: uppercase; }
+  @media (max-width: 768px) { .article-list { grid-template-columns: 1fr; gap: 1.5rem; } }
+</style>
