@@ -16,8 +16,8 @@ specs:
     Lead time: "2 weeks prototype, 30 days production"
     Certifications: "ISO 9001, IPC-A-610 Class 2/3"
 
-gallery: ["/images/site/electronics.jpg", "/images/site/electronics.jpg", "/images/site/electronics.jpg"]
-cover: "/images/site/electronics.jpg"
+gallery: ["/images/site/products/pcb-1.jpg", "/images/site/products/pcb-2.jpg", "/images/site/products/pcb-3.jpg"]
+cover: "/images/site/products/pcb-1.jpg"
 tags: ["PCB", "SMT", "Electronics", "IoT"]
 relatedCase: "01-toyota-oem"
 draft: false

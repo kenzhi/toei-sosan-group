@@ -16,8 +16,8 @@ specs:
     标准交期: "模具 30 天 + 量产 30 天"
     二次加工: "印刷（移印 / 丝印）/ 喷涂 / 组装"
 
-gallery: ["/images/site/injection.jpg", "/images/site/logistics.jpg", "/images/site/cosmetic.jpg"]
-cover: "/images/site/injection.jpg"
+gallery: ["/images/site/products/injection-1.jpg", "/images/site/products/injection-2.jpg", "/images/site/products/injection-3.jpg"]
+cover: "/images/site/products/injection-1.jpg"
 tags: ["注塑", "ABS", "家电", "模具"]
 relatedCase: "02-amazon-eco-bottle"
 draft: false

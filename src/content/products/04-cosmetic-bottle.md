@@ -16,8 +16,8 @@ specs:
     認証: "FDA 認可 / EU リーチ / 中国 NMPA 対応"
     FBA: "納品ラベル事前貼付 + フルフィルメント対応"
 
-gallery: ["/images/site/cosmetic.jpg", "/images/site/electronics.jpg", "/images/site/logistics.jpg"]
-cover: "/images/site/cosmetic.jpg"
+gallery: ["/images/site/products/cosmetic-1.jpg", "/images/site/products/cosmetic-2.jpg", "/images/site/products/cosmetic-3.jpg"]
+cover: "/images/site/products/cosmetic-1.jpg"
 tags: ["化粧品", "OEM", "FBA", "PET"]
 relatedCase: "02-amazon-eco-bottle"
 draft: false

@@ -16,8 +16,8 @@ specs:
     標準納期: "試作 2週間、量産 45日"
     認証: "ISO 9001, ISO 14001, RoHS 対応"
 
-gallery: ["/images/site/factory-main.jpg", "/images/site/factory-main.jpg", "/images/site/factory-main.jpg"]
-cover: "/images/site/factory-main.jpg"
+gallery: ["/images/site/products/metal-1.jpg", "/images/site/products/metal-2.jpg", "/images/site/products/metal-3.jpg"]
+cover: "/images/site/products/metal-1.jpg"
 tags: ["CNC", "金属加工", "自動車", "5軸"]
 relatedCase: "01-toyota-oem"
 draft: false

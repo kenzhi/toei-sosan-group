@@ -16,8 +16,8 @@ specs:
     標準納期: "試作 2 週間、量産 30日"
     認証: "ISO 9001, IPC-A-610 Class 2/3"
 
-gallery: ["/images/site/electronics.jpg", "/images/site/electronics.jpg", "/images/site/electronics.jpg"]
-cover: "/images/site/electronics.jpg"
+gallery: ["/images/site/products/pcb-1.jpg", "/images/site/products/pcb-2.jpg", "/images/site/products/pcb-3.jpg"]
+cover: "/images/site/products/pcb-1.jpg"
 tags: ["PCB", "SMT", "電子組立", "IoT"]
 relatedCase: "01-toyota-oem"
 draft: false

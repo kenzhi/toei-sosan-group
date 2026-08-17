@@ -16,8 +16,8 @@ specs:
     Lead time: "30 days mold + 30 days production"
     Secondary ops: "Pad/silk printing, painting, assembly"
 
-gallery: ["/images/site/injection.jpg", "/images/site/logistics.jpg", "/images/site/cosmetic.jpg"]
-cover: "/images/site/injection.jpg"
+gallery: ["/images/site/products/injection-1.jpg", "/images/site/products/injection-2.jpg", "/images/site/products/injection-3.jpg"]
+cover: "/images/site/products/injection-1.jpg"
 tags: ["Injection molding", "ABS", "Consumer electronics", "Mold"]
 relatedCase: "02-amazon-eco-bottle"
 draft: false

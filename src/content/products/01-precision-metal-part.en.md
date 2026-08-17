@@ -16,8 +16,8 @@ specs:
     Lead time: "2 weeks prototype, 45 days mass production"
     Certifications: "ISO 9001, ISO 14001, RoHS compliant"
 
-gallery: ["/images/site/factory-main.jpg", "/images/site/factory-main.jpg", "/images/site/factory-main.jpg"]
-cover: "/images/site/factory-main.jpg"
+gallery: ["/images/site/products/metal-1.jpg", "/images/site/products/metal-2.jpg", "/images/site/products/metal-3.jpg"]
+cover: "/images/site/products/metal-1.jpg"
 tags: ["CNC", "Metal", "Automotive", "5-axis"]
 relatedCase: "01-toyota-oem"
 draft: false

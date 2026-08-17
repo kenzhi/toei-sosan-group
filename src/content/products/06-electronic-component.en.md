@@ -16,8 +16,8 @@ specs:
     Lead time: "4 weeks prototype, 60 days mass production"
     Explosion-proof: "ATEX / IECEx (optional)"
 
-gallery: ["/images/site/electronics.jpg", "/images/site/electronics.jpg", "/images/site/electronics.jpg"]
-cover: "/images/site/electronics.jpg"
+gallery: ["/images/site/products/electronic-1.jpg", "/images/site/products/electronic-2.jpg", "/images/site/products/electronic-3.jpg"]
+cover: "/images/site/products/electronic-1.jpg"
 tags: ["Electronic components", "Automotive", "IATF", "Sensors"]
 relatedCase: "01-toyota-oem"
 draft: false

@@ -16,8 +16,8 @@ specs:
     標準納期: "試作 4 週間、量産 60日"
     防爆: "ATEX / IECEx（オプション）"
 
-gallery: ["/images/site/electronics.jpg", "/images/site/electronics.jpg", "/images/site/electronics.jpg"]
-cover: "/images/site/electronics.jpg"
+gallery: ["/images/site/products/electronic-1.jpg", "/images/site/products/electronic-2.jpg", "/images/site/products/electronic-3.jpg"]
+cover: "/images/site/products/electronic-1.jpg"
 tags: ["電子部品", "車載", "IATF", "センサー"]
 relatedCase: "01-toyota-oem"
 draft: false
