@@ -16,8 +16,8 @@ specs:
     標準納期: "金型 30日 + 量産 30日"
     二次加工: "印刷（タンポ / シルク）/ 塗装 / 組立"
 
-gallery: ["https://images.unsplash.com/photo-1581092335397-9583eb92d232?w=1200&h=800&fit=crop&auto=format&q=80", "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=1200&h=800&fit=crop&auto=format&q=80", "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=1200&h=800&fit=crop&auto=format&q=80"]
-cover: "https://images.unsplash.com/photo-1581092335397-9583eb92d232?w=1600&h=900&fit=crop&auto=format&q=80"
+gallery: ["/images/site/injection.jpg", "/images/site/logistics.jpg", "/images/site/cosmetic.jpg"]
+cover: "/images/site/injection.jpg"
 tags: ["射出成形", "ABS", "家電", "金型"]
 relatedCase: "02-amazon-eco-bottle"
 draft: false

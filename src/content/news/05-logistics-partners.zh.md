@@ -4,7 +4,7 @@ excerpt: "扩展日本 / 中国 / 国际三大物流渠道，现已覆盖 FBA �
 date: 2026-05-28
 lang: zh
 type: partnership
-cover: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/logistics.jpg"
 draft: false
 ---
 

@@ -4,7 +4,7 @@ excerpt: "关于东荣创产集团东京 / 东莞两据点的夏季休假安排�
 date: 2026-06-10
 lang: zh
 type: announcement
-cover: "https://images.unsplash.com/photo-1483921020237-713ff7249957?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/404.jpg"
 draft: false
 ---
 

@@ -4,7 +4,7 @@ excerpt: "We've added Japan, China, and international shipping options—now cov
 date: 2026-05-28
 lang: en
 type: partnership
-cover: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/logistics.jpg"
 draft: false
 ---
 

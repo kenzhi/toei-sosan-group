@@ -12,7 +12,7 @@ industry: "自動車・精密部品"
 service: "OEM 製造"
 tags: ["OEM", "自動車", "東莞工場"]
 draft: false
-cover: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/factory-main.jpg"
 ---
 
 ## 課題

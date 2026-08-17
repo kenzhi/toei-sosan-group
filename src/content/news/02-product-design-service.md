@@ -9,7 +9,7 @@ date: 2026-05-10
 lang: ja
 type: "service"
 draft: false
-cover: "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/factory-main.jpg"
 ---
 
 ## サービス内容

@@ -16,8 +16,8 @@ specs:
     认证: "FDA 注册 / EU REACH / 中国 NMPA 合规"
     FBA: "入仓标签预贴 + 履约对接"
 
-gallery: ["https://images.unsplash.com/photo-1556228720-195a672e8a03?w=1200&h=800&fit=crop&auto=format&q=80", "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=1200&h=800&fit=crop&auto=format&q=80", "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=1200&h=800&fit=crop&auto=format&q=80"]
-cover: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=1600&h=900&fit=crop&auto=format&q=80"
+gallery: ["/images/site/cosmetic.jpg", "/images/site/electronics.jpg", "/images/site/logistics.jpg"]
+cover: "/images/site/cosmetic.jpg"
 tags: ["化妆品", "OEM", "FBA", "PET"]
 relatedCase: "02-amazon-eco-bottle"
 draft: false

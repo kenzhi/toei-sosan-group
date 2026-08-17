@@ -5,7 +5,7 @@ date: 2026-05-18
 lang: ja
 category: "市場トレンド"
 tags: ["越境EC", "Amazon", "選品", "TikTok Shop"]
-cover: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/team.jpg"
 draft: false
 ---
 

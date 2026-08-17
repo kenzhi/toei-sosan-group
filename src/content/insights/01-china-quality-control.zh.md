@@ -6,7 +6,7 @@ lang: zh
 category: "质量管理"
 tags: ["QC", "OEM", "工厂选定"]
 draft: false
-cover: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/factory-main.jpg"
 ---
 
 ## 为什么「中国质量」会被贴负面标签

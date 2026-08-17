@@ -8,7 +8,7 @@ industry: "汽车 · 精密部件"
 service: "OEM 制造"
 tags: ["OEM", "汽车", "东莞工厂"]
 draft: false
-cover: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/factory-main.jpg"
 ---
 
 ## 客户课题

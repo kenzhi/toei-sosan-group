@@ -24,6 +24,17 @@ const stats = [
 
   <PageHero eyebrow="ABOUT US" title="私たちの物語" subtitle="東京・品川 × 中国・東莞。二つの拠点から。" />
 
+  {/* 拠点イメージ：東京オフィス */}
+  <section class="hero-image-strip">
+    <div class="strip-grid">
+      <div class="strip-img strip-tokyo" role="img" aria-label="東京オフィスから見た東京のスカイライン"></div>
+      <div class="strip-caption">
+        <span class="caption-tag">TOKYO HQ</span>
+        <p>東京・品川インターシティ。営業と企画の拠点。</p>
+      </div>
+    </div>
+  </section>
+
   <section class="section">
     <div class="container narrow">
       <h2>なぜ、この事業を始めたのか</h2>
@@ -91,6 +102,43 @@ const stats = [
 </Layout>
 
 <style>
+  .hero-image-strip { background: var(--color-bg); }
+  .strip-grid {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    min-height: 320px;
+    overflow: hidden;
+  }
+  .strip-img {
+    background-size: cover;
+    background-position: center;
+  }
+  .strip-tokyo { background-image: url('/images/site/tokyo.jpg'); }
+  .strip-caption {
+    padding: 3rem 3rem;
+    background: var(--color-primary);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .caption-tag {
+    font-family: var(--font-en);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+  }
+  .strip-caption p { color: rgba(255,255,255,0.85); font-size: 1rem; line-height: 1.8; margin: 0; }
+  @media (max-width: 768px) {
+    .strip-grid { grid-template-columns: 1fr; min-height: auto; }
+    .strip-img { min-height: 220px; }
+    .strip-caption { padding: 2rem 1.5rem; }
+  }
+
   .narrow { max-width: 720px; margin: 0 auto; }
   .narrow h2 { text-align: center; margin-bottom: 2.5rem; }
   .narrow p { font-size: 1.0625rem; line-height: 2; margin-bottom: 1.5rem; }

@@ -10,7 +10,7 @@ lang: en
 category: "Materials & Standards"
 tags: ["Injection Molding", "Material Selection", "ISO 1043", "JIS", "GB"]
 draft: false
-cover: "https://images.unsplash.com/photo-1565098772267-60af42b81ef2?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/metal.jpg"
 ---
 
 ## Why resin selection always sparks debate

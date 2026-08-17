@@ -5,7 +5,7 @@ date: 2026-04-20
 lang: en
 category: "Business Model"
 tags: ["OEM", "ODM", "Business Model"]
-cover: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/consulting.jpg"
 draft: false
 ---
 

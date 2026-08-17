@@ -8,7 +8,7 @@ industry: "Automotive · Precision Parts"
 service: "OEM Manufacturing"
 tags: ["OEM", "Automotive", "Dongguan Factory"]
 draft: false
-cover: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/factory-main.jpg"
 ---
 
 ## The Challenge

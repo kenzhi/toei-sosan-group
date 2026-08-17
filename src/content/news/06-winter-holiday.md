@@ -4,7 +4,7 @@ excerpt: "東栄創産グループ東京・東莞両拠点の夏季休業につ�
 date: 2026-06-10
 lang: ja
 type: announcement
-cover: "https://images.unsplash.com/photo-1483921020237-713ff7249957?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/404.jpg"
 draft: false
 ---
 

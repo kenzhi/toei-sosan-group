@@ -4,7 +4,7 @@ excerpt: "Summer holiday schedule for our Tokyo and Dongguan offices. Urgent mat
 date: 2026-06-10
 lang: en
 type: announcement
-cover: "https://images.unsplash.com/photo-1483921020237-713ff7249957?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/404.jpg"
 draft: false
 ---
 

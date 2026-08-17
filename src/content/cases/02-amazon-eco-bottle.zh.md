@@ -8,7 +8,7 @@ industry: "消费品 · 可持续"
 service: "跨境电商 + OEM"
 tags: ["Amazon", "DTC", "可持续", "OEM"]
 draft: false
-cover: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/logistics.jpg"
 ---
 
 ## 背景

@@ -10,7 +10,7 @@ lang: ja
 category: "貿易・市場"
 tags: ["中日貿易", "RCEP", "CPTPP", "半導体", "OEM"]
 draft: false
-cover: "https://images.unsplash.com/photo-1493946740644-2d8a1f1a6aff?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/trade.jpg"
 ---
 
 ## 数字が示す「停滞」と「中身の大変動」

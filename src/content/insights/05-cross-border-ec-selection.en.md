@@ -5,7 +5,7 @@ date: 2026-05-18
 lang: en
 category: "Market Trends"
 tags: ["Cross-border", "Amazon", "Product Selection", "TikTok Shop"]
-cover: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/team.jpg"
 draft: false
 ---
 

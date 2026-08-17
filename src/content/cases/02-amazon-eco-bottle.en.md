@@ -8,7 +8,7 @@ industry: "Consumer Goods · Sustainability"
 service: "Cross-border E-commerce + OEM"
 tags: ["Amazon", "DTC", "Sustainability", "OEM"]
 draft: false
-cover: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/logistics.jpg"
 ---
 
 ## Background

@@ -4,7 +4,7 @@ excerpt: "2026 年 4 月 15-19 日、第 137 回広州交易会 Phase 1 に出�
 date: 2026-05-12
 lang: ja
 type: partnership
-cover: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/team.jpg"
 draft: false
 ---
 

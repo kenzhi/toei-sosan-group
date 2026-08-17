@@ -10,7 +10,7 @@ lang: en
 category: "Trade & Markets"
 tags: ["China–Japan Trade", "RCEP", "CPTPP", "Semiconductors", "OEM"]
 draft: false
-cover: "https://images.unsplash.com/photo-1493946740644-2d8a1f1a6aff?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/trade.jpg"
 ---
 
 ## Stagnation on the surface, structural shifts underneath

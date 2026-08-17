@@ -4,7 +4,7 @@ excerpt: "为应对快速发展的中国 OEM / 跨境电商业务，在东京与
 date: 2026-04-08
 lang: zh
 type: announcement
-cover: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/team.jpg"
 draft: false
 ---
 

@@ -5,7 +5,7 @@ date: 2026-05-05
 lang: ja
 category: "法規・コンプライアンス"
 tags: ["環境規制", "中国", "コンプライアンス"]
-cover: "https://images.unsplash.com/photo-1532996122724-e3c79a843ae2?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/warehouse.jpg"
 draft: false
 ---
 

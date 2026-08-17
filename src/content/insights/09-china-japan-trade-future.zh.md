@@ -10,7 +10,7 @@ lang: zh
 category: "贸易・市场"
 tags: ["中日贸易", "RCEP", "CPTPP", "半导体", "OEM"]
 draft: false
-cover: "https://images.unsplash.com/photo-1493946740644-2d8a1f1a6aff?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/trade.jpg"
 ---
 
 ## 数字背后的"停滞"与"内里大变动"

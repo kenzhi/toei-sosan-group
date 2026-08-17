@@ -6,7 +6,7 @@ lang: en
 category: "Market Trends"
 tags: ["Cross-border E-commerce", "Amazon", "TikTok Shop", "Tmall Global"]
 draft: false
-cover: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/logistics.jpg"
 ---
 
 ## Shift 1: Chinese Consumer Trust in Foreign Brands Recovers

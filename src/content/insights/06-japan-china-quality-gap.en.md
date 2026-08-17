@@ -5,7 +5,7 @@ date: 2026-06-02
 lang: en
 category: "Quality Control"
 tags: ["Quality standards", "JIS", "GB", "Sino-Japan"]
-cover: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/factory-main.jpg"
 draft: false
 ---
 

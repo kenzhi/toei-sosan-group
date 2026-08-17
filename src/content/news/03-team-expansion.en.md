@@ -4,7 +4,7 @@ excerpt: "We're hiring two roles—Tokyo and Dongguan—to support our growing C
 date: 2026-04-08
 lang: en
 type: announcement
-cover: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/team.jpg"
 draft: false
 ---
 

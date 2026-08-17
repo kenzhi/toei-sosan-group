@@ -10,7 +10,7 @@ lang: zh
 category: "材料・标准"
 tags: ["注塑", "材料选型", "ISO 1043", "JIS", "GB"]
 draft: false
-cover: "https://images.unsplash.com/photo-1565098772267-60af42b81ef2?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/metal.jpg"
 ---
 
 ## 为什么树脂选型总是讨论不完

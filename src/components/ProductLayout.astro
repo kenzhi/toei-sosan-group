@@ -26,7 +26,7 @@ const { Content } = await entry.render();
 const data = entry.data as any;
 const dateStr = data.date.toISOString().split('T')[0];
 
-const cover = data.cover || 'https://images.unsplash.com/photo-1565043589221-1a6fd9ae74c4?w=1600&h=600&fit=crop&auto=format&q=80';
+const cover = data.cover || '/images/site/factory-main.jpg';
 const gallery = data.gallery && data.gallery.length > 0 ? data.gallery : [cover];
 const specs = data.specs || {};
 const ogImage = cover.startsWith('http') ? cover : `https://toei-sosan.com${cover}`;
@@ -129,7 +129,7 @@ const productSchema = {
         <div class="container">
           <div class="sec-eyebrow"><span class="eyebrow-line"></span><span>{t.relatedCase}</span></div>
           <a href={`${lang === 'ja' ? '' : '/' + lang}/cases/${cleanSlug(relatedCaseEntry.slug)}/`} class="related-case-card">
-            <div class="related-case-cover" style={`background-image: url(${(relatedCaseEntry.data as any).cover || 'https://images.unsplash.com/photo-1565043666747-69f6646db940?w=800&h=400&fit=crop&auto=format&q=80'})`}></div>
+            <div class="related-case-cover" style={`background-image: url(${(relatedCaseEntry.data as any).cover || '/images/site/trade.jpg'})`}></div>
             <div class="related-case-content">
               <span class="related-case-tag">{(relatedCaseEntry.data as any).industry || 'CASE'}</span>
               <h3>{(relatedCaseEntry.data as any).title}</h3>

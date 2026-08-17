@@ -46,6 +46,9 @@ const contactHref = lang === 'ja' ? '/contact/' : `/${lang}/contact/`;
   <section class="notfound">
     <div class="container">
       <div class="notfound-inner">
+        <div class="notfound-illustration">
+          <img src="/images/site/error-404.jpg" alt="" loading="eager" width="640" height="640" />
+        </div>
         <div class="big-404">
           <span class="digit">4</span>
           <span class="digit middle">0</span>
@@ -89,6 +92,16 @@ const contactHref = lang === 'ja' ? '/contact/' : `/${lang}/contact/`;
     background: radial-gradient(circle, var(--color-primary-fade) 0%, transparent 70%);
     pointer-events: none;
   }
+
+  .notfound-illustration {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(27, 58, 92, 0.08);
+  }
+  .notfound-illustration img { width: 100%; height: 100%; object-fit: cover; }
 
   .notfound-inner {
     position: relative;

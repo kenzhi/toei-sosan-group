@@ -16,8 +16,8 @@ specs:
     サステナ: "100% リサイクル紙 / コンポスタブル素材"
     認証: "FSC, PEFC, ISO 14001"
 
-gallery: ["https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=1200&h=800&fit=crop&auto=format&q=80", "https://images.unsplash.com/photo-1583947581924-860bda6a26df?w=1200&h=800&fit=crop&auto=format&q=80", "https://images.unsplash.com/photo-1610545034380-15da0b2eb3a4?w=1200&h=800&fit=crop&auto=format&q=80"]
-cover: "https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=1600&h=900&fit=crop&auto=format&q=80"
+gallery: ["/images/site/carton.jpg", "/images/site/carton.jpg", "/images/site/carton.jpg"]
+cover: "/images/site/carton.jpg"
 tags: ["紙箱", "FSC", "サステナブル", "OEM"]
 relatedCase: "02-amazon-eco-bottle"
 draft: false

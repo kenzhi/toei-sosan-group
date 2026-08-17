@@ -10,7 +10,7 @@ lang: ja
 category: "市場トレンド"
 tags: ["越境EC", "Amazon", "TikTok Shop", "天猫国際"]
 draft: false
-cover: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/logistics.jpg"
 ---
 
 ## 変化 1：中国消費者の「海外ブランド信頼度」が回復

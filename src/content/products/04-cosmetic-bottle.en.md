@@ -16,8 +16,8 @@ specs:
     Certifications: "FDA registered, EU REACH, China NMPA"
     FBA: "Pre-applied labels + fulfillment support"
 
-gallery: ["https://images.unsplash.com/photo-1556228720-195a672e8a03?w=1200&h=800&fit=crop&auto=format&q=80", "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=1200&h=800&fit=crop&auto=format&q=80", "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=1200&h=800&fit=crop&auto=format&q=80"]
-cover: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=1600&h=900&fit=crop&auto=format&q=80"
+gallery: ["/images/site/cosmetic.jpg", "/images/site/electronics.jpg", "/images/site/logistics.jpg"]
+cover: "/images/site/cosmetic.jpg"
 tags: ["Cosmetic", "OEM", "FBA", "PET"]
 relatedCase: "02-amazon-eco-bottle"
 draft: false

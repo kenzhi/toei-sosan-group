@@ -5,7 +5,7 @@ date: 2026-02-01
 lang: en
 type: "announcement"
 draft: false
-cover: "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/factory-main.jpg"
 ---
 
 ## Factory Overview

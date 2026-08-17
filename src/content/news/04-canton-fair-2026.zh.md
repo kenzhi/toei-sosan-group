@@ -4,7 +4,7 @@ excerpt: "2026 年 4 月 15-19 日，我们参展第 137 届广交会第一期�
 date: 2026-05-12
 lang: zh
 type: partnership
-cover: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/team.jpg"
 draft: false
 ---
 

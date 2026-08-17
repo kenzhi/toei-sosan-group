@@ -6,7 +6,7 @@ lang: zh
 category: "市场趋势"
 tags: ["跨境电商", "Amazon", "TikTok Shop", "天猫国际"]
 draft: false
-cover: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/logistics.jpg"
 ---
 
 ## 变化 1：中国消费者的「海外品牌信任度」回升

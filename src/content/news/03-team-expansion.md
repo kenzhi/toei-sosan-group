@@ -4,7 +4,7 @@ excerpt: "急成長する中国 OEM / 越境 EC 事業に対応するため、�
 date: 2026-04-08
 lang: ja
 type: announcement
-cover: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/team.jpg"
 draft: false
 ---
 

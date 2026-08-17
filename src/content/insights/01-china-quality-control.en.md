@@ -6,7 +6,7 @@ lang: en
 category: "Quality Management"
 tags: ["QC", "OEM", "Factory Selection"]
 draft: false
-cover: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/factory-main.jpg"
 ---
 
 ## Why "China Quality" Has a Bad Reputation

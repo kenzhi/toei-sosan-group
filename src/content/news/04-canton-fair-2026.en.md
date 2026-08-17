@@ -4,7 +4,7 @@ excerpt: "We exhibited at the 137th Canton Fair, Phase 1 (Apr 15-19, 2026), and 
 date: 2026-05-12
 lang: en
 type: partnership
-cover: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1600&h=600&fit=crop&auto=format&q=80"
+cover: "/images/site/team.jpg"
 draft: false
 ---
 

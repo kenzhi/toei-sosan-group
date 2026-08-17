@@ -16,8 +16,8 @@ specs:
     标准交期: "试制 4 周、量产 60 天"
     防爆: "ATEX / IECEx（可选）"
 
-gallery: ["https://images.unsplash.com/photo-1581092446327-9b52bd1570c2?w=1200&h=800&fit=crop&auto=format&q=80", "https://images.unsplash.com/photo-1597733336794-12d05021d510?w=1200&h=800&fit=crop&auto=format&q=80", "https://images.unsplash.com/photo-1607703703520-bb638e84afe2?w=1200&h=800&fit=crop&auto=format&q=80"]
-cover: "https://images.unsplash.com/photo-1581092446327-9b52bd1570c2?w=1600&h=900&fit=crop&auto=format&q=80"
+gallery: ["/images/site/electronics.jpg", "/images/site/electronics.jpg", "/images/site/electronics.jpg"]
+cover: "/images/site/electronics.jpg"
 tags: ["电子元件", "车载", "IATF", "传感器"]
 relatedCase: "01-toyota-oem"
 draft: false
