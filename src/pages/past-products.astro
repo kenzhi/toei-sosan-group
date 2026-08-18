@@ -1,0 +1,150 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import PageHero from '../components/PageHero.astro';
+import Footer from '../components/Footer.astro';
+
+const items = [
+  {
+    src: '/images/site/past-products/cableprotectors-1.jpg',
+    label: 'ケーブルプロテクター（キャラクター造型）',
+    process: '射出成形 + 塗装 + 組立',
+    material: 'PVC / 軟質樹脂',
+  },
+  {
+    src: '/images/site/past-products/cableprotectors-2.jpg',
+    label: 'ケーブルプロテクター（バリエーション）',
+    process: '射出成形 + 塗装 + 組立',
+    material: 'PVC / 軟質樹脂',
+  },
+  {
+    src: '/images/site/past-products/usbcables.jpg',
+    label: 'USB 充電ケーブル（キャラクターカバー付）',
+    process: '射出成形 + 組立 + 包装',
+    material: 'PVC / TPE / ケーブル',
+  },
+  {
+    src: '/images/site/past-products/charger-dalmatian.jpg',
+    label: 'USB 充電器（アニマル造型・小売パッケージ）',
+    process: '射出成形 + 組立 + 包装',
+    material: 'ABS / PVC / リテールパック',
+  },
+  {
+    src: '/images/site/past-products/charger.jpg',
+    label: 'USB ウォールチャージャー',
+    process: '射出成形 + 組立',
+    material: 'ABS / PC',
+  },
+  {
+    src: '/images/site/past-products/anpanman.jpg',
+    label: 'アンパンマン パンこうじょう 玩具セット',
+    process: '射出成形 + 塗装 + 組立 + 包装',
+    material: 'ABS / PVC',
+  },
+  {
+    src: '/images/site/past-products/spiderman.jpg',
+    label: 'フィギュア人偶（Funko スタイル）',
+    process: '射出成形 + 塗装 + 組立',
+    material: 'PVC / 塗装',
+  },
+];
+---
+<Layout title="過去の製品 | 東栄創産グループ" description="東栄創産グループが手がけたOEM製造の製品サンプル（一部加工済み）。">
+  <Nav />
+  <PageHero
+    eyebrow="PAST PRODUCTS"
+    title="過去の製品サンプル"
+    subtitle="東栄創産グループが手がけた OEM 製造の事例。キャラクター玩具・USB アクセサリー・充電器まで、中国東莞自社工場での一貫生産。"
+  />
+  <section class="section">
+    <div class="container">
+      <div class="note">
+        ※ 一部の画像は、関連キャラクターの肖像権・IP 保護のため、顔部分のみモザイク加工を施しています。製品本体・仕様・加工精度のご参考としてごらんください。
+      </div>
+      <div class="gallery">
+        {items.map(it => (
+          <figure class="card">
+            <div class="img-wrap">
+              <img src={it.src} alt={it.label} loading="lazy" />
+            </div>
+            <figcaption>
+              <h3>{it.label}</h3>
+              <dl>
+                <dt>主要工程</dt><dd>{it.process}</dd>
+                <dt>主な素材</dt><dd>{it.material}</dd>
+              </dl>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+  <Footer />
+</Layout>
+
+<style>
+  .section { padding: 4rem 0 6rem; }
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+  .note {
+    font-size: 0.875rem;
+    color: var(--color-text-soft, #5A5A5A);
+    background: #F7F4ED;
+    border-left: 3px solid #E29C52;
+    padding: 0.875rem 1.125rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+  }
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+  .card {
+    margin: 0;
+    background: #FFFFFF;
+    border: 1px solid #E8E2D5;
+    transition: all 0.3s;
+    overflow: hidden;
+  }
+  .card:hover {
+    border-color: #1B3A5C;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(27,58,92,0.08);
+  }
+  .img-wrap {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    background: #F4F0E6;
+  }
+  .img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  figcaption {
+    padding: 1.25rem 1.5rem 1.5rem;
+  }
+  figcaption h3 {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: #1B3A5C;
+    margin: 0 0 0.75rem 0;
+    line-height: 1.5;
+  }
+  figcaption dl {
+    margin: 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.375rem 0.875rem;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+  }
+  figcaption dt {
+    color: #8A8A8A;
+    font-weight: 500;
+  }
+  figcaption dd {
+    color: #1B3A5C;
+    margin: 0;
+  }
+</style>
