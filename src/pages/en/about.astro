@@ -4,46 +4,46 @@ import Nav from '../../components/Nav.astro';
 import PageHero from '../../components/PageHero.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
 import Footer from '../../components/Footer.astro';
+import { company } from '../../data/company';
 
-const team = [
-  { role: 'CEO', name: 'Yutaka Orita', bio: '20+ years in the Japanese market.' },
-  { role: 'Co-founder', name: 'Han Longyi', bio: 'Bridge between Chinese manufacturing and the Japanese market.' },
-  { role: 'China Factory Head', name: '(Hiring)', bio: 'Dongguan factory operations.' },
-  { role: 'Sales Manager', name: '(Hiring)', bio: 'Client relations across China and Japan.' }
-];
-
-const stats = [
-  { num: '2025', label: 'Founded' },
-  { num: '2', label: 'Countries' },
-  { num: '11', label: 'Business Areas' },
-  { num: '100%', label: 'Real Business' }
-];
+const C = company.en;
+const team = C.directors2;
+const stats = C.stats.slice(0, 4);
 ---
-<Layout title="About | Toei Sosan Group" description="Toei Sosan Group story. From Tokyo and Dongguan, building cross-border real business." lang="en">
+<Layout title="About | TOEI SOSAN GROUP" description="The story of TOEI SOSAN GROUP. Founded in 2015 in Dongguan, China. In 2025 anchored by our Saitama HQ, we serve global brands with Japanese quality standards.">
   <Nav />
 
-  <PageHero eyebrow="ABOUT US" title="Our Story" subtitle="Tokyo · Shinagawa × China · Dongguan. Two locations, one mission." />
+  <PageHero eyebrow="ABOUT US" title="Our Story" subtitle="Saitama × Dongguan, China. From two sites, one team, to the world." />
+
+  <section class="hero-image-strip">
+    <div class="strip-grid">
+      <div class="strip-img strip-tokyo" role="img" aria-label="Dongguan factory — 5 in-house production stages"></div>
+      <div class="strip-caption">
+        <span class="caption-tag">DONGGUAN FACTORY</span>
+        <p>Established 2015. In-house 5 stages — injection, painting,<br/>assembly, packaging, and warehouse — all under one roof.</p>
+      </div>
+    </div>
+  </section>
 
   <section class="section">
     <div class="container narrow">
       <h2>Why we started this</h2>
       <p>
-        November 2025, Tokyo · Shinagawa and Dongguan, Guangdong.<br />
-        Toei Sosan Group started from <strong>two locations</strong> at the same time.
+        In 2015, we founded our self-operated factory in Dongguan, Guangdong.<br />
+        A decade focused on Japanese clients, we have honed our OEM craft.
       </p>
       <p>
-        One question kept us thinking —<br />
-        <em>"Can China's powerful manufacturing capacity, paired with Japanese quality standards, reach global consumers?"</em>
+        In October 2025, we established our Japan entity “TOEI SOSAN GROUP Co., Ltd.” in Koshigaya, Saitama.<br />
+        As the liaison point for business expansion and Japanese client relations, we now operate as a <strong>two-site</strong> organization.
       </p>
       <p>
-        Japanese companies want Chinese manufacturing, so they set up factories in China.<br />
-        Chinese factories can't meet Japanese quality demands, and back-and-forth wastes time.<br />
-        In the end, time and cost drain away in the "middle ground."
+        One question has stayed with us —<br />
+        <em>“Can China’s powerful manufacturing capacity, paired with Japanese quality standards, reach global consumers?”</em>
       </p>
       <p>
-        We chose to <strong>sit between these two worlds</strong>.<br />
-        Use Chinese factories, follow Japanese quality, deliver to the global market.<br />
-        All 11 business areas exist for that <strong>real business</strong> purpose.
+        We chose to <strong>stand between these two worlds</strong>.<br />
+        Saitama HQ plans and sells; Dongguan factory executes the 5 in-house stages.<br />
+        Across 11 registered business areas, we deliver trusted quality to the world.
       </p>
     </div>
   </section>
@@ -53,7 +53,7 @@ const stats = [
       <div class="stats-grid">
         {stats.map(s => (
           <div class="stat">
-            <div class="stat-num">{s.num}</div>
+            <div class="stat-num">{s.value}<span class="stat-unit">{s.unit}</span></div>
             <div class="stat-label">{s.label}</div>
           </div>
         ))}
@@ -63,13 +63,14 @@ const stats = [
 
   <section class="section">
     <div class="container">
-      <SectionHeader eyebrow="TEAM" title="Team" subtitle="Two founders personally involved in every project." />
+      <SectionHeader eyebrow="TEAM" title="Directors" subtitle="Two directors are personally involved in every project." />
       <div class="team-grid">
         {team.map(m => (
           <div class="team-card">
-            <div class="team-avatar">{m.name.charAt(0)}</div>
+            <div class="team-avatar" data-region={m.region}>{m.name.charAt(0)}</div>
             <div class="team-role">{m.role}</div>
             <div class="team-name">{m.name}</div>
+            <div class="team-loc">{m.location}</div>
             <p class="team-bio">{m.bio}</p>
           </div>
         ))}
@@ -78,10 +79,26 @@ const stats = [
   </section>
 
   <section class="section">
+    <div class="container narrow company-facts">
+      <h2>Company Facts</h2>
+      <dl>
+        <dt>Legal name</dt><dd>{C.name}</dd>
+        <dt>Japan entity</dt><dd>{C.founded}</dd>
+        <dt>China factory</dt><dd>{C.factoryFounded}</dd>
+        <dt>Capital</dt><dd>{C.capital}</dd>
+        <dt>Directors</dt><dd>{C.directors}</dd>
+        <dt>Headquarters</dt><dd>{C.hq}</dd>
+        <dt>China factory</dt><dd>{C.factory}</dd>
+        <dt>Business scope</dt><dd>{C.purpose}</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section">
     <div class="container">
       <div class="cta-banner cta-banner-primary">
         <div class="cta-tag">Contact Us</div>
-        <h3>Let's deliver your product to global consumers, together</h3>
+        <h3>Let’s build the global market, together</h3>
         <a href="/en/contact/" class="btn cta-btn">Contact Us</a>
       </div>
     </div>
@@ -91,6 +108,43 @@ const stats = [
 </Layout>
 
 <style>
+  .hero-image-strip { background: var(--color-bg); }
+  .strip-grid {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    min-height: 320px;
+    overflow: hidden;
+  }
+  .strip-img {
+    background-size: cover;
+    background-position: center;
+  }
+  .strip-tokyo { background-image: url('/images/site/tokyo.jpg'); }
+  .strip-caption {
+    padding: 3rem 3rem;
+    background: var(--color-primary);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .caption-tag {
+    font-family: var(--font-en);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+  }
+  .strip-caption p { color: rgba(255,255,255,0.85); font-size: 1rem; line-height: 1.8; margin: 0; }
+  @media (max-width: 768px) {
+    .strip-grid { grid-template-columns: 1fr; min-height: auto; }
+    .strip-img { min-height: 220px; }
+    .strip-caption { padding: 2rem 1.5rem; }
+  }
+
   .narrow { max-width: 720px; margin: 0 auto; }
   .narrow h2 { text-align: center; margin-bottom: 2.5rem; }
   .narrow p { font-size: 1.0625rem; line-height: 2; margin-bottom: 1.5rem; }
@@ -99,14 +153,26 @@ const stats = [
   .stats-section { background: var(--color-bg-white); }
   .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center; }
   .stat-num { font-family: var(--font-serif); font-size: clamp(2.5rem, 4vw, 3.5rem); color: var(--color-primary); font-weight: 500; margin-bottom: 0.5rem; }
+  .stat-unit { font-family: var(--font-en); font-size: 0.95rem; color: var(--color-accent); margin-left: 0.25rem; font-weight: 500; }
   .stat-label { font-size: 0.875rem; color: var(--color-text-soft); letter-spacing: 0.1em; }
   .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
   .team-card { background: var(--color-bg-white); border: 1px solid var(--color-border-soft); padding: 2rem 1.5rem; text-align: center; transition: all 0.3s; }
   .team-card:hover { border-color: var(--color-accent); }
   .team-avatar { width: 72px; height: 72px; border-radius: 50%; background: var(--color-primary); color: white; font-family: var(--font-serif); font-size: 1.75rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; }
+  .team-avatar[data-region="cn"] { background: linear-gradient(135deg, #1B3A5C 0%, #2C4F7A 100%); }
+  .team-avatar[data-region="jp"] { background: linear-gradient(135deg, #C8864A 0%, #E29C52 100%); }
   .team-role { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.1em; margin-bottom: 0.5rem; }
-  .team-name { font-family: var(--font-serif); font-size: 1.125rem; color: var(--color-primary); font-weight: 500; margin-bottom: 0.75rem; }
+  .team-name { font-family: var(--font-serif); font-size: 1.125rem; color: var(--color-primary); font-weight: 500; margin-bottom: 0.25rem; }
+  .team-loc { font-size: 0.75rem; color: var(--color-text-mute); letter-spacing: 0.05em; margin-bottom: 0.75rem; }
   .team-bio { font-size: 0.875rem; color: var(--color-text-soft); line-height: 1.6; margin: 0; }
+  /* Company facts dl */
+  .company-facts h2 { text-align: center; margin-bottom: 2.5rem; }
+  .company-facts dl {
+    display: grid; grid-template-columns: 12rem 1fr; gap: 1rem 1.5rem;
+    font-size: 0.9375rem; line-height: 1.7;
+  }
+  .company-facts dt { color: var(--color-text-soft); font-weight: 500; }
+  .company-facts dd { color: var(--color-primary); margin: 0; }
   .cta-banner { padding: 3.5rem 2.5rem; text-align: center; }
   .cta-banner h3 { color: white; margin-bottom: 2rem; }
   .cta-tag { font-size: 0.75rem; color: var(--color-accent-soft); letter-spacing: 0.2em; margin-bottom: 1rem; }

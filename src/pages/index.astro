@@ -8,14 +8,14 @@ import { cleanSlug } from '../i18n/ui';
 const capabilities = [
   { num: '01', icon: 'factory', title: 'OEM製造', desc: '広東省東莞を拠点とする自社工場群で、品質管理から量産対応まで一貫体制を構築。日本品質基準を中国製造で実現します。' },
   { num: '02', icon: 'globe',   title: '跨境電商', desc: '日本×中国×東南アジアの越境EC運営。Amazon・楽天・天猫・Shopeeを網羅し、物流・通関・カスタマーサービスを統合。' },
-  { num: '03', icon: 'ship',    title: '国際貿易', desc: '東京品川の本社を起点に、アジア全域のB2B貿易を展開。原材料調達から完成品輸出まで、サプライチェーン全域をカバー。' }
+  { num: '03', icon: 'ship',    title: '国際貿易', desc: '埼玉本社を起点に、アジア全域のB2B貿易を展開。原材料調達から完成品輸出まで、サプライチェーン全域をカバー。' }
 ];
 
 const areas = [
   { tag: 'MANUFACTURING', title: '精密製造 & 品質管理', desc: '自社工場による一貫生産体制',
     img: '/images/factory/上色 1 - heavy-blur.webp',
     href: '/factory/' },
-  { tag: 'LOGISTICS', title: '国際物流 & サプライチェーン', desc: '東京⇄東莞の最適化されたルート構築',
+  { tag: 'LOGISTICS', title: '国際物流 & サプライチェーン', desc: '埼玉⇄東莞の最適化されたルート構築',
     img: '/images/factory/仓储 1 - heavy-blur.webp',
     href: '/logistics/' },
   { tag: 'E-COMMERCE', title: '越境EC & デジタルマーケティング', desc: '多プラットフォーム統合運営',
@@ -51,7 +51,7 @@ const featuredProducts = (await getCollection('products', p => p.data.lang === '
 // FAQ
 const faq = [
   { q: '初回相談は有料ですか？', a: '初回相談は無料です。課題のヒアリングとご提案まで、お気軽にお問い合わせください。' },
-  { q: '対応エリアはどこまで？', a: '日本（東京・品川）と中国（広東省東莞）の二拠点体制で、日本全国・中国全土・東南アジア全域に対応します。' },
+  { q: '対応エリアはどこまで？', a: '日本（埼玉県越谷）と中国（広東省東莞）の二拠点体制で、日本全国・中国全土・東南アジア全域に対応します。' },
   { q: '小ロット（試作）も可能ですか？', a: 'はい、試作・小ロットから量産まで対応可能です。OEM 製造は 100 個から、跨境電商は 1 SKU からご相談いただけます。' },
   { q: '契約から実行までの期間は？', a: '内容により異なりますが、最短 2 週間で着手可能な案件もあります。緊急案件は別途ご相談ください。' },
   { q: '品質管理体制はどうなっていますか？', a: '東莞工場に日本人駐在の品質管理チームを配置。ISO 9001 準拠の QC 工程、出荷前検査、サンプル試作時の寸法検査レポート提出まで一貫対応します。' },
@@ -164,7 +164,7 @@ const faqSchema = {
       <div class="story-grid">
         <div class="story-left">
           <div class="story-photo">
-            <img src="/images/site/team.jpg" alt="東京オフィス" loading="lazy"  decoding="async" />
+            <img src="/images/site/team.jpg" alt="埼玉オフィス" loading="lazy"  decoding="async" />
             <div class="story-photo-frame"></div>
           </div>
           <blockquote class="story-quote">
@@ -173,11 +173,11 @@ const faqSchema = {
           </blockquote>
         </div>
         <div class="story-right">
-          <h2 class="story-title">東京品川 × 広東東莞<br/><span class="t-accent">二つの拠点、一つの精神</span></h2>
-          <p>東栄創産グループは、東京都品川区に本社を、広東省東莞市に生産拠点を構える日中一体型の実業集団です。OEM製造、越境EC、国際貿易の三本柱を基軸に、日本の品質基準と中国の生産力を融合し、アジアから世界市場へ価値を届けています。</p>
+          <h2 class="story-title">埼玉県越谷 × 広東東莞<br/><span class="t-accent">二つの拠点、一つの精神</span></h2>
+          <p>東栄創産グループは、埼玉県越谷市に本社を、広東省東莞市に生産拠点を構える日中一体型の実業集団です。2015 年から東莞工廠で磨いてきた OEM 製造の技を、2025 年の埼玉本社設立を機に、日本の企画力・品質基準と融合させ、アジアから世界市場へ価値を届けています。</p>
           <p>創業以来、「工場現場から離れない」という原則を堅持。物づくりの本質を見据えた経営で、パートナー企業とともにグローバルサプライチェーンの最適解を追求し続けます。</p>
           <div class="story-metrics">
-            <div><span class="m-val" data-countup="2" data-countup-duration="1200">0</span><span class="m-suf">拠点</span><span class="m-lbl">TOKYO × DONGGUAN</span></div>
+            <div><span class="m-val" data-countup="2" data-countup-duration="1200">0</span><span class="m-suf">拠点</span><span class="m-lbl">SAITAMA × DONGGUAN</span></div>
             <div><span class="m-val" data-countup="3" data-countup-duration="1200">0</span><span class="m-suf">事業</span><span class="m-lbl">CORE BUSINESSES</span></div>
             <div><span class="m-val" data-countup="100" data-countup-duration="1800" data-countup-suffix="+">0</span><span class="m-suf">%</span><span class="m-lbl">実業精神</span></div>
           </div>

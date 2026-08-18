@@ -26,8 +26,8 @@ const currentLangInfo = langs.find(l => l.code === currentLang)!;
   <div class="accent-line"></div>
 
   <div class="container nav-inner">
-    <!-- 左：Logo -->
-    <a href={langPath('ja')} class="brand" aria-label="東栄創産グループ ホーム">
+    <!-- 左：Logo — 点击回当前语言首页 -->
+    <a href={langPath(currentLang, '/')} class="brand" aria-label="東栄創産グループ ホーム">
       <img src="/logo.svg" alt="東栄創産グループ TOEI SOSAN GROUP" class="brand-logo" width="180" height="60" />
     </a>
 
@@ -35,7 +35,29 @@ const currentLangInfo = langs.find(l => l.code === currentLang)!;
     <nav class="links" aria-label="主要导航">
       <a href={langPath(currentLang, '/')}>{t.nav.home}</a>
       <a href={langPath(currentLang, '/about/')}>{t.nav.about}</a>
-      <a href={langPath(currentLang, '/services/')}>{t.nav.services}</a>
+      <div class="has-dropdown" data-dropdown>
+        <a href={langPath(currentLang, '/services/')} class="dropdown-trigger">
+          {t.nav.services}
+          <span class="caret" aria-hidden="true">▾</span>
+        </a>
+        <div class="dropdown" role="menu">
+          <a href={langPath(currentLang, '/services/')} class="dd-overview" role="menuitem">
+            {t.servicesMenu.overview}
+          </a>
+          <a href={langPath(currentLang, '/factory/')} role="menuitem">
+            {t.servicesMenu.factory}
+          </a>
+          <div class="dd-group" role="group">
+            <div class="dd-group-label">{t.servicesMenu.products}</div>
+            {t.servicesMenu.productItems.map(p => (
+              <a href={langPath(currentLang, `/products/${p.slug}/`)} role="menuitem">{p.label}</a>
+            ))}
+          </div>
+          <a href={langPath(currentLang, '/services/past-products/')} role="menuitem">
+            {t.servicesMenu.pastProducts}
+          </a>
+        </div>
+      </div>
       <a href={langPath(currentLang, '/blog/')}>{t.nav.blog}</a>
     </nav>
 
@@ -63,17 +85,22 @@ const currentLangInfo = langs.find(l => l.code === currentLang)!;
     </div>
   </div>
 
-  <!-- 移动端菜单（4 个 nav links + contact，lang 已在外面下拉） -->
-  <nav id="mobileNav" class="mobile-nav" aria-label="モバイル导航">
-    {[
-      ['/', t.nav.home],
-      [`/${currentLang === 'ja' ? '' : currentLang + '/'}about/`, t.nav.about],
-      [`/${currentLang === 'ja' ? '' : currentLang + '/'}services/`, t.nav.services],
-      [`/${currentLang === 'ja' ? '' : currentLang + '/'}blog/`, t.nav.blog],
-      [`/${currentLang === 'ja' ? '' : currentLang + '/'}contact/`, t.nav.contact]
-    ].map(([href, label]) => (
-      <a href={href}>{label}</a>
-    ))}
+  <!-- 移动端菜单（4 个 nav links + 服务下拉展开 + contact） -->
+  <nav id="mobileNav" class="mobile-nav" aria-label="モバイルナビゲーション">
+    <a href={langPath(currentLang, '/')}>{t.nav.home}</a>
+    <a href={langPath(currentLang, '/about/')}>{t.nav.about}</a>
+    <details class="mobile-group">
+      <summary>{t.nav.services}</summary>
+      <a href={langPath(currentLang, '/services/')} class="mobile-sub">{t.servicesMenu.overview}</a>
+      <a href={langPath(currentLang, '/factory/')} class="mobile-sub">{t.servicesMenu.factory}</a>
+      <div class="mobile-sub-label">{t.servicesMenu.products}</div>
+      {t.servicesMenu.productItems.map(p => (
+        <a href={langPath(currentLang, `/products/${p.slug}/`)} class="mobile-sub mobile-product">{p.label}</a>
+      ))}
+      <a href={langPath(currentLang, '/services/past-products/')} class="mobile-sub">{t.servicesMenu.pastProducts}</a>
+    </details>
+    <a href={langPath(currentLang, '/blog/')}>{t.nav.blog}</a>
+    <a href={langPath(currentLang, '/contact/')}>{t.nav.contact}</a>
   </nav>
 </header>
 
@@ -94,6 +121,45 @@ const currentLangInfo = langs.find(l => l.code === currentLang)!;
       });
     });
   }
+
+  // Services dropdown (desktop hover + click toggle, mobile tap)
+  document.querySelectorAll('[data-dropdown]').forEach(dd => {
+    const trigger = dd.querySelector('.dropdown-trigger');
+    if (!trigger) return;
+    let hoverTimer: number | undefined;
+
+    const open = () => dd.setAttribute('data-open', 'true');
+    const close = () => dd.removeAttribute('data-open');
+
+    // Desktop hover
+    dd.addEventListener('mouseenter', () => {
+      clearTimeout(hoverTimer);
+      open();
+    });
+    dd.addEventListener('mouseleave', () => {
+      hoverTimer = window.setTimeout(close, 150);
+    });
+
+    // Click toggle (also for touch devices)
+    trigger.addEventListener('click', (e) => {
+      // If the user is clicking the trigger itself, toggle; if they want the link,
+      // let the link navigate. We toggle on click for accessibility.
+      if (window.matchMedia('(hover: none)').matches) {
+        e.preventDefault();
+        dd.hasAttribute('data-open') ? close() : open();
+      }
+    });
+
+    // Click outside closes
+    document.addEventListener('click', (e) => {
+      if (!dd.contains(e.target as Node)) close();
+    });
+
+    // Esc closes
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') close();
+    });
+  });
 </script>
 
 <style>
@@ -152,6 +218,82 @@ const currentLangInfo = langs.find(l => l.code === currentLang)!;
   }
   .links a:hover { opacity: 1; }
   .links a:hover::after { width: 100%; }
+
+  /* ─── Services dropdown ─── */
+  .has-dropdown { position: relative; }
+  .has-dropdown .dropdown-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    cursor: pointer;
+  }
+  .has-dropdown .caret {
+    font-size: 0.625rem;
+    opacity: 0.6;
+    transition: transform 0.2s var(--ease);
+  }
+  .has-dropdown[data-open="true"] .caret { transform: rotate(180deg); }
+
+  .dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 50%;
+    transform: translateX(-50%) translateY(-6px);
+    min-width: 280px;
+    background: #FFFFFF;
+    border: 1px solid #E8E2D5;
+    box-shadow: 0 12px 32px rgba(27,58,92,0.08);
+    padding: 0.75rem 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
+    z-index: 200;
+  }
+  .has-dropdown[data-open="true"] .dropdown {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+  .dropdown a {
+    display: block;
+    padding: 0.5rem 1.25rem;
+    font-family: var(--font-en);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    opacity: 0.85;
+    text-transform: none;
+    text-decoration: none;
+    transition: background 0.15s var(--ease), opacity 0.15s var(--ease);
+  }
+  .dropdown a::after { display: none; }
+  .dropdown a:hover { background: #F7F4ED; opacity: 1; }
+  .dropdown .dd-overview {
+    font-weight: 700;
+    border-bottom: 1px solid #E8E2D5;
+    padding-bottom: 0.625rem;
+    margin-bottom: 0.375rem;
+  }
+  .dropdown .dd-group {
+    border-top: 1px solid #F0EBE0;
+    margin-top: 0.375rem;
+    padding-top: 0.375rem;
+  }
+  .dropdown .dd-group-label {
+    padding: 0.5rem 1.25rem 0.25rem;
+    font-family: var(--font-en);
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    opacity: 0.9;
+  }
+  .dropdown .dd-group a {
+    padding: 0.4rem 1.25rem 0.4rem 1.75rem;
+    font-size: 0.75rem;
+  }
 
   .actions {
     display: flex;
@@ -274,6 +416,54 @@ const currentLangInfo = langs.find(l => l.code === currentLang)!;
     border-bottom: 1px solid var(--color-border-soft);
   }
   .mobile-nav.open { display: flex; }
+  .mobile-group {
+    border-bottom: 1px solid var(--color-border-soft);
+  }
+  .mobile-group > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.95rem 0;
+    font-family: var(--font-en);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .mobile-group > summary::-webkit-details-marker { display: none; }
+  .mobile-group > summary::after {
+    content: '+';
+    font-size: 1.25rem;
+    font-weight: 400;
+    transition: transform 0.2s var(--ease);
+  }
+  .mobile-group[open] > summary::after { content: '−'; }
+  .mobile-sub {
+    display: block;
+    padding: 0.6rem 0 0.6rem 1.25rem;
+    font-family: var(--font-en);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    opacity: 0.75;
+    text-decoration: none;
+    text-transform: none;
+    letter-spacing: 0.05em;
+  }
+  .mobile-sub:hover { opacity: 1; }
+  .mobile-product { padding-left: 2rem; font-size: 0.75rem; opacity: 0.65; }
+  .mobile-sub-label {
+    padding: 0.5rem 0 0.25rem 1.25rem;
+    font-family: var(--font-en);
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--color-accent);
+    text-transform: uppercase;
+  }
 
   /* ─── 响应式 ─── */
   @media (max-width: 1023px) {

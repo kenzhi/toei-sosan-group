@@ -4,12 +4,15 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import PageHero from '../components/PageHero.astro';
 import SectionHeader from '../components/SectionHeader.astro';
+import { company } from '../data/company';
 
+const C = company.ja;
+// 真实指标（来自 登記事項証明書 + 工厂实际状况）
 const stats = [
-  { num: '5,000㎡', label: '東莞自社工場' },
-  { num: '12年', label: '製造実績' },
-  { num: '15万', label: '月間生産能力（個）' },
-  { num: '100+', label: '日本人駐在＋現地エンジニア' }
+  { num: '2015', unit: '年', label: '東莞工廠 設立' },
+  { num: '10+', unit: '年', label: '日本向け取引実績' },
+  { num: '5', unit: '工程', label: '射出・塗装・組立・包装・倉庫' },
+  { num: '11', unit: '項目', label: '営業範囲 (登記)' }
 ];
 
 // LocalBusiness JSON-LD — 东莞自营工厂，Google Knowledge Graph + Google Maps
@@ -19,23 +22,21 @@ const localBusinessSchema = {
   '@id': 'https://toei-sosan.com/factory/#business',
   name: '東栄創産グループ 東莞工場',
   alternateName: '东荣创产集团 东莞工厂',
-  description: '中国広東省東莞市にある 5,000㎡ の自社工場。射出成形・塗装・組立・包装・出荷まで 5 工程を一気通貫で対応。',
+  description: '中国広東省東莞市にある自社工場。2015 年設立。射出成形・塗装・組立・包装・倉庫まで 5 工程を內部で保有。',
   url: 'https://toei-sosan.com/factory/',
   image: 'https://toei-sosan.com/og/zh-factory.png',
-  telephone: '+81-3-6718-2456',
   email: 'info@toei-sosan.com',
-  foundingDate: '2014-01-01',
+  foundingDate: '2015-01-01',
   areaServed: ['JP', 'CN', 'US', 'EU', 'ASEAN'],
   address: {
     '@type': 'PostalAddress',
-    streetAddress: '長安鎮烏沙社区振安中路 東栄創産工業園',
-    addressLocality: '東莞市',
+    addressLocality: '東莞市東城街道',
     addressRegion: '広東省',
     addressCountry: 'CN'
   },
   parentOrganization: {
     '@type': 'Organization',
-    name: '東栄創産グループ株式会社',
+    name: C.name,
     url: 'https://toei-sosan.com/'
   }
 };
@@ -100,7 +101,7 @@ const processes = [
   {
     step: '05',
     title: '保管・出荷',
-    desc: '深セン・東莞の保税倉庫直結。温湿度管理で長期保管でも品質を保持。',
+    desc: '工場內部で溫湿度管理された保管スペースを保有。FBA 納品・国際配送・通関まで対応。',
     images: [
       { src: '/images/factory/仓储 1 - heavy-blur.webp', alt: '倉庫 01' },
       { src: '/images/factory/仓储 2 - heavy-blur.webp', alt: '倉庫 02' },
@@ -110,7 +111,7 @@ const processes = [
   }
 ];
 ---
-<Layout title="工場・製造実力 | 東栄創産グループ" description="中国・東莞 5,000㎡ の自社工場。射出成形から塗装・組立・包装・出荷まで 5 工程を一気通貫。OEM / ODM のご相談は東栄創産グループまで。">
+<Layout title="工場・製造実力 | 東栄創産グループ" description="2015 年設立の中国・東莞 自社工場。射出成形から塗装・組立・包装・倉庫まで 5 工程を一気通貫。OEM / ODM のご相談は東栄創産グループまで。">
   <!-- 構造化データ: ManufacturingBusiness + BreadcrumbList -->
   <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} is:inline />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} is:inline />
@@ -120,7 +121,7 @@ const processes = [
   <PageHero
     eyebrow="FACTORY"
     title="工場・製造実力"
-    subtitle="中国・東莞 5,000㎡ の自社工場。5 工程で、企画から出荷まで一気通貫。"
+    subtitle="2015 年設立、中国・東莞の自社工場。射出成形・塗装・組立・包装・倉庫まで 5 工程を內部で保有。"
   />
 
   <section class="section stats-section">
@@ -128,7 +129,7 @@ const processes = [
       <div class="stats-grid">
         {stats.map(s => (
           <div class="stat">
-            <div class="stat-num">{s.num}</div>
+            <div class="stat-num">{s.num}<span class="stat-unit">{s.unit}</span></div>
             <div class="stat-label">{s.label}</div>
           </div>
         ))}
@@ -192,6 +193,13 @@ const processes = [
     font-weight: 600;
     margin-bottom: 0.5rem;
     letter-spacing: -0.01em;
+  }
+  .stat-unit {
+    font-family: var(--font-en);
+    font-size: 0.95rem;
+    color: var(--color-accent);
+    margin-left: 0.25rem;
+    font-weight: 500;
   }
   .stat-label {
     font-size: 0.875rem;

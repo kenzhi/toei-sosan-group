@@ -4,33 +4,23 @@ import Nav from '../components/Nav.astro';
 import PageHero from '../components/PageHero.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import Footer from '../components/Footer.astro';
+import { company } from '../data/company';
 
-const team = [
-  { role: '代表取締役 CEO', name: '折田 豊', bio: '日本市場で20年以上の経験。' },
-  { role: '副代表', name: '韓 龍一', bio: '中国製造業と日本マーケットの橋渡し役。' },
-  { role: '中国工場長', name: '（採用予定）', bio: '東莞工場の運営責任者。' },
-  { role: '営業マネージャー', name: '（採用予定）', bio: '日中両市場のクライアント対応。' }
-];
-
-const stats = [
-  { num: '2025', label: '年設立' },
-  { num: '2', label: '国拠点' },
-  { num: '11', label: '事業領域' },
-  { num: '100%', label: '実業' }
-];
+const C = company.ja;
+const team = C.directors2;
+const stats = C.stats.slice(0, 4);
 ---
-<Layout title="私たちについて | 東栄創産グループ" description="東栄創産グループの物語。日本東京と中国東莞の二拠点から、跨境実業を構築。">
+<Layout title="私たちについて | 東栄創産グループ" description="東栄創産グループの物語。2015 年中国東莞に自社工廠を設立、2025 年埼玉本社を起点に日本向け OEM 製造を主軸にグローバル展開。">
   <Nav />
 
-  <PageHero eyebrow="ABOUT US" title="私たちの物語" subtitle="東京・品川 × 中国・東莞。二つの拠点から。" />
+  <PageHero eyebrow="ABOUT US" title="私たちの物語" subtitle="埼玉 × 中国・東莞。二つの拠点から、日中二拠点体制でグローバルへ。" />
 
-  {/* 拠点イメージ：東京オフィス */}
   <section class="hero-image-strip">
     <div class="strip-grid">
-      <div class="strip-img strip-tokyo" role="img" aria-label="東京オフィスから見た東京のスカイライン"></div>
+      <div class="strip-img strip-tokyo" role="img" aria-label="東莞工廠 5 工程の自社生産ライン"></div>
       <div class="strip-caption">
-        <span class="caption-tag">TOKYO HQ</span>
-        <p>東京・品川インターシティ。営業と企画の拠点。</p>
+        <span class="caption-tag">DONGGUAN FACTORY</span>
+        <p>2015 年設立。射出成形・塗装・組立・包装・倉庫まで<br/>5 工程を內部で保有する自社工廠。</p>
       </div>
     </div>
   </section>
@@ -39,22 +29,21 @@ const stats = [
     <div class="container narrow">
       <h2>なぜ、この事業を始めたのか</h2>
       <p>
-        2025年11月、東京・品川と中国広東省東莞。<br />
-        東栄創産グループは、<strong>二つの拠点</strong>から始まりました。
+        2015 年、中国広東省東莞に自社工廠を設立。<br />
+        日本向けを中心に 10 年、OEM 製造で技を磨いてきました。
       </p>
       <p>
-        一つの問題は、ずっと私たちの心にありました —<br />
+        2025 年 10 月、埼玉県越谷市に日本法人「東栄創産グループ株式会社」を設立。<br />
+        業務拓展と日本クライアントとの対接拠点として、<strong>二つの拠点</strong>体制になりました。
+      </p>
+      <p>
+        一つの問いに、ずっと向き合ってきました —<br />
         <em>「中国の高い製造力を、日本の品質基準でグローバル市場に届ける方法はないのか？」</em>
       </p>
       <p>
-        日本企業は中国の製造力を求めて中国に渡る。<br />
-        中国工場は品質基準で日本企業の要求に応えきれない。<br />
-        結局、両者の「間」で、時間とコストが失われる。
-      </p>
-      <p>
         私たちは、この<strong>"間"に立つ</strong>ことを選びました。<br />
-        中国の工場で、日本の品質基準で、グローバル市場に届ける。<br />
-        11 の事業領域は、そのための<strong>実業そのもの</strong>です。
+        埼玉本社の企画・営業と、東莞工廠の 5 工程內製を直結させ、<br />
+        11 の営業範囲で、確かな品質を世界へ届けます。
       </p>
     </div>
   </section>
@@ -64,7 +53,7 @@ const stats = [
       <div class="stats-grid">
         {stats.map(s => (
           <div class="stat">
-            <div class="stat-num">{s.num}</div>
+            <div class="stat-num">{s.value}<span class="stat-unit">{s.unit}</span></div>
             <div class="stat-label">{s.label}</div>
           </div>
         ))}
@@ -74,17 +63,34 @@ const stats = [
 
   <section class="section">
     <div class="container">
-      <SectionHeader eyebrow="TEAM" title="チーム" subtitle="二人の代表が、すべてのプロジェクトに参加します。" />
+      <SectionHeader eyebrow="TEAM" title="取締役" subtitle="二人の取締役が、すべてのプロジェクトに参加します。" />
       <div class="team-grid">
         {team.map(m => (
           <div class="team-card">
-            <div class="team-avatar">{m.name.charAt(0)}</div>
+            <div class="team-avatar" data-region={m.region}>{m.name.charAt(0)}</div>
             <div class="team-role">{m.role}</div>
             <div class="team-name">{m.name}</div>
+            <div class="team-loc">{m.location}</div>
             <p class="team-bio">{m.bio}</p>
           </div>
         ))}
       </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container narrow company-facts">
+      <h2>会社情報</h2>
+      <dl>
+        <dt>会社名</dt><dd>{C.name}</dd>
+        <dt>日本法人設立</dt><dd>{C.founded}</dd>
+        <dt>中国工廠設立</dt><dd>{C.factoryFounded}</dd>
+        <dt>資本金</dt><dd>{C.capital}</dd>
+        <dt>取締役</dt><dd>{C.directors}</dd>
+        <dt>本店</dt><dd>{C.hq}</dd>
+        <dt>中国工廠</dt><dd>{C.factory}</dd>
+        <dt>業務目的</dt><dd>{C.purpose}</dd>
+      </dl>
     </div>
   </section>
 
@@ -147,14 +153,26 @@ const stats = [
   .stats-section { background: var(--color-bg-white); }
   .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center; }
   .stat-num { font-family: var(--font-serif); font-size: clamp(2.5rem, 4vw, 3.5rem); color: var(--color-primary); font-weight: 500; margin-bottom: 0.5rem; }
+  .stat-unit { font-family: var(--font-en); font-size: 0.95rem; color: var(--color-accent); margin-left: 0.25rem; font-weight: 500; }
   .stat-label { font-size: 0.875rem; color: var(--color-text-soft); letter-spacing: 0.1em; }
   .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
   .team-card { background: var(--color-bg-white); border: 1px solid var(--color-border-soft); padding: 2rem 1.5rem; text-align: center; transition: all 0.3s; }
   .team-card:hover { border-color: var(--color-accent); }
   .team-avatar { width: 72px; height: 72px; border-radius: 50%; background: var(--color-primary); color: white; font-family: var(--font-serif); font-size: 1.75rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; }
+  .team-avatar[data-region="cn"] { background: linear-gradient(135deg, #1B3A5C 0%, #2C4F7A 100%); }
+  .team-avatar[data-region="jp"] { background: linear-gradient(135deg, #C8864A 0%, #E29C52 100%); }
   .team-role { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.1em; margin-bottom: 0.5rem; }
-  .team-name { font-family: var(--font-serif); font-size: 1.125rem; color: var(--color-primary); font-weight: 500; margin-bottom: 0.75rem; }
+  .team-name { font-family: var(--font-serif); font-size: 1.125rem; color: var(--color-primary); font-weight: 500; margin-bottom: 0.25rem; }
+  .team-loc { font-size: 0.75rem; color: var(--color-text-mute); letter-spacing: 0.05em; margin-bottom: 0.75rem; }
   .team-bio { font-size: 0.875rem; color: var(--color-text-soft); line-height: 1.6; margin: 0; }
+  /* Company facts dl */
+  .company-facts h2 { text-align: center; margin-bottom: 2.5rem; }
+  .company-facts dl {
+    display: grid; grid-template-columns: 12rem 1fr; gap: 1rem 1.5rem;
+    font-size: 0.9375rem; line-height: 1.7;
+  }
+  .company-facts dt { color: var(--color-text-soft); font-weight: 500; }
+  .company-facts dd { color: var(--color-primary); margin: 0; }
   .cta-banner { padding: 3.5rem 2.5rem; text-align: center; }
   .cta-banner h3 { color: white; margin-bottom: 2rem; }
   .cta-tag { font-size: 0.75rem; color: var(--color-accent-soft); letter-spacing: 0.2em; margin-bottom: 1rem; }

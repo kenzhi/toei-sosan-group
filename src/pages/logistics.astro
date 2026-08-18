@@ -5,8 +5,8 @@ import Footer from '../components/Footer.astro';
 import PageHero from '../components/PageHero.astro';
 
 const services = [
-  { num: '01', title: '国際海上・航空輸送', desc: '東京⇄東莞⇄深セン港の定期便を最適化。FCL / LCL / エクスプレスの 3 モードで、量と納期に応じて最安・最速を提案。' },
-  { num: '02', title: '保税倉庫・在庫管理', desc: '東莞・深センの保税倉庫を直結。温湿度管理で長期保管でも品質を保持し、出荷指示から即日通関まで対応。' },
+  { num: '01', title: '国際海上・航空輸送', desc: '埼玉⇄東莞⇄深セン港の定期便を最適化。FCL / LCL / エクスプレスの 3 モードで、量と納期に応じて最安・最速を提案。' },
+  { num: '02', title: '国際倉庫・在庫管理', desc: '東莞工場內部および外部提携倉庫を活用した保管体制。溫湿度管理で長期保管でも品質を保持し、出荷指示から即日通関まで対応。' },
   { num: '03', title: '通関・三国間貿易', desc: '日中両国の通関士が常駐。NACCS / 中国電子通関の双方を熟知し、HS コード分類から原産地証明書まで一貫サポート。' },
   { num: '04', title: 'ラストマイル配送', desc: '佐川急便 / SF エクスプレス / DHL と提携。日本全国 FBA 納品、中国国内越境 EC、ASEAN 国際配送まで。' }
 ];
@@ -25,7 +25,7 @@ const serviceSchema = {
   '@id': 'https://toei-sosan.com/logistics/#service',
   name: '国際物流・サプライチェーン',
   alternateName: 'International Logistics & Supply Chain',
-  description: '東京⇄東莞⇄深センの物流ルート最適化。FCL/LCL/エクスプレス、保税倉庫、通関・三国間貿易、ラストマイル配送まで一貫対応。',
+  description: '埼玉⇄東莞⇄深センの物流ルート最適化。FCL/LCL/エクスプレス、国際倉庫、通関・三国間貿易、ラストマイル配送まで一貫対応。',
   provider: {
     '@type': 'Organization',
     name: '東栄創産グループ株式会社',
@@ -44,7 +44,7 @@ const breadcrumbSchema = {
   ]
 };
 ---
-<Layout title="国際物流 & サプライチェーン | 東栄創産グループ" description="東京⇄東莞⇄深センの物流ルート最適化。FCL/LCL/エクスプレス、保税倉庫、通関、ラストマイル配送まで一貫対応。">
+<Layout title="国際物流 & サプライチェーン | 東栄創産グループ" description="埼玉⇄東莞⇄深センの物流ルート最適化。FCL/LCL/エクスプレス、国際倉庫、通関、ラストマイル配送まで一貫対応。">
   <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} is:inline />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} is:inline />
 
@@ -53,7 +53,7 @@ const breadcrumbSchema = {
   <PageHero
     eyebrow="LOGISTICS"
     title="国際物流 & サプライチェーン"
-    subtitle="東京⇄東莞⇄深セン。3 つの物流チャネルを統合し、最適なコストと納期を提案。"
+    subtitle="埼玉⇄東莞⇄深セン。3 つの物流チャネルを統合し、最適なコストと納期を提案。"
   />
 
   <section class="section">

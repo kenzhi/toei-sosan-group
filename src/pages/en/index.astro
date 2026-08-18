@@ -8,14 +8,14 @@ import { cleanSlug } from '../../i18n/ui';
 const capabilities = [
   { num: '01', icon: 'factory', title: 'OEM Manufacturing', desc: 'Based on our own factory network in Dongguan, Guangdong, we deliver end-to-end systems from quality control to mass production—Japanese standards realized in Chinese manufacturing.' },
   { num: '02', icon: 'globe',   title: 'Cross-border E-commerce', desc: 'Cross-border e-commerce operations across Japan, China, and Southeast Asia. Covering Amazon, Rakuten, Tmall, and Shopee with integrated logistics, customs, and customer service.' },
-  { num: '03', icon: 'ship',    title: 'International Trade', desc: 'B2B trade across all of Asia, anchored at our Tokyo Shinagawa headquarters. From raw material sourcing to finished goods export, the entire supply chain covered.' }
+  { num: '03', icon: 'ship',    title: 'International Trade', desc: 'B2B trade across all of Asia, anchored at our Saitama HQ. From raw material sourcing to finished goods export, the entire supply chain covered.' }
 ];
 
 const areas = [
   { tag: 'MANUFACTURING', title: 'Precision Manufacturing & Quality Control', desc: 'End-to-end production in our own facilities',
     img: '/images/factory/上色 1 - heavy-blur.webp',
     href: '/en/factory/' },
-  { tag: 'LOGISTICS', title: 'International Logistics & Supply Chain', desc: 'Optimized routes between Tokyo and Dongguan',
+  { tag: 'LOGISTICS', title: 'International Logistics & Supply Chain', desc: 'Optimized routes between Saitama and Dongguan',
     img: '/images/factory/仓储 1 - heavy-blur.webp',
     href: '/en/logistics/' },
   { tag: 'E-COMMERCE', title: 'Cross-border E-commerce & Digital Marketing', desc: 'Unified multi-platform operations',
@@ -47,7 +47,7 @@ const featuredProducts = (await getCollection('products', p => p.data.lang === '
 
 const faq = [
   { q: 'Is the initial consultation free?', a: 'Yes—your first consultation is free, from scoping your challenge to a high-level proposal. Reach out any time.' },
-  { q: 'What regions do you serve?', a: 'From our Tokyo Shinagawa HQ and Dongguan, Guangdong base, we cover all of Japan, mainland China, and Southeast Asia.' },
+  { q: 'What regions do you serve?', a: 'From our Saitama HQ (Koshigaya) and Dongguan, Guangdong base, we cover all of Japan, mainland China, and Southeast Asia.' },
   { q: 'Do you handle small-batch or prototype runs?', a: 'Yes. OEM manufacturing starts at 100 units; cross-border e-commerce from 1 SKU.' },
   { q: 'How long from contract to kickoff?', a: 'Depends on scope—some projects kick off in as little as two weeks. Urgent cases can be expedited on request.' },
   { q: 'What does your quality control system look like?', a: 'A Japanese-stationed QC team at our Dongguan factory runs ISO 9001-aligned inspections, pre-shipment checks, and sample dimensional reporting.' },
@@ -159,7 +159,7 @@ const faqSchema = {
       <div class="story-grid">
         <div class="story-left">
           <div class="story-photo">
-            <img src="/images/site/team.jpg" alt="Tokyo office" loading="lazy"  decoding="async" />
+            <img src="/images/site/team.jpg" alt="Saitama office" loading="lazy"  decoding="async" />
             <div class="story-photo-frame"></div>
           </div>
           <blockquote class="story-quote">
@@ -168,11 +168,11 @@ const faqSchema = {
           </blockquote>
         </div>
         <div class="story-right">
-          <h2 class="story-title">Tokyo Shinagawa × Dongguan Guangdong<br/><span class="t-accent">Two locations, one spirit</span></h2>
-          <p>Toei Sosan Group is a Japan-China integrated real-industry group, headquartered in Tokyo's Shinagawa ward with production facilities in Dongguan, Guangdong. Anchored by three pillars—OEM manufacturing, cross-border e-commerce, and international trade—we fuse Japanese quality standards with Chinese productive capacity to deliver value across Asia and the world.</p>
+          <h2 class="story-title">Koshigaya, Saitama × Dongguan, Guangdong<br/><span class="t-accent">Two locations, one spirit</span></h2>
+          <p>TOEI SOSAN GROUP is a Japan-China integrated real-industry group, headquartered in Koshigaya, Saitama with production facilities in Dongguan, Guangdong. Since 2015 we have honed our OEM craft in our Dongguan factory; in 2025, with our Saitama HQ established, we fuse that craft with Japanese planning and quality standards, delivering value across Asia and the world.</p>
           <p>Since our founding, we have held firm to the principle: <em>never leave the factory floor</em>. With management that sees through to the essence of making things, we pursue the optimal answer in the global supply chain—together with our partner companies.</p>
           <div class="story-metrics">
-            <div><span class="m-val" data-countup="2" data-countup-duration="1200">0</span><span class="m-suf">locations</span><span class="m-lbl">TOKYO × DONGGUAN</span></div>
+            <div><span class="m-val" data-countup="2" data-countup-duration="1200">0</span><span class="m-suf">locations</span><span class="m-lbl">SAITAMA × DONGGUAN</span></div>
             <div><span class="m-val" data-countup="3" data-countup-duration="1200">0</span><span class="m-suf">businesses</span><span class="m-lbl">CORE BUSINESSES</span></div>
             <div><span class="m-val" data-countup="100" data-countup-duration="1800" data-countup-suffix="+">0</span><span class="m-suf">%</span><span class="m-lbl">real-industry spirit</span></div>
           </div>

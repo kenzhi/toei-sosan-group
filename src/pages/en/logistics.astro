@@ -5,8 +5,8 @@ import Footer from '../../components/Footer.astro';
 import PageHero from '../../components/PageHero.astro';
 
 const services = [
-  { num: '01', title: 'Ocean & Air Freight', desc: 'Optimized routes between Tokyo, Dongguan, and Shenzhen ports. FCL / LCL / Express — pick the cheapest or fastest based on volume and timeline.' },
-  { num: '02', title: 'Bonded Warehouse & Inventory', desc: 'Direct links to Dongguan / Shenzhen bonded warehouses. Climate-controlled storage with same-day customs clearance on dispatch orders.' },
+  { num: '01', title: 'Ocean & Air Freight', desc: 'Optimized routes between Saitama, Dongguan, and Shenzhen ports. FCL / LCL / Express — pick the cheapest or fastest based on volume and timeline.' },
+  { num: '02', title: 'International Warehousing & Inventory', desc: 'Storage through our Dongguan factory and partner warehouses. Climate-controlled storage with same-day customs clearance on dispatch orders.' },
   { num: '03', title: 'Customs & Triangular Trade', desc: 'Licensed customs brokers in both Japan and China. HS code classification, certificates of origin, and complex routing handled in-house.' },
   { num: '04', title: 'Last-Mile Delivery', desc: 'Partners with Sagawa, Yamato, SF Express, DHL, and EMS. Japan FBA, China domestic cross-border, and ASEAN international shipping.' }
 ];
@@ -23,7 +23,7 @@ const serviceSchema = {
   '@type': 'Service',
   '@id': 'https://toei-sosan.com/en/logistics/#service',
   name: 'International Logistics & Supply Chain',
-  description: 'Optimized Tokyo ⇄ Dongguan ⇄ Shenzhen logistics. FCL/LCL/Express, bonded warehousing, customs clearance, and last-mile delivery — all in one stop.',
+  description: 'Optimized Saitama ⇄ Dongguan ⇄ Shenzhen logistics. FCL/LCL/Express, international warehousing, customs clearance, and last-mile delivery — all in one stop.',
   provider: { '@type': 'Organization', name: 'Toei Sosan Group Co., Ltd.', url: 'https://toei-sosan.com/en/' },
   areaServed: ['JP', 'CN', 'ASEAN', 'US', 'EU'],
   serviceType: 'International Freight Forwarding'
@@ -38,7 +38,7 @@ const breadcrumbSchema = {
   ]
 };
 ---
-<Layout title="Logistics & Supply Chain | Toei Sosan Group" description="Optimized Tokyo ⇄ Dongguan ⇄ Shenzhen logistics. FCL/LCL/Express, bonded warehousing, customs clearance, and last-mile delivery — all in one stop." lang="en">
+<Layout title="Logistics & Supply Chain | TOEI SOSAN GROUP" description="Optimized Saitama ⇄ Dongguan ⇄ Shenzhen logistics. FCL/LCL/Express, international warehousing, customs clearance, and last-mile delivery — all in one stop." lang="en">
   <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} is:inline />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} is:inline />
 
@@ -47,7 +47,7 @@ const breadcrumbSchema = {
   <PageHero
     eyebrow="LOGISTICS"
     title="Logistics & Supply Chain"
-    subtitle="Tokyo ⇄ Dongguan ⇄ Shenzhen. Three integrated channels for optimal cost and timeline."
+    subtitle="Saitama ⇄ Dongguan ⇄ Shenzhen. Three integrated channels for optimal cost and timeline."
   />
 
   <section class="section">

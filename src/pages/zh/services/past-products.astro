@@ -1,65 +1,65 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
-import PageHero from '../components/PageHero.astro';
-import Footer from '../components/Footer.astro';
+import Layout from '../../../layouts/Layout.astro';
+import Nav from '../../../components/Nav.astro';
+import PageHero from '../../../components/PageHero.astro';
+import Footer from '../../../components/Footer.astro';
 
 const items = [
   {
     src: '/images/site/past-products/cableprotectors-1.jpg',
-    label: 'ケーブルプロテクター（キャラクター造型）',
-    process: '射出成形 + 塗装 + 組立',
-    material: 'PVC / 軟質樹脂',
+    label: '数据线保护套（角色造型）',
+    process: '注塑 + 涂装 + 组装',
+    material: 'PVC / 软质树脂',
   },
   {
     src: '/images/site/past-products/cableprotectors-2.jpg',
-    label: 'ケーブルプロテクター（バリエーション）',
-    process: '射出成形 + 塗装 + 組立',
-    material: 'PVC / 軟質樹脂',
+    label: '数据线保护套（多款式）',
+    process: '注塑 + 涂装 + 组装',
+    material: 'PVC / 软质树脂',
   },
   {
     src: '/images/site/past-products/usbcables.jpg',
-    label: 'USB 充電ケーブル（キャラクターカバー付）',
-    process: '射出成形 + 組立 + 包装',
-    material: 'PVC / TPE / ケーブル',
+    label: 'USB 充电线（带角色保护套）',
+    process: '注塑 + 组装 + 包装',
+    material: 'PVC / TPE / 线材',
   },
   {
     src: '/images/site/past-products/charger-dalmatian.jpg',
-    label: 'USB 充電器（アニマル造型・小売パッケージ）',
-    process: '射出成形 + 組立 + 包装',
-    material: 'ABS / PVC / リテールパック',
+    label: 'USB 充电器（动物造型 / 零售包装）',
+    process: '注塑 + 组装 + 包装',
+    material: 'ABS / PVC / 零售包装',
   },
   {
     src: '/images/site/past-products/charger.jpg',
-    label: 'USB ウォールチャージャー',
-    process: '射出成形 + 組立',
+    label: 'USB 墙充充电器',
+    process: '注塑 + 组装',
     material: 'ABS / PC',
   },
   {
     src: '/images/site/past-products/anpanman.jpg',
-    label: 'アンパンマン パンこうじょう 玩具セット',
-    process: '射出成形 + 塗装 + 組立 + 包装',
+    label: '面包超人面包工厂 玩具套装',
+    process: '注塑 + 涂装 + 组装 + 包装',
     material: 'ABS / PVC',
   },
   {
     src: '/images/site/past-products/spiderman.jpg',
-    label: 'フィギュア人偶（Funko スタイル）',
-    process: '射出成形 + 塗装 + 組立',
-    material: 'PVC / 塗装',
+    label: '人偶公仔（Funko 风格）',
+    process: '注塑 + 涂装 + 组装',
+    material: 'PVC / 涂装',
   },
 ];
 ---
-<Layout title="過去の製品 | 東栄創産グループ" description="東栄創産グループが手がけたOEM製造の製品サンプル（一部加工済み）。">
+<Layout title="过往产品 | 东荣创产集团" description="东荣创产集团 OEM 制造的产品样例（部分已处理）。">
   <Nav />
   <PageHero
     eyebrow="PAST PRODUCTS"
-    title="過去の製品サンプル"
-    subtitle="東栄創産グループが手がけた OEM 製造の事例。キャラクター玩具・USB アクセサリー・充電器まで、中国東莞自社工場での一貫生産。"
+    title="过往产品样例"
+    subtitle="东荣创产集团 OEM 制造的实例。角色玩具、USB 配件、充电器，中国东莞自营工厂一贯生产。"
   />
   <section class="section">
     <div class="container">
       <div class="note">
-        ※ 一部の画像は、関連キャラクターの肖像権・IP 保護のため、顔部分のみモザイク加工を施しています。製品本体・仕様・加工精度のご参考としてごらんください。
+        ※ 部分图片因相关角色肖像权 / IP 保护，已对脸部进行马赛克处理。作为产品本体 / 规格 / 加工精度的参考。
       </div>
       <div class="gallery">
         {items.map(it => (
@@ -70,8 +70,8 @@ const items = [
             <figcaption>
               <h3>{it.label}</h3>
               <dl>
-                <dt>主要工程</dt><dd>{it.process}</dd>
-                <dt>主な素材</dt><dd>{it.material}</dd>
+                <dt>主要工序</dt><dd>{it.process}</dd>
+                <dt>主要材料</dt><dd>{it.material}</dd>
               </dl>
             </figcaption>
           </figure>
@@ -87,7 +87,7 @@ const items = [
   .container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
   .note {
     font-size: 0.875rem;
-    color: var(--color-text-soft, #5A5A5A);
+    color: #5A5A5A;
     background: #F7F4ED;
     border-left: 3px solid #E29C52;
     padding: 0.875rem 1.125rem;

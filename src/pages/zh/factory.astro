@@ -4,12 +4,14 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import PageHero from '../../components/PageHero.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
+import { company } from '../../data/company';
 
+const C = company.zh;
 const stats = [
-  { num: '5,000㎡', label: '东莞自有工厂' },
-  { num: '12年', label: '制造经验' },
-  { num: '15万', label: '月产能（个）' },
-  { num: '100+', label: '日方驻在 + 当地工程师' }
+  { num: '2015', unit: '年', label: '东莞工厂 设立' },
+  { num: '10+', unit: '年', label: '对日合作经验' },
+  { num: '5', unit: '工序', label: '注塑・涂装・组装・包装・仓储' },
+  { num: '11', unit: '项', label: '营业范围 (登记)' }
 ];
 
 // ManufacturingBusiness JSON-LD
@@ -17,25 +19,23 @@ const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'ManufacturingBusiness',
   '@id': 'https://toei-sosan.com/zh/factory/#business',
-  name: '东荣创产集团 东莞工厂',
-  alternateName: '東栄創産グループ 東莞工場',
-  description: '中国广东省东莞市 5,000㎡ 自营工厂。注塑成型、涂装、组装、包装、出货 5 道工序一气贯通。',
+  name: '东栄創産グループ 东莞工厂',
+  alternateName: 'TOEI SOSAN GROUP — Dongguan Plant',
+  description: '中国广东省东莞市自营工厂,2015 年设立。注塑、涂装、组装、包装、仓储 5 道工序内部自营。',
   url: 'https://toei-sosan.com/zh/factory/',
   image: 'https://toei-sosan.com/og/zh-factory.png',
-  telephone: '+81-3-6718-2456',
   email: 'info@toei-sosan.com',
-  foundingDate: '2014-01-01',
+  foundingDate: '2015-01-01',
   areaServed: ['JP', 'CN', 'US', 'EU', 'ASEAN'],
   address: {
     '@type': 'PostalAddress',
-    streetAddress: '长安镇乌沙社区振安中路 东荣创产工业园',
-    addressLocality: '东莞市',
+    addressLocality: '东莞市东城街道',
     addressRegion: '广东省',
     addressCountry: 'CN'
   },
   parentOrganization: {
     '@type': 'Organization',
-    name: '东荣创产集团股份有限公司',
+    name: C.name,
     url: 'https://toei-sosan.com/zh/'
   }
 };
@@ -100,7 +100,7 @@ const processes = [
   {
     step: '05',
     title: '仓储・出货',
-    desc: '紧邻深圳、东莞保税仓。温湿度受控，对日出货最快 3 个工作日。',
+    desc: '工厂内部温湿度受控的保管空间。FBA 入仓、国际配送、通关全部支持。',
     images: [
       { src: '/images/factory/仓储 1 - heavy-blur.webp', alt: '仓库 01' },
       { src: '/images/factory/仓储 2 - heavy-blur.webp', alt: '仓库 02' },
@@ -110,15 +110,15 @@ const processes = [
   }
 ];
 ---
-<Layout title="工厂实力 | 东荣创产集团" description="中国东莞 5,000㎡ 自有工厂。注塑、喷漆、组装、包装、出货 5 大工序一气呵成。OEM / ODM 请洽东荣创产集团。" lang="zh">
+<Layout title="工厂实力 | 東栄創産グループ" description="2015 年设立的中国・东莞自营工厂。注塑、涂装、组装、包装、仓储 5 道工序内部自营。OEM / ODM 请洽東栄創産グループ。" lang="zh">
   <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} is:inline />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} is:inline />
   <Nav />
 
   <PageHero
     eyebrow="工厂实力"
-    title="5,000㎡ 自有工厂"
-    subtitle="中国·东莞。从设计到出货，5 大工序一站搞定。"
+    title="工厂・制造实力"
+    subtitle="2015 年设立,中国・东莞自营工厂。注塑、涂装、组装、包装、仓储 5 道工序内部自营。"
   />
 
   <section class="section stats-section">
@@ -126,7 +126,7 @@ const processes = [
       <div class="stats-grid">
         {stats.map(s => (
           <div class="stat">
-            <div class="stat-num">{s.num}</div>
+            <div class="stat-num">{s.num}<span class="stat-unit">{s.unit}</span></div>
             <div class="stat-label">{s.label}</div>
           </div>
         ))}
@@ -190,6 +190,13 @@ const processes = [
     font-weight: 600;
     margin-bottom: 0.5rem;
     letter-spacing: -0.01em;
+  }
+  .stat-unit {
+    font-family: var(--font-en);
+    font-size: 0.95rem;
+    color: var(--color-accent);
+    margin-left: 0.25rem;
+    font-weight: 500;
   }
   .stat-label {
     font-size: 0.875rem;

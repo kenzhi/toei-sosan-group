@@ -8,27 +8,39 @@ const t = ui[currentLang];
 const year = new Date().getFullYear();
 
 const officeLabels = {
-  ja: { tokyo: 'TOKYO OFFICE', dongguan: 'DONGGUAN OFFICE', contact: 'CONTACT' },
-  zh: { tokyo: '东京总部',    dongguan: '东莞据点',        contact: '联系我们' },
-  en: { tokyo: 'TOKYO OFFICE', dongguan: 'DONGGUAN OFFICE', contact: 'CONTACT' },
+  ja: { hq: '日本本社 (SAITAMA HQ)', factory: '東莞工廠 (DONGGUAN FACTORY)', contact: 'CONTACT' },
+  zh: { hq: '日本总部 (SAITAMA HQ)', factory: '东莞工厂 (DONGGUAN FACTORY)', contact: '联系我们' },
+  en: { hq: 'SAITAMA HQ (JAPAN)',   factory: 'DONGGUAN FACTORY (CHINA)',    contact: 'CONTACT' },
 };
 const labels = officeLabels[currentLang];
 
 const officeAddresses = {
   ja: {
-    tokyo: '〒140-0002<br/>東京都品川区東品川4-12-4<br/>品川インターシティC棟 6F',
-    dongguan: '中国広東省東莞市<br/>長安鎮烏沙社区振安中路<br/>東栄創産工業園',
+    hq: '〒343-0828<br/>埼玉県越谷市レイクタウン八丁目8番地125号',
+    factory: '中国広東省東莞市東城街道',
   },
   zh: {
-    tokyo: '〒140-0002<br/>东京都品川区东品川 4-12-4<br/>品川 Intercity C 栋 6F',
-    dongguan: '中国广东省东莞市<br/>长安镇乌沙社区振安中路<br/>东荣创产工业园',
+    hq: '〒343-0828<br/>埼玉县越谷市 Lake Town 八丁目8番地125号',
+    factory: '中国广东省东莞市东城街道',
   },
   en: {
-    tokyo: '4-12-4 Higashi-Shinagawa, Shinagawa-ku,<br/>Tokyo 140-0002, Japan<br/>Shinagawa Intercity C Bldg. 6F',
-    dongguan: 'Zhen\'an Middle Rd, Wusha Community,<br/>Chang\'an Town, Dongguan,<br/>Guangdong, China',
+    hq: '8-125 Lake-Town 8-chome,<br/>Koshigaya, Saitama 343-0828, Japan',
+    factory: 'Dongcheng Subdistrict,<br/>Dongguan, Guangdong, China',
   },
 };
 const addrs = officeAddresses[currentLang];
+
+// Logo link — 回当前语言首页
+function langPath(targetLang: Lang, p: string = currentPath): string {
+  if (targetLang === 'ja') {
+    if (p === '/zh' || p === '/en') return '/';
+    return p.replace(/^\/(zh|en)/, '') || '/';
+  }
+  let stripped = p.replace(/^\/(zh|en)/, '') || '/';
+  if (!stripped.endsWith('/')) stripped += '/';
+  return `/${targetLang}${stripped}`;
+}
+const homeHref = langPath(currentLang, '/');
 ---
 <footer class="footer">
   <!-- 顶部 accent line -->
@@ -36,33 +48,34 @@ const addrs = officeAddresses[currentLang];
 
   <div class="container">
     <div class="footer-grid">
-      <!-- Brand -->
+      <!-- Brand — 点击回首页 -->
       <div class="brand-col">
-        <div class="brand">
+        <a href={homeHref} class="brand" aria-label="TOEI SOSAN GROUP ホーム">
           <span class="brand-mark">
             <span class="brand-kanji">東</span>
           </span>
           <span class="brand-en">TOEI SOSAN GROUP</span>
-        </div>
+        </a>
         <p class="brand-tag" set:html={t.footer.brandTag ?? t.footer.address}></p>
       </div>
 
-      <!-- Tokyo Office -->
+      <!-- Japan HQ (Saitama) -->
       <div class="addr-col">
-        <h5>{labels.tokyo}</h5>
-        <p set:html={addrs.tokyo}></p>
+        <h5>{labels.hq}</h5>
+        <p set:html={addrs.hq}></p>
       </div>
 
-      <!-- Dongguan Office -->
+      <!-- Dongguan Factory -->
       <div class="addr-col">
-        <h5>{labels.dongguan}</h5>
-        <p set:html={addrs.dongguan}></p>
+        <h5>{labels.factory}</h5>
+        <p set:html={addrs.factory}></p>
       </div>
 
       <!-- Contact -->
       <div class="contact-col">
         <h5>{labels.contact}</h5>
-        <p>info@toei-sosan.com<br/>+81-3-6718-2456</p>
+        <p>info@toei-sosan.com</p>
+        <p class="contact-hours">{t.footer.hours}</p>
       </div>
     </div>
 
@@ -103,11 +116,14 @@ const addrs = officeAddresses[currentLang];
     margin-bottom: 3rem;
   }
   .brand {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 0.75rem;
     margin-bottom: 1.25rem;
+    text-decoration: none;
+    transition: opacity 0.2s;
   }
+  .brand:hover { opacity: 0.85; }
   .brand-mark {
     width: 32px;
     height: 32px;
@@ -153,6 +169,7 @@ const addrs = officeAddresses[currentLang];
     color: rgba(255, 255, 255, 0.6);
     margin: 0;
   }
+  .contact-col .contact-hours { margin-top: 0.5rem; opacity: 0.7; font-size: 0.6875rem; }
   .footer-bottom {
     display: flex;
     justify-content: space-between;

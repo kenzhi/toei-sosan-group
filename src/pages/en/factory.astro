@@ -4,12 +4,14 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import PageHero from '../../components/PageHero.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
+import { company } from '../../data/company';
 
+const C = company.en;
 const stats = [
-  { num: '5,000㎡', label: 'Dongguan facility' },
-  { num: '12 yrs', label: 'Manufacturing' },
-  { num: '150K', label: 'Monthly capacity' },
-  { num: '100+', label: 'JP staff + local engineers' }
+  { num: '2015', unit: '', label: 'Dongguan factory established' },
+  { num: '10+', unit: 'yrs', label: 'Serving Japanese clients' },
+  { num: '5', unit: 'stages', label: 'Injection · paint · assembly · packaging · warehouse' },
+  { num: '11', unit: 'items', label: 'Registered business scope' }
 ];
 
 // ManufacturingBusiness JSON-LD
@@ -17,25 +19,23 @@ const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'ManufacturingBusiness',
   '@id': 'https://toei-sosan.com/en/factory/#business',
-  name: 'Toei Sosan Group — Dongguan Plant',
+  name: 'TOEI SOSAN GROUP — Dongguan Plant',
   alternateName: '東栄創産グループ 東莞工場',
-  description: '5,000㎡ self-operated factory in Dongguan, Guangdong, China. Five end-to-end processes: injection molding, painting, assembly, packaging, and shipping.',
+  description: 'Self-operated factory in Dongguan, Guangdong, China, established 2015. Five in-house stages: injection, painting, assembly, packaging, warehouse.',
   url: 'https://toei-sosan.com/en/factory/',
   image: 'https://toei-sosan.com/og/en-factory.png',
-  telephone: '+81-3-6718-2456',
   email: 'info@toei-sosan.com',
-  foundingDate: '2014-01-01',
+  foundingDate: '2015-01-01',
   areaServed: ['JP', 'CN', 'US', 'EU', 'ASEAN'],
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Zhenan Middle Rd, Wusha Community, Chang\'an Town',
-    addressLocality: 'Dongguan',
+    addressLocality: 'Dongcheng Subdistrict, Dongguan',
     addressRegion: 'Guangdong',
     addressCountry: 'CN'
   },
   parentOrganization: {
     '@type': 'Organization',
-    name: 'Toei Sosan Group Co., Ltd.',
+    name: C.name,
     url: 'https://toei-sosan.com/en/'
   }
 };
@@ -100,7 +100,7 @@ const processes = [
   {
     step: '05',
     title: 'Warehousing & Shipping',
-    desc: 'Bonded warehouses in Shenzhen and Dongguan. Climate-controlled; 3-day turnaround to Japan.',
+    desc: 'Climate-controlled in-house storage. FBA intake, international shipping, and customs clearance — all supported.',
     images: [
       { src: '/images/factory/仓储 1 - heavy-blur.webp', alt: 'Warehouse 01' },
       { src: '/images/factory/仓储 2 - heavy-blur.webp', alt: 'Warehouse 02' },
@@ -110,15 +110,15 @@ const processes = [
   }
 ];
 ---
-<Layout title="Factory | Toei Sosan Group" description="5,000㎡ in-house facility in Dongguan, China. Five stages — injection, painting, assembly, packaging, shipping — under one roof. OEM/ODM by Toei Sosan Group." lang="en">
+<Layout title="Factory | TOEI SOSAN GROUP" description="Self-operated factory in Dongguan, China, established 2015. Five in-house stages — injection, painting, assembly, packaging, warehouse. OEM / ODM by TOEI SOSAN GROUP." lang="en">
   <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} is:inline />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} is:inline />
   <Nav />
 
   <PageHero
     eyebrow="FACTORY"
-    title="5,000㎡ In-House Factory"
-    subtitle="Dongguan, China. Five stages, from concept to shipment, under one roof."
+    title="Factory & Manufacturing"
+    subtitle="Self-operated factory in Dongguan, China, established 2015. Five stages — injection, painting, assembly, packaging, warehouse — all in-house."
   />
 
   <section class="section stats-section">
@@ -126,7 +126,7 @@ const processes = [
       <div class="stats-grid">
         {stats.map(s => (
           <div class="stat">
-            <div class="stat-num">{s.num}</div>
+            <div class="stat-num">{s.num}<span class="stat-unit">{s.unit}</span></div>
             <div class="stat-label">{s.label}</div>
           </div>
         ))}
@@ -190,6 +190,13 @@ const processes = [
     font-weight: 600;
     margin-bottom: 0.5rem;
     letter-spacing: -0.01em;
+  }
+  .stat-unit {
+    font-family: var(--font-en);
+    font-size: 0.95rem;
+    color: var(--color-accent);
+    margin-left: 0.25rem;
+    font-weight: 500;
   }
   .stat-label {
     font-size: 0.875rem;

@@ -7,59 +7,59 @@ import Footer from '../../components/Footer.astro';
 const items = [
   {
     src: '/images/site/past-products/cableprotectors-1.jpg',
-    label: 'Cable protectors (character design)',
-    process: 'Injection + painting + assembly',
-    material: 'PVC / soft resin',
+    label: 'ケーブルプロテクター（キャラクター造型）',
+    process: '射出成形 + 塗装 + 組立',
+    material: 'PVC / 軟質樹脂',
   },
   {
     src: '/images/site/past-products/cableprotectors-2.jpg',
-    label: 'Cable protectors (variations)',
-    process: 'Injection + painting + assembly',
-    material: 'PVC / soft resin',
+    label: 'ケーブルプロテクター（バリエーション）',
+    process: '射出成形 + 塗装 + 組立',
+    material: 'PVC / 軟質樹脂',
   },
   {
     src: '/images/site/past-products/usbcables.jpg',
-    label: 'USB charging cable (with character cover)',
-    process: 'Injection + assembly + packaging',
-    material: 'PVC / TPE / cable',
+    label: 'USB 充電ケーブル（キャラクターカバー付）',
+    process: '射出成形 + 組立 + 包装',
+    material: 'PVC / TPE / ケーブル',
   },
   {
     src: '/images/site/past-products/charger-dalmatian.jpg',
-    label: 'USB charger (animal design / retail pack)',
-    process: 'Injection + assembly + packaging',
-    material: 'ABS / PVC / retail pack',
+    label: 'USB 充電器（アニマル造型・小売パッケージ）',
+    process: '射出成形 + 組立 + 包装',
+    material: 'ABS / PVC / リテールパック',
   },
   {
     src: '/images/site/past-products/charger.jpg',
-    label: 'USB wall charger',
-    process: 'Injection + assembly',
+    label: 'USB ウォールチャージャー',
+    process: '射出成形 + 組立',
     material: 'ABS / PC',
   },
   {
     src: '/images/site/past-products/anpanman.jpg',
-    label: 'Anpanman Bakery toy set',
-    process: 'Injection + painting + assembly + packaging',
+    label: 'アンパンマン パンこうじょう 玩具セット',
+    process: '射出成形 + 塗装 + 組立 + 包装',
     material: 'ABS / PVC',
   },
   {
     src: '/images/site/past-products/spiderman.jpg',
-    label: 'Vinyl figure (Funko-style)',
-    process: 'Injection + painting + assembly',
-    material: 'PVC / paint',
+    label: 'フィギュア人偶（Funko スタイル）',
+    process: '射出成形 + 塗装 + 組立',
+    material: 'PVC / 塗装',
   },
 ];
 ---
-<Layout title="Past Products | TOEI SOSAN GROUP" description="Sample OEM products manufactured by TOEI SOSAN GROUP (some processed for IP protection).">
+<Layout title="過去の製品 | 東栄創産グループ" description="東栄創産グループが手がけたOEM製造の製品サンプル（一部加工済み）。">
   <Nav />
   <PageHero
     eyebrow="PAST PRODUCTS"
-    title="Past Product Samples"
-    subtitle="Sample OEM products manufactured by TOEI SOSAN GROUP. Character toys, USB accessories, and chargers — produced in our self-operated Dongguan, China facility."
+    title="過去の製品サンプル"
+    subtitle="東栄創産グループが手がけた OEM 製造の事例。キャラクター玩具・USB アクセサリー・充電器まで、中国東莞自社工場での一貫生産。"
   />
   <section class="section">
     <div class="container">
       <div class="note">
-        ※ Some images are lightly mosaic-blurred on the character faces only, to respect third-party IP. Body, form, and material details remain visible for reference.
+        ※ 一部の画像は、関連キャラクターの肖像権・IP 保護のため、顔部分のみモザイク加工を施しています。製品本体・仕様・加工精度のご参考としてごらんください。
       </div>
       <div class="gallery">
         {items.map(it => (
@@ -70,8 +70,8 @@ const items = [
             <figcaption>
               <h3>{it.label}</h3>
               <dl>
-                <dt>Process</dt><dd>{it.process}</dd>
-                <dt>Material</dt><dd>{it.material}</dd>
+                <dt>主要工程</dt><dd>{it.process}</dd>
+                <dt>主な素材</dt><dd>{it.material}</dd>
               </dl>
             </figcaption>
           </figure>
@@ -87,7 +87,7 @@ const items = [
   .container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
   .note {
     font-size: 0.875rem;
-    color: #5A5A5A;
+    color: var(--color-text-soft, #5A5A5A);
     background: #F7F4ED;
     border-left: 3px solid #E29C52;
     padding: 0.875rem 1.125rem;
