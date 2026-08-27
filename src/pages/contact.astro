@@ -160,6 +160,18 @@ const isSubmitted = Astro.url.searchParams.get('submitted') === '1';
       form.addEventListener('submit', () => {
         submitBtn.classList.add('is-loading');
         submitBtn.disabled = true;
+
+        // v1.14: dual-POST — 表单同时发一份到 Trade OS (不阻塞 Web3Forms 邮件流程)
+        // Web3Forms 原生 webhook 是付费, 改用浏览器 JS 同表单同时发 2 份
+        // 失败不打扰用户, 邮件已通过 Web3Forms 发出
+        const formData = new FormData(form);
+        fetch('https://app.maclog.cn/api/inquiries/webhook/web3forms', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(Object.fromEntries(formData)),
+        }).catch((err) => {
+          console.warn('Trade OS 同步失败, 但邮件已发:', err);
+        });
       });
     }
   </script>
