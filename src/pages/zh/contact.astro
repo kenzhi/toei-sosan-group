@@ -91,6 +91,11 @@ const isSubmitted = Astro.url.searchParams.get('submitted') === '1';
             <div class="info-label">邮箱</div>
             <a href="mailto:info@toei-sosan.com" class="info-value">info@toei-sosan.com</a>
           </div>
+          {/* v1.28: WhatsApp 入口 — 上线前请把占位号替换为真实的日本 WhatsApp Business 号 */}
+          <div class="info-block">
+            <div class="info-label">WhatsApp (日本总部)</div>
+            <a href="https://wa.me/81XXXXXXXXXX" class="info-value" target="_blank" rel="noopener">+81 XX-XXXX-XXXX（English / 日本語）</a>
+          </div>
           <div class="info-block">
             <div class="info-label">日本总部 (埼玉)</div>
             <p class="info-value">

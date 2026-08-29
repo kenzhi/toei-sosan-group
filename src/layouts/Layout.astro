@@ -5,12 +5,15 @@ interface Props {
   description?: string;
   lang?: 'ja' | 'zh' | 'en';
   ogImage?: string;
+  /** v1.28: SEO keywords meta tag — 逗号分隔 */
+  keywords?: string;
 }
 const {
   title,
   description = '東栄創産グループ - 中国の工場から、世界へ。OEM製造・跨境電商・国際貿易を一社で。',
   lang = 'ja',
-  ogImage
+  ogImage,
+  keywords
 } = Astro.props;
 
 // CF Web Analytics token（从 Cloudflare Dashboard → Analytics → Web Analytics 获取）
@@ -74,6 +77,7 @@ const orgSchema = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    {keywords && <meta name="keywords" content={keywords} />}
 
     <!-- SEO -->
     <link rel="canonical" href={canonicalUrl} />

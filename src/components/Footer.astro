@@ -74,7 +74,14 @@ const homeHref = langPath(currentLang, '/');
       <!-- Contact -->
       <div class="contact-col">
         <h5>{labels.contact}</h5>
-        <p>info@toei-sosan.com</p>
+        <p><a href="mailto:info@toei-sosan.com" class="footer-link">info@toei-sosan.com</a></p>
+        {/* v1.28: WhatsApp 入口 — 日本 B2B 客户首选即时通讯
+            ⚠️ 上线前请把 81XXXXXXXXXX 替换成真实的日本 WhatsApp Business 号 */}
+        <p class="contact-whatsapp">
+          <a href="https://wa.me/81XXXXXXXXXX" class="footer-link footer-whatsapp" target="_blank" rel="noopener">
+            💬 WhatsApp (Japan)
+          </a>
+        </p>
         <p class="contact-hours">{t.footer.hours}</p>
       </div>
     </div>
@@ -170,6 +177,10 @@ const homeHref = langPath(currentLang, '/');
     margin: 0;
   }
   .contact-col .contact-hours { margin-top: 0.5rem; opacity: 0.7; font-size: 0.6875rem; }
+  .footer-link { color: rgba(255, 255, 255, 0.85); text-decoration: none; transition: color 0.2s; }
+  .footer-link:hover { color: var(--color-accent); }
+  .contact-whatsapp { margin-top: 0.4rem; }
+  .footer-whatsapp { font-size: 0.8125rem; }
   .footer-bottom {
     display: flex;
     justify-content: space-between;
