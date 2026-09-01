@@ -6,7 +6,7 @@ import { getCollection } from 'astro:content';
 import { cleanSlug } from '../../i18n/ui';
 
 const capabilities = [
-  { num: '01', icon: 'factory', title: 'OEM Manufacturing', desc: 'Based on our own factory network in Dongguan, Guangdong, we deliver end-to-end systems from quality control to mass production—Japanese standards realized in Chinese manufacturing.' },
+  { num: '01', icon: 'factory', title: 'OEM Manufacturing', desc: 'Specializing in collectible figurines, character toys, and PVC figures from our 10-year Dongguan factory. Full process: plastic injection → painting → assembly → packaging → warehousing. Japanese quality standards realized in Chinese manufacturing capacity.' },
   { num: '02', icon: 'globe',   title: 'Cross-border E-commerce', desc: 'Cross-border e-commerce operations across Japan, China, and Southeast Asia. Covering Amazon, Rakuten, Tmall, and Shopee with integrated logistics, customs, and customer service.' },
   { num: '03', icon: 'ship',    title: 'International Trade', desc: 'B2B trade across all of Asia, anchored at our Saitama HQ. From raw material sourcing to finished goods export, the entire supply chain covered.' }
 ];
@@ -54,6 +54,9 @@ const faq = [
   { q: 'Can we sign an NDA?', a: 'Yes. We can sign an NDA before the first conversation so your technology and customer data stay protected.' },
   { q: 'What payment methods do you accept?', a: 'JPY, RMB, and USD. Wire transfer (T/T) is standard; L/C available for larger projects.' },
   { q: 'Do you support online meetings?', a: 'Yes—Zoom, Teams, and Google Meet all work, and we can flex between JST and CST time zones.' },
+  // v1.28: OEM-specific FAQ for B2B collectors/character-toy clients
+  { q: 'What is your OEM minimum order quantity?', a: 'Standard MOQ is 500 units per SKU for mass production; prototype runs start at 100 units. Mix-SKU orders can be arranged in 1 master carton if total ≥ 500 units.' },
+  { q: 'Do you support client-owned tooling and IP?', a: 'Yes. We can work with client-supplied tooling, or develop new tooling in-house. All client IP and tooling remains the property of the client, with NDA protection throughout the process.' },
 ];
 
 const faqSchema = {
@@ -66,7 +69,12 @@ const faqSchema = {
   }))
 };
 ---
-<Layout title="Toei Sosan Group | From Chinese Factories to Global Markets." lang="en">
+<Layout
+  title="Toy OEM Manufacturer in China | Toei Sosan Group"
+  description="OEM toy manufacturer in Dongguan, China. 10+ years of craft in collectible figurines, character toys, and PVC figures. Japan-based QC. Get a quote today."
+  keywords="OEM toy manufacturer, figurine OEM, China factory, collectible manufacturer, PVC figure, character toy, Dongguan factory, Japan QC, OEM manufacturing"
+  lang="en"
+>
   <Nav />
 
   <!-- HERO -->
@@ -78,7 +86,7 @@ const faqSchema = {
         <div class="hero-eyebrow"><span class="eyebrow-line"></span><span class="eyebrow-text">JAPAN × CHINA × GLOBAL</span></div>
         <h1 class="hero-title">From Chinese factories,<br/>to global markets.</h1>
         <p class="hero-sub">A real-industry group that fuses Japanese quality standards with Chinese manufacturing power, delivering value from Asia to the world.</p>
-        <a href="/en/services/" class="hero-cta">EXPLORE MORE <span aria-hidden="true">→</span></a>
+        <a href="/en/services/" class="hero-cta">START YOUR PROJECT <span aria-hidden="true">→</span></a>
         <div class="hero-scroll" aria-hidden="true"><span></span><span class="scroll-label">SCROLL</span></div>
       </div>
       <div class="hero-visual" aria-hidden="true">
@@ -172,9 +180,9 @@ const faqSchema = {
           <p>TOEI SOSAN GROUP is a Japan-China integrated real-industry group, headquartered in Koshigaya, Saitama with production facilities in Dongguan, Guangdong. Since 2015 we have honed our OEM craft in our Dongguan factory; in 2025, with our Saitama HQ established, we fuse that craft with Japanese planning and quality standards, delivering value across Asia and the world.</p>
           <p>Since our founding, we have held firm to the principle: <em>never leave the factory floor</em>. With management that sees through to the essence of making things, we pursue the optimal answer in the global supply chain—together with our partner companies.</p>
           <div class="story-metrics">
-            <div><span class="m-val" data-countup="2" data-countup-duration="1200">0</span><span class="m-suf">locations</span><span class="m-lbl">SAITAMA × DONGGUAN</span></div>
-            <div><span class="m-val" data-countup="3" data-countup-duration="1200">0</span><span class="m-suf">businesses</span><span class="m-lbl">CORE BUSINESSES</span></div>
-            <div><span class="m-val" data-countup="100" data-countup-duration="1800" data-countup-suffix="+">0</span><span class="m-suf">%</span><span class="m-lbl">real-industry spirit</span></div>
+            <div><span class="m-val" data-countup="10" data-countup-duration="1200" data-countup-suffix="+">0</span><span class="m-suf">years</span><span class="m-lbl">Dongguan factory craft</span></div>
+            <div><span class="m-val" data-countup="5" data-countup-duration="1200">0</span><span class="m-suf">stages</span><span class="m-lbl">PRODUCTION PROCESS</span></div>
+            <div><span class="m-val" data-countup="100" data-countup-duration="1800" data-countup-suffix="K+">0</span><span class="m-suf">pcs</span><span class="m-lbl">MONTHLY CAPACITY</span></div>
           </div>
         </div>
       </div>

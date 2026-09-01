@@ -6,7 +6,7 @@ import { getCollection } from 'astro:content';
 import { cleanSlug } from '../../i18n/ui';
 
 const capabilities = [
-  { num: '01', icon: 'factory', title: 'OEM 制造', desc: '以广东省东莞的自有工厂群为基础，构建从品质管理到量产的一贯体制。用中国制造实现日本品质标准。' },
+  { num: '01', icon: 'factory', title: 'OEM 制造', desc: '深耕收藏级手办、角色玩具与 PVC 人形制造，以 10 年东莞工厂经验为基底。一贯工序：注塑 → 上色 → 装配 → 包装 → 仓储。 用中国产能实现日本品质标准。' },
   { num: '02', icon: 'globe',   title: '跨境电商', desc: '日本×中国×东南亚跨境电商运营。覆盖 Amazon、乐天、天猫、Shopee，物流·通关·客服一体化。' },
   { num: '03', icon: 'ship',    title: '国际贸易', desc: '以埼玉总部为起点，开展亚洲全域 B2B 贸易。从原材料采购到成品出口，全供应链覆盖。' }
 ];
@@ -54,6 +54,9 @@ const faq = [
   { q: '可以签 NDA 吗？', a: '可以，即使在初次咨询前也支持签署 NDA，确保贵司技术与客户信息得到保护。' },
   { q: '付款方式有哪些？', a: '支持日元、人民币、美元结算。以银行电汇（T/T）为主，必要时可接受 L/C。' },
   { q: '可以线上会议吗？', a: '支持 Zoom / Teams / Google Meet，可灵活协调日本时间与中国时间。' },
+  // v1.28: OEM 专项 FAQ — 对 B2B 收藏级 / 角色玩具客户
+  { q: 'OEM 制造的最小起订量是多少？', a: '量产标准 MOQ 为 500 件 / SKU；试产起订 100 件。混 SKU 订单在总数 ≥ 500 件时可合并装 1 个外箱出货。' },
+  { q: '是否支持客户提供模具与自有 IP？', a: '支持。可使用客户提供的模具，亦可由我方开模。客户 IP 与模具的所有权始终归客户所有，全程 NDA 保护。' },
 ];
 
 const faqSchema = {
@@ -66,7 +69,12 @@ const faqSchema = {
   }))
 };
 ---
-<Layout title="东荣创产集团 | 从中国工厂，到全球市场。" lang="zh">
+<Layout
+  title="OEM 玩具代工 | 东荣创产集团"
+  description="中国东莞 OEM 玩具代工厂, 10 年以上制造经验, 手办/角色玩具/PVC 人形. 日本品质管理, 24 小时内回复询盘. 免费初步咨询."
+  keywords="OEM 代工, 玩具代工厂, 东莞工厂, 手办代工, 角色玩具, PVC 人形"
+  lang="zh"
+>
   <Nav />
 
   <!-- HERO -->
@@ -78,7 +86,7 @@ const faqSchema = {
         <div class="hero-eyebrow"><span class="eyebrow-line"></span><span class="eyebrow-text">JAPAN × CHINA × GLOBAL</span></div>
         <h1 class="hero-title">从中国工厂，<br/>到全球市场。</h1>
         <p class="hero-sub">融合日本品质标准与中国制造实力，向亚洲与世界市场持续输出价值的实业集团。</p>
-        <a href="/zh/services/" class="hero-cta">了解更多 <span aria-hidden="true">→</span></a>
+        <a href="/zh/services/" class="hero-cta">发起项目 <span aria-hidden="true">→</span></a>
         <div class="hero-scroll" aria-hidden="true"><span></span><span class="scroll-label">SCROLL</span></div>
       </div>
       <div class="hero-visual" aria-hidden="true">
@@ -172,9 +180,9 @@ const faqSchema = {
           <p>东栄創産グループ在埼玉县越谷市设立总部,在广东省东莞市建设生产基地,是中日一体的实业集团。2015 年起在东莞工厂打磨的 OEM 制造技术,2025 年以埼玉总部为起点,与日本企划力・品质基准融合,持续向亚洲与世界市场输出价值。</p>
           <p>自创立以来，始终坚持"不脱离工厂现场"的原则。以洞察制造本质的经营方式，与合作伙伴企业共同追求全球供应链的最优解。</p>
           <div class="story-metrics">
-            <div><span class="m-val" data-countup="2" data-countup-duration="1200">0</span><span class="m-suf">据点</span><span class="m-lbl">SAITAMA × DONGGUAN</span></div>
-            <div><span class="m-val" data-countup="3" data-countup-duration="1200">0</span><span class="m-suf">事业</span><span class="m-lbl">CORE BUSINESSES</span></div>
-            <div><span class="m-val" data-countup="100" data-countup-duration="1800" data-countup-suffix="+">0</span><span class="m-suf">%</span><span class="m-lbl">实业精神</span></div>
+            <div><span class="m-val" data-countup="10" data-countup-duration="1200" data-countup-suffix="+">0</span><span class="m-suf">年</span><span class="m-lbl">Dongguan factory craft</span></div>
+            <div><span class="m-val" data-countup="5" data-countup-duration="1200">0</span><span class="m-suf">工序</span><span class="m-lbl">PRODUCTION PROCESS</span></div>
+            <div><span class="m-val" data-countup="100" data-countup-duration="1800" data-countup-suffix="K+">0</span><span class="m-suf">件</span><span class="m-lbl">MONTHLY CAPACITY</span></div>
           </div>
         </div>
       </div>
